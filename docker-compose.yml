@@ -10,7 +10,7 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
-      - ./mysql-data:/var/lib/mysql
+      - mysql_data:/var/lib/mysql
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - twotier
@@ -25,7 +25,10 @@ services:
   django:
     build: .
     container_name: django-app
-    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py collectstatic --noinput &&
+             gunicorn your_project_name.wsgi:application --bind 0.0.0.0:8000"
     ports:
       - "8000:8000"
     environment:
@@ -36,8 +39,6 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_DB: ${MYSQL_DATABASE}
       DJANGO_SETTINGS_MODULE: ${DJANGO_SETTINGS_MODULE}
-    volumes:
-      - .:/app
     depends_on:
       mysql:
         condition: service_healthy
@@ -53,3 +54,6 @@ services:
 
 networks:
   twotier:
+
+volumes:
+  mysql_data:
