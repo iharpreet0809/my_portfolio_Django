@@ -1,32 +1,26 @@
 #!/bin/sh
 
-# Set environment variables for the script
-# These should ideally come from your Docker Compose environment,
-# but explicitly setting them here ensures the script has access.
-# Make sure these match your .env or docker-compose.yml settings.
-DB_HOST=$MYSQL_HOST
-DB_PORT=$MYSQL_PORT
-DB_NAME=$MYSQL_DATABASE
-DB_USER=$MYSQL_USER
-DB_PASSWORD=$MYSQL_PASSWORD
+set -e  # Exit immediately if a command exits with a non-zero status
+
+# Use environment variables from Docker Compose directly
+DB_HOST="${MYSQL_HOST:-mysql}"
+DB_PORT="${MYSQL_PORT:-3306}"
 
 echo "Waiting for database at $DB_HOST:$DB_PORT..."
 
-# Loop until the database is available
-# Using netcat (nc) to check if the port is open
-# If nc is not available, you might need to install it in Dockerfile
-while ! nc -z $DB_HOST $DB_PORT; do
+# Wait until the database port is open
+while ! nc -z "$DB_HOST" "$DB_PORT"; do
   sleep 0.5
 done
 
-echo "Database is ready! Applying migrations and collecting static files."
+echo "Database is ready! Running Django setup..."
 
-# Run Django migrations
+# Run Django database migrations
 python manage.py migrate --noinput
 
 # Collect static files
 python manage.py collectstatic --noinput
 
-echo "Starting Gunicorn server."
-# Start the Gunicorn server
-exec gunicorn portfolio_django.wsgi:application --bind 0.0.0.0:8000
+echo "Starting Gunicorn server..."
+# Run Gunicorn server (pass any CMD from Dockerfile)
+exec "$@"
