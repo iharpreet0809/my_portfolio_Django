@@ -1,0 +1,18 @@
+# Django collectstatic output
+staticfiles/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# IDE/editor folders
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+
+#env files
+env/
