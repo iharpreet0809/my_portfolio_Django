@@ -13,6 +13,7 @@ services:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+      - ./staticfiles:/app/staticfiles
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - twotier
