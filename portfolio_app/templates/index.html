@@ -480,13 +480,11 @@
 				<div class="col-md-7 heading-section text-center ftco-animate">
 					<h1 class="big big-2">Contact</h1>
 					<h2 class="mb-4">Contact Me</h2>
-					<p>Below are the details to reach out to me!</p>
+					<p>Feel free to reach out to me for any questions or opportunities!</p>
 				</div>
 			</div>
 
-			<!-- here change the center  -->
-
-			<div class="row d-flex contact-info mb-5 justify-content-center">
+			<div class="row d-flex contact-info mb-5">
 				<div class="col-md-6 col-lg-3 d-flex ftco-animate">
 					<div class="align-self-stretch box p-4 text-center">
 						<div class="icon d-flex align-items-center justify-content-center">
@@ -502,7 +500,7 @@
 							<span class="icon-phone2"></span>
 						</div>
 						<h3 class="mb-4">Contact Number</h3>
-						<p><a href="tel://+917048691931">+91 7048 691 931</a></p>
+						<p><a href="tel://+917048691931">+91 7048691931</a></p>
 					</div>
 				</div>
 				<div class="col-md-6 col-lg-3 d-flex ftco-animate">
@@ -510,40 +508,54 @@
 						<div class="icon d-flex align-items-center justify-content-center">
 							<span class="icon-paper-plane"></span>
 						</div>
-						<h3 class="mb-4">Email Address</h3>
-						<p><a href="mailto:harpreetsingh9437@gmail.com">harpreetsingh9437@gmail.com</a></p>
+						<h3 class="mb-4">Mail</h3>
+						<p><a href="mailto:talkwithharpreet@gmail.com">talkwithharpreet@gmail.com</a></p>
 					</div>
 				</div>
-
-
-				<div class="container">
-					<br>
-					<br>
-					<div class="row justify-content-center">
-						<div class="col-md-7 ftco-animate text-center">
-							<h2>Have a<span> Question? </span>
-								<a href="https://wa.me/7048691931?text=Hi%20Harpreet%2C%20Hope%20you%20are%20doing%20well.%20I%20contact%20through%20your%20website."
-									class="btn btn-primary py-3 px-5">WhatsApp</a>
-							</h2>
-
+				<div class="col-md-6 col-lg-3 d-flex ftco-animate">
+					<div class="align-self-stretch box p-4 text-center">
+						<div class="icon d-flex align-items-center justify-content-center">
+							<span class="icon-globe"></span>
 						</div>
+						<h3 class="mb-4">Github</h3>
+						<p><a href="https://github.com/iharpreet0809">iharpreet0809</a></p>
 					</div>
-					<br>
-					<ul class="ftco-footer-social list-unstyled d-flex justify-content-center align-items-center mb-0">
-						<li class="ftco-animate normal-txt">Find me on </li>
-
-						<li class="ftco-animate"><a href="https://www.linkedin.com/in/harpreet22"><span
-									class="icon-linkedin"></span></a></li>
-						<li class="ftco-animate"><a href="https://twitter.com/iharpreet0809"><span
-									class="icon-twitter"></span></a></li>
-						<li class="ftco-animate"><a href="https://twitter.com/iharpreet0809"><span
-									class="icon-facebook"></span></a></li>
-						<li class="ftco-animate"><a href="https://www.instagram.com/s4smarty/"><span
-									class="icon-instagram"></span></a></li>
-					</ul>
-					<br>
 				</div>
 			</div>
+
+			<div class="row no-gutters block-9">
+				<div class="col-md-6 order-md-last d-flex">
+					<form action="{% url 'home' %}" method="POST" class="bg-light p-4 p-md-5 contact-form">
+						{% csrf_token %}
+						{% if messages %}
+							{% for message in messages %}
+								<div class="alert alert-{{ message.tags }}">
+									{{ message }}
+								</div>
+							{% endfor %}
+						{% endif %}
+						<div class="form-group">
+							{{ form.name }}
+						</div>
+						<div class="form-group">
+							{{ form.email }}
+						</div>
+						<div class="form-group">
+							{{ form.subject }}
+						</div>
+						<div class="form-group">
+							{{ form.message }}
+						</div>
+						<div class="form-group">
+							<input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
+						</div>
+					</form>
+				</div>
+				<div class="col-md-6 d-flex">
+					<div class="img" style="background-image: url('{% static "images/about.jpg" %}');"></div>
+				</div>
+			</div>
+		</div>
 	</section>
 
 
@@ -587,6 +599,17 @@
         <script src="{% static 'js/typing-animation.js' %}"></script>
         <script src="{% static 'js/main.js' %}"></script>
         
+
+<script>
+    // Check if there are any messages
+    document.addEventListener('DOMContentLoaded', function() {
+        const messages = document.querySelector('.alert');
+        if (messages) {
+            // Scroll to contact section
+            document.getElementById('contact-section').scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+</script>
 
 </body>
 

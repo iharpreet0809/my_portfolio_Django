@@ -24,10 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECRET_KEY = "django-insecure-kyaqp9kt2q@&x(nbndoxf6@3&-jad$nv6*9sc&&&)95%q$)c=t"
 SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback-secret')
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
+# DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+
+#for local development
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -85,16 +87,39 @@ WSGI_APPLICATION = "portfolio_django.wsgi.application"
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('MYSQL_DB'),
-        'USER': os.environ.get('MYSQL_USER'),
-        'PASSWORD': os.environ.get('MYSQL_PASSWORD'),
-        'HOST': os.environ.get('MYSQL_HOST'),
-        'PORT': '3306',
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': os.environ.get('MYSQL_DB'),
+#         'USER': os.environ.get('MYSQL_USER'),
+#         'PASSWORD': os.environ.get('MYSQL_PASSWORD'),
+#         'HOST': os.environ.get('MYSQL_HOST'),
+#         'PORT': '3306',
+#     }
+# }
+
+if DEBUG: #for local development
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'my_portfolio',
+            'USER': 'root',
+            'PASSWORD': 'root',
+            'HOST': 'localhost',
+            'PORT': '3306',
+        }
     }
-}
+else: #for production
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.environ.get('MYSQL_DB'),
+            'USER': os.environ.get('MYSQL_USER'),
+            'PASSWORD': os.environ.get('MYSQL_PASSWORD'),
+            'HOST': os.environ.get('MYSQL_HOST'),
+            'PORT': '3306',
+        }
+    }
 
 
 
