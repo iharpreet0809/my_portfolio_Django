@@ -92,6 +92,7 @@
 		//for disable the slider loop and autoplay false
 	    loop: false, 
 	    autoplay: false,
+
 	    margin:0,
 	    animateOut: 'fadeOut',
 	    animateIn: 'fadeIn',
