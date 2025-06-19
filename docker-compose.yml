@@ -44,6 +44,8 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
+    volumes:
+    - ./staticfiles:/app/staticfiles
     networks:
       - twotier
     restart: unless-stopped
