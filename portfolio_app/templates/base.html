@@ -1,0 +1,142 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>{% block title %}Harpreet Singh Portfolio{% endblock %}</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	
+	{% block meta %}
+	<meta name="description" content="{% block description %}Full Stack Engineer specializing in Development, Data Analysis, Machine Learning, and DevOps{% endblock %}">
+	<meta name="keywords" content="{% block keywords %}portfolio, developer, data analyst, machine learning, devops{% endblock %}">
+	<meta name="author" content="Harpreet Singh">
+	{% endblock %}
+
+	<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+	
+	<link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+	<link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="manifest" href="{% static 'site.webmanifest' %}">
+	
+	{% block extra_css %}
+	<!-- Additional CSS for child templates -->
+	{% endblock %}
+</head>
+
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
+		<div class="container">
+			<a class="navbar-brand" href="/">Welcome to My Portfolio</a>
+			<button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse"
+				data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="oi oi-menu"></span> Menu
+			</button>
+
+			<div class="collapse navbar-collapse" id="ftco-nav">
+				<ul class="navbar-nav nav ml-auto">
+					<li class="nav-item"><a href="{% url 'contact' %}#home-section" class="nav-link"><span>Home</span></a></li>
+					<li class="nav-item"><a href="{% url 'contact' %}#about-section" class="nav-link"><span>About</span></a></li>
+					<li class="nav-item"><a href="{% url 'contact' %}#resume-section" class="nav-link"><span>Resume</span></a></li>
+					<li class="nav-item"><a href="{% url 'contact' %}#project-section" class="nav-link"><span>Projects</span></a></li>
+					<li class="nav-item"><a href="{% url 'blog_list' %}" class="nav-link"><span>Blog</span></a></li>
+					<li class="nav-item"><a href="{% url 'contact' %}#contact-section" class="nav-link"><span>Contact</span></a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	{% block content %}
+	<!-- Default content will be overridden by child templates -->
+	{% endblock %}
+
+	<!-- Footer -->
+	<footer class="ftco-footer ftco-bg-dark ftco-section">
+		<div class="container">
+			<div class="row mb-5">
+				<div class="col-md">
+					<div class="ftco-footer-widget mb-4">
+						<h2 class="ftco-heading-2">About</h2>
+						<p>Full Stack Engineer with expertise in Development, Data Analysis, Machine Learning, and DevOps. Passionate about creating innovative solutions and sharing knowledge through my blog.</p>
+						<ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+							<li class="ftco-animate"><a href="https://www.linkedin.com/in/harpreet22/"><span class="icon-linkedin"></span></a></li>
+							<li class="ftco-animate"><a href="https://github.com/iharpreet0809"><span class="icon-github"></span></a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md">
+					<div class="ftco-footer-widget mb-4 ml-md-5">
+						<h2 class="ftco-heading-2">Quick Links</h2>
+						<ul class="list-unstyled">
+							<li><a href="{% url 'contact' %}#about-section" class="py-2 d-block">About</a></li>
+							<li><a href="{% url 'contact' %}#resume-section" class="py-2 d-block">Resume</a></li>
+							<li><a href="{% url 'contact' %}#project-section" class="py-2 d-block">Projects</a></li>
+							<li><a href="{% url 'blog_list' %}" class="py-2 d-block">Blog</a></li>
+							<li><a href="{% url 'contact' %}#contact-section" class="py-2 d-block">Contact</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md">
+					<div class="ftco-footer-widget mb-4">
+						<h2 class="ftco-heading-2">Have a Questions?</h2>
+						<div class="block-23 mb-3">
+							<ul>
+								<li><span class="icon icon-map-marker"></span><span class="text">Ahmedabad, India</span></li>
+								<li><a href="mailto:talkwithharpreet@gmail.com"><span class="icon icon-envelope"></span><span class="text">talkwithharpreet@gmail.com</span></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved | Harpreet Singh</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<!-- Loader -->
+	<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+	<!-- Scripts -->
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	<script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+	<script src="{% static 'js/popper.min.js' %}"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+	<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+	<script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+	<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+	<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+	<script src="{% static 'js/aos.js' %}"></script>
+	<script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+	<script src="{% static 'js/scrollax.min.js' %}"></script>
+	<script src="{% static 'js/main.js' %}"></script>
+	<script src="{% static 'js/typing-animation.js' %}"></script>
+
+	{% block extra_js %}
+	<!-- Additional JavaScript for child templates -->
+	{% endblock %}
+
+</body>
+</html> 

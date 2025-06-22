@@ -11746,6 +11746,8 @@ body.menu-show {
   width: 100%;
 }
 
+
+/* text color */
 a {
   -webkit-transition: .3s all ease;
   -o-transition: .3s all ease;
@@ -11771,7 +11773,7 @@ h5,
 .h4,
 .h5 {
   line-height: 1.5;
-  color: white;
+  color: #ffffff;
   font-weight: 400;
 }
 

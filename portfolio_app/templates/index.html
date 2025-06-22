@@ -52,6 +52,8 @@
 					<li class="nav-item"><a href="#about-section" class="nav-link"><span>About</span></a></li>
 					<li class="nav-item"><a href="#resume-section" class="nav-link"><span>Resume</span></a></li>
 					<li class="nav-item"><a href="#project-section" class="nav-link"><span>Projects</span></a></li>
+					<li class="nav-item"><a href="/blogs" class="nav-link"><span>Blogs</span></a></li>
+
 					<li class="nav-item"><a href="#contact-section" class="nav-link"><span>Contact</span></a></li>
 				</ul>
 			</div>
@@ -141,7 +143,7 @@
 								<div class="row">
 									<div class="col-sm-6 col-md-5">
 										<div class="about-img">
-											<img src="images/profile-pic.png" class="img-fluid rounded b-shadow-a"
+											<img src="{% static 'images/profile-pic.png' %}" class="img-fluid rounded b-shadow-a"
 												alt="">
 										</div>
 									</div>
@@ -251,7 +253,8 @@
 					<p>Data Analyst with 1+ years of experience driving business strategies through data-driven
 						insights. Proven expertise in data science, statistical analysis, machine learning algorithms
 						and project management.</p>
-				</div>
+					<a href="/Harpreet_Singh_Resume.pdf" target=”_blank” class="btn btn-primary py-4 px-5">Download CV/Resume</a>
+				</div>	
 			</div>
 
 			<div class="row">
@@ -329,13 +332,13 @@
 
 
 
-				<div class="row justify-content-center mt-5 col-md-12">
+				{% comment %} <div class="row justify-content-center mt-5 col-md-12">
 					<div class="col-md-12 text-center ftco-animate">
 						<p><a href="/Harpreet_Singh_Resume.pdf" target=”_blank” class="btn btn-primary py-4 px-5">Download CV/Resume</a>
 						</p>
 					</div>
 				</div>
-			</div>
+			</div> {% endcomment %}
 	</section>
 
 
