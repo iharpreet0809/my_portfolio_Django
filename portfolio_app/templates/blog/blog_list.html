@@ -218,7 +218,7 @@
                 </div>
 
                 <!-- Featured Posts -->
-                {% comment %} {% if featured_posts %}
+              {% if featured_posts %}
                 <div class="mb-4">
                     <h3 class="mb-3">Featured Posts</h3>
                     <div class="row">
@@ -247,9 +247,9 @@
                         {% endfor %}
                     </div>
                 </div>
-                {% endif %} {% endcomment %}
+                {% endif %} 
 
-                <!-- Blog Posts -->
+                <!-- all Blog Posts -->
                 <div class="row">
                     {% for post in posts %}
                     <div class="col-md-6 mb-4">
@@ -263,7 +263,7 @@
                             {% endif %}
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <span class="badge bg-secondary">{{ post.category.name }}</span>
+                                    <span class="badge bg-primary">{{ post.category.name }}</span>
                                     <small class="text-muted">{{ post.published_date|date:"M d, Y" }}</small>
                                 </div>
                                 <h5 class="card-title">
