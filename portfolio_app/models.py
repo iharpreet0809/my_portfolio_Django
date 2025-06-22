@@ -1,3 +1,10 @@
+"""
+Django Models for Portfolio Application
+
+This module contains all the database models for the portfolio website.
+Models include Contact form submissions, Blog categories, Authors, and Blog posts.
+"""
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
@@ -9,13 +16,20 @@ from django.utils import timezone
 # Create your models here.
 
 class Contact(models.Model):
-    name = models.CharField(max_length=100)
-    email = models.EmailField()
-    subject = models.CharField(max_length=200)
-    message = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
+    """
+    Contact Form Model
+    
+    Stores contact form submissions from visitors.
+    Used for the main contact form on the portfolio homepage.
+    """
+    name = models.CharField(max_length=100)  # Visitor's full name
+    email = models.EmailField()  # Visitor's email address
+    subject = models.CharField(max_length=200)  # Subject line of the message
+    message = models.TextField()  # The actual message content
+    created_at = models.DateTimeField(auto_now_add=True)  # Timestamp when message was sent
 
     def __str__(self):
+        """String representation for admin interface"""
         return f"{self.name} - {self.subject}"
 
     class Meta:
@@ -23,37 +37,52 @@ class Contact(models.Model):
         verbose_name_plural = "Contact Form Submissions"
 
 class Category(models.Model):
-    name = models.CharField(max_length=100, unique=True)
-    slug = models.SlugField(max_length=100, unique=True, blank=True)
-    description = models.TextField(blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    """
+    Blog Category Model
+    
+    Organizes blog posts into categories for better content organization.
+    Each category has a name, slug (URL-friendly version), and description.
+    """
+    name = models.CharField(max_length=100, unique=True)  # Category name (e.g., "Technology", "Tutorials")
+    slug = models.SlugField(max_length=100, unique=True, blank=True)  # URL-friendly version of name
+    description = models.TextField(blank=True)  # Optional description of the category
+    created_at = models.DateTimeField(auto_now_add=True)  # When category was created
+    updated_at = models.DateTimeField(auto_now=True)  # When category was last updated
 
     def save(self, *args, **kwargs):
+        """Auto-generate slug from name if not provided"""
         if not self.slug:
-            self.slug = slugify(self.name)
+            self.slug = slugify(self.name)  # Convert "Web Development" to "web-development"
         super().save(*args, **kwargs)
 
     def __str__(self):
+        """String representation for admin interface"""
         return self.name
 
     class Meta:
         verbose_name = "Category"
         verbose_name_plural = "Categories"
-        ordering = ['name']
+        ordering = ['name']  # Sort categories alphabetically
 
 class Author(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bio = models.TextField(blank=True)
-    profile_picture = models.ImageField(upload_to='authors/', blank=True, null=True)
-    website = models.URLField(blank=True)
-    twitter = models.URLField(blank=True)
-    linkedin = models.URLField(blank=True)
-    github = models.URLField(blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    """
+    Author Model
+    
+    Extends Django's User model to store additional author information.
+    Links to blog posts and contains social media profiles.
+    """
+    user = models.OneToOneField(User, on_delete=models.CASCADE)  # Link to Django User model
+    bio = models.TextField(blank=True)  # Author's biography
+    profile_picture = models.ImageField(upload_to='authors/', blank=True, null=True)  # Author's profile photo
+    website = models.URLField(blank=True)  # Personal website URL
+    twitter = models.URLField(blank=True)  # Twitter profile URL
+    linkedin = models.URLField(blank=True)  # LinkedIn profile URL
+    github = models.URLField(blank=True)  # GitHub profile URL
+    created_at = models.DateTimeField(auto_now_add=True)  # When author profile was created
+    updated_at = models.DateTimeField(auto_now=True)  # When author profile was last updated
 
     def __str__(self):
+        """String representation - use full name if available, otherwise username"""
         return self.user.get_full_name() or self.user.username
 
     class Meta:
@@ -61,66 +90,83 @@ class Author(models.Model):
         verbose_name_plural = "Authors"
 
 class BlogPost(models.Model):
+    """
+    Blog Post Model
+    
+    The main content model for blog posts. Includes rich text content,
+    SEO fields, engagement tracking, and relationships to categories and authors.
+    """
+    # Status choices for post publication
     STATUS_CHOICES = [
         ('draft', 'Draft'),
         ('published', 'Published'),
     ]
 
-    title = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200, unique=True, blank=True)
-    content = RichTextField(config_name='blog')
-    excerpt = models.TextField(max_length=500, blank=True, help_text="Brief summary of the post")
-    cover_image = models.ImageField(upload_to='blog_covers/', blank=True, null=True)
+    # Basic post information
+    title = models.CharField(max_length=200)  # Post title
+    slug = models.SlugField(max_length=200, unique=True, blank=True)  # URL-friendly title
+    content = RichTextField(config_name='blog')  # Rich text content using CKEditor
+    excerpt = models.TextField(max_length=500, blank=True, help_text="Brief summary of the post")  # Short description
+    cover_image = models.ImageField(upload_to='blog_covers/', blank=True, null=True)  # Featured image
     
-    # Relationships
-    author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='blog_posts')
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='blog_posts')
-    tags = TaggableManager(blank=True)
+    # Relationships to other models
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='blog_posts')  # Post author
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='blog_posts')  # Post category
+    tags = TaggableManager(blank=True)  # Flexible tagging system
     
-    # Status and dates
-    is_published = models.BooleanField(default=False)
-    published_date = models.DateTimeField(blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    # Publication status and timing
+    is_published = models.BooleanField(default=False)  # Whether post is live
+    published_date = models.DateTimeField(blank=True, null=True)  # When post was published
+    created_at = models.DateTimeField(auto_now_add=True)  # When post was created
+    updated_at = models.DateTimeField(auto_now=True)  # When post was last updated
     
-    # SEO fields
+    # SEO (Search Engine Optimization) fields
     meta_title = models.CharField(max_length=60, blank=True, help_text="SEO title (max 60 characters)")
     meta_description = models.CharField(max_length=160, blank=True, help_text="SEO description (max 160 characters)")
     
-    # Engagement fields
-    views = models.PositiveIntegerField(default=0)
-    featured = models.BooleanField(default=False)
+    # Engagement and visibility fields
+    views = models.PositiveIntegerField(default=0)  # Number of times post was viewed
+    featured = models.BooleanField(default=False)  # Whether post is featured/promoted
 
     def save(self, *args, **kwargs):
+        """Custom save method to auto-generate slug and set published date"""
+        # Generate slug from title if not provided
         if not self.slug:
             self.slug = slugify(self.title)
         
-        # Set published_date when post is published
+        # Set published_date when post is first published
         if self.is_published and not self.published_date:
             self.published_date = timezone.now()
         
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
+        """Return the URL for this post (used in admin and templates)"""
         return reverse('blog_detail', kwargs={'slug': self.slug})
 
     def __str__(self):
+        """String representation for admin interface"""
         return self.title
 
     class Meta:
         verbose_name = "Blog Post"
         verbose_name_plural = "Blog Posts"
-        ordering = ['-published_date', '-created_at']
+        ordering = ['-published_date', '-created_at']  # Most recent first
 
     @property
     def reading_time(self):
-        """Estimate reading time based on content length"""
-        words_per_minute = 200
+        """
+        Estimate reading time based on content length
+        
+        Returns:
+            int: Estimated reading time in minutes (minimum 1 minute)
+        """
+        words_per_minute = 200  # Average reading speed
         word_count = len(self.content.split())
         minutes = word_count // words_per_minute
-        return max(1, minutes)  # Minimum 1 minute
+        return max(1, minutes)  # Ensure minimum 1 minute reading time
 
     def increment_views(self):
-        """Increment view count"""
+        """Increment the view count for this post"""
         self.views += 1
-        self.save(update_fields=['views'])
+        self.save(update_fields=['views'])  # Only update the views field for efficiency

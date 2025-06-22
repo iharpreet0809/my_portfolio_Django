@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+# This is the root directory of the Django project
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -21,11 +22,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# The secret key is used for cryptographic signing and should be kept secure
 
 # SECRET_KEY = "django-insecure-kyaqp9kt2q@&x(nbndoxf6@3&-jad$nv6*9sc&&&)95%q$)c=t"
 SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback-secret')
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# Debug mode shows detailed error pages and should be False in production
 
 #FOR PRODUCTION
 # DEBUG = os.environ.get('DEBUG', 'False') == 'True'
@@ -34,10 +37,12 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback-secret')
 DEBUG = True
 
 # Add your server's IP and the Docker container's service name
+# ALLOWED_HOSTS specifies which hostnames Django can serve
 ALLOWED_HOSTS = ['*', 'django-app'] # add the docker container name of nginx due to allow the csrf validation properly.
 #Your Django settings need to be explicitly configured to trust requests coming from your server's IP address and through the Nginx proxy.
 
 # Trust requests originating from your domain/IP on the port Nginx is using
+# CSRF_TRUSTED_ORIGINS is required when using HTTPS or when behind a proxy
 CSRF_TRUSTED_ORIGINS = [
     'http://65.1.110.216:8888',
     # If you plan to use HTTPS in the future, you can add this as well
@@ -53,54 +58,65 @@ CSRF_TRUSTED_ORIGINS = [
 
 
 # Application definition
+# INSTALLED_APPS tells Django which applications are available in this project
 
 INSTALLED_APPS = [
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
-    'portfolio_app',
-    'ckeditor',
-    'ckeditor_uploader',
-    'taggit',
+    # Django built-in apps
+    "django.contrib.admin",  # Admin interface
+    "django.contrib.auth",  # Authentication system
+    "django.contrib.contenttypes",  # Content type framework
+    "django.contrib.sessions",  # Session framework
+    "django.contrib.messages",  # Messaging framework
+    "django.contrib.staticfiles",  # Static file management
+    
+    # Custom apps
+    'portfolio_app',  # Main portfolio application
+    
+    # Third-party apps
+    'ckeditor',  # Rich text editor for blog content
+    'ckeditor_uploader',  # File upload for CKEditor
+    'taggit',  # Tagging system for blog posts
 ]
 
+# MIDDLEWARE is a list of middleware classes that are executed on every request
 MIDDLEWARE = [
-    "django.middleware.security.SecurityMiddleware",
-    "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.middleware.security.SecurityMiddleware",  # Security middleware
+    "django.contrib.sessions.middleware.SessionMiddleware",  # Session handling
+    "django.middleware.common.CommonMiddleware",  # Common middleware
+    "django.middleware.csrf.CsrfViewMiddleware",  # CSRF protection
+    "django.contrib.auth.middleware.AuthenticationMiddleware",  # Authentication
+    "django.contrib.messages.middleware.MessageMiddleware",  # Message handling
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",  # Clickjacking protection
 ]
 
+# ROOT_URLCONF points to the main URL configuration module
 ROOT_URLCONF = "portfolio_django.urls"
 
+# TEMPLATES configuration for template rendering
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, 'portfolio_app', 'templates')],
-        "APP_DIRS": True,
+        "DIRS": [os.path.join(BASE_DIR, 'portfolio_app', 'templates')],  # Template directory
+        "APP_DIRS": True,  # Look for templates in app directories
         "OPTIONS": {
             "context_processors": [
-                "django.template.context_processors.debug",
-                "django.template.context_processors.request",
-                "django.contrib.auth.context_processors.auth",
-                "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.debug",  # Debug context
+                "django.template.context_processors.request",  # Request context
+                "django.contrib.auth.context_processors.auth",  # Auth context
+                "django.contrib.messages.context_processors.messages",  # Messages context
             ],
         },
     },
 ]
 
+# WSGI_APPLICATION points to the WSGI application object
 WSGI_APPLICATION = "portfolio_django.wsgi.application"
 
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# SQLite configuration (commented out - using MySQL instead)
 # DATABASES = {
 #     "default": {
 #         "ENGINE": "django.db.backends.sqlite3",
@@ -108,6 +124,7 @@ WSGI_APPLICATION = "portfolio_django.wsgi.application"
 #     }
 # }
 
+# Production MySQL configuration (commented out - using conditional configuration)
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
@@ -119,6 +136,7 @@ WSGI_APPLICATION = "portfolio_django.wsgi.application"
 #     }
 # }
 
+# Conditional database configuration based on DEBUG setting
 if DEBUG: #for local development
     DATABASES = {
         'default': {
@@ -148,6 +166,7 @@ else: #for production
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
+# AUTH_PASSWORD_VALIDATORS defines the password validation rules
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -167,80 +186,86 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "en-us"  # Language code for the site
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "UTC"  # Time zone for the site
 
-USE_I18N = True
+USE_I18N = True  # Enable internationalization
 
-USE_TZ = True
+USE_TZ = True  # Enable timezone support
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = "static/"
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = "static/"  # URL prefix for static files
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Directory for collected static files
 # Optional if you want to collect from multiple places
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),  # <-- make sure this exists!
 ]
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
+# Media files (user-uploaded content)
+MEDIA_URL = '/media/'  # URL prefix for media files
+MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')  # Directory for uploaded files
 
 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"  # Use BigAutoField for primary keys
 
 
 #EMAIL SETTINGS
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'talkwithharpreet@gmail.com'
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-EMAIL_HOST_PASSWORD = 'ldjqbszfodflytmf'            # Use Gmail App Password (not your Gmail password)
+# Configuration for sending emails (used by contact form)
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # SMTP backend
+EMAIL_HOST = 'smtp.gmail.com'  # Gmail SMTP server
+EMAIL_PORT = 587  # SMTP port for TLS
+EMAIL_USE_TLS = True  # Use TLS encryption
+EMAIL_HOST_USER = 'talkwithharpreet@gmail.com'  # Gmail account
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER  # Default sender email
+EMAIL_HOST_PASSWORD = 'ldjqbszfodflytmf'  # Use Gmail App Password (not your Gmail password)
 
 # CKEditor Configuration
-CKEDITOR_UPLOAD_PATH = "uploads/"
-CKEDITOR_IMAGE_BACKEND = "pillow"
+# Settings for the rich text editor used in blog posts
 
+CKEDITOR_UPLOAD_PATH = "uploads/"  # Directory for uploaded files via CKEditor
+CKEDITOR_IMAGE_BACKEND = "pillow"  # Image processing backend
+
+# CKEditor toolbar configurations
 CKEDITOR_CONFIGS = {
     'default': {
-        'toolbar': 'full',
-        'height': 300,
-        'width': '100%',
+        'toolbar': 'full',  # Full toolbar with all options
+        'height': 300,  # Editor height in pixels
+        'width': '100%',  # Editor width
         'extraPlugins': ','.join([
-            'uploadimage',
-            'autolink',
-            'autoembed',
-            'embedsemantic',
-            'autogrow',
-            'widget',
-            'lineutils',
-            'clipboard',
-            'dialog',
-            'dialogui',
-            'elementspath'
+            'uploadimage',  # Image upload
+            'autolink',  # Auto-link detection
+            'autoembed',  # Auto-embed media
+            'embedsemantic',  # Semantic embedding
+            'autogrow',  # Auto-resize editor
+            'widget',  # Widget system
+            'lineutils',  # Line utilities
+            'clipboard',  # Clipboard operations
+            'dialog',  # Dialog system
+            'dialogui',  # Dialog UI
+            'elementspath'  # Element path
         ]),
     },
     'blog': {
         'toolbar': [
-            ['Bold', 'Italic', 'Underline', 'Strike'],
-            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'],
-            ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-            ['Link', 'Unlink'],
-            ['Image', 'Table', 'HorizontalRule'],
-            ['Format', 'Font', 'FontSize'],
-            ['TextColor', 'BGColor'],
-            ['Source']
+            ['Bold', 'Italic', 'Underline', 'Strike'],  # Text formatting
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'],  # Lists and indentation
+            ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],  # Text alignment
+            ['Link', 'Unlink'],  # Link management
+            ['Image', 'Table', 'HorizontalRule'],  # Media and tables
+            ['Format', 'Font', 'FontSize'],  # Text formatting options
+            ['TextColor', 'BGColor'],  # Color options
+            ['Source']  # HTML source view
         ],
-        'height': 400,
-        'width': '100%',
+        'height': 400,  # Editor height for blog posts
+        'width': '100%',  # Full width
     }
 }
