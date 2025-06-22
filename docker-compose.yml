@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   mysql:
-    image: mysql:8.0
+    image: mysql/mysql-server:8.0
     container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
@@ -68,6 +68,7 @@ services:
       - ./staticfiles:/app/staticfiles  # NGINX SERVES from this
     networks:
       - twotier
+    restart: always   # This ensures Nginx auto-starts after reboot
 
 networks:
   twotier:
