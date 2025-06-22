@@ -26,12 +26,30 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback-secret')
 
 # SECURITY WARNING: don't run with debug turned on in production!
+
+#FOR PRODUCTION
 # DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-#for local development
+#for LOCAL DEVELOPMENT
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+# Add your server's IP and the Docker container's service name
+ALLOWED_HOSTS = ['*', 'django-app'] # add the docker container name of nginx due to allow the csrf validation properly.
+#Your Django settings need to be explicitly configured to trust requests coming from your server's IP address and through the Nginx proxy.
+
+# Trust requests originating from your domain/IP on the port Nginx is using
+CSRF_TRUSTED_ORIGINS = [
+    'http://65.1.110.216:8888',
+    # If you plan to use HTTPS in the future, you can add this as well
+    # 'https://65.1.110.216:8888',
+]
+
+# Since you are not using HTTPS yet, it's best to comment these out for now
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# CSRF_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
+
+
 
 
 # Application definition
