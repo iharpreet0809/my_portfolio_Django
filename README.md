@@ -1,4 +1,4 @@
-# Django Portfolio Application
+# Django Portfolio & Blogging Application
 
 A modern, feature-rich portfolio website built with Django, featuring a blog system, contact form, and Docker deployment.
 
