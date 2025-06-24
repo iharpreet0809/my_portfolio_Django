@@ -1,25 +1,14 @@
-# Django Portfolio & Blogging Application
+# Django Portfolio Application
 
-A modern, feature-rich portfolio website built with Django, featuring a blog system, contact form, and Docker deployment.
+A modern, feature-rich portfolio website built with Django, featuring a contact form and Docker deployment.
 
 ## 🚀 Features
 
 ### Core Features
 - **Portfolio Homepage**: Professional landing page with contact form
-- **Blog System**: Complete blog with categories, tags, and search functionality
 - **Contact Form**: Email notifications for visitor inquiries
 - **Admin Interface**: Full Django admin for content management
 - **Responsive Design**: Mobile-friendly Bootstrap-based UI
-
-### Blog Features
-- **Rich Text Editor**: CKEditor for creating formatted blog posts
-- **Categories & Tags**: Organize content with categories and flexible tagging
-- **Search & Filter**: Advanced search across titles, content, and tags
-- **Pagination**: Efficient content browsing with pagination
-- **RSS Feed**: Subscribe to blog updates
-- **View Tracking**: Track post popularity
-- **Featured Posts**: Highlight important content
-- **Related Posts**: Suggest relevant content to readers
 
 ### Technical Features
 - **Docker Deployment**: Containerized application with Docker Compose
@@ -35,7 +24,7 @@ A modern, feature-rich portfolio website built with Django, featuring a blog sys
 ```
 portfolio_django/
 ├── portfolio_app/          # Main Django application
-│   ├── models.py          # Database models (Contact, BlogPost, Category, Author)
+│   ├── models.py          # Database models (Contact, Category, Author)
 │   ├── views.py           # View functions for handling requests
 │   ├── forms.py           # Django forms for user input
 │   ├── urls.py            # URL routing configuration
@@ -59,8 +48,6 @@ portfolio_django/
 - **Web Server**: Nginx (reverse proxy) + Gunicorn (WSGI server)
 - **Containerization**: Docker & Docker Compose
 - **Frontend**: Bootstrap, jQuery, custom CSS/JS
-- **Rich Text**: CKEditor
-- **Tagging**: django-taggit
 - **Image Processing**: Pillow
 
 ## 🛠️ Installation & Setup
@@ -171,17 +158,12 @@ The contact form uses Gmail SMTP. To set up:
 - Fields: name, email, subject, message, created_at
 
 ### Category Model
-- Organizes blog posts into categories
+- Organizes content into categories
 - Fields: name, slug, description, timestamps
 
 ### Author Model
 - Extends Django User model with additional info
 - Fields: bio, profile_picture, social media links
-
-### BlogPost Model
-- Main content model for blog posts
-- Features: rich text content, SEO fields, view tracking
-- Relationships: author, category, tags
 
 ## 🔧 Management Commands
 

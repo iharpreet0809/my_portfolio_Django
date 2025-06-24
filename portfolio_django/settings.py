@@ -71,11 +71,7 @@ INSTALLED_APPS = [
     
     # Custom apps
     'portfolio_app',  # Main portfolio application
-    
-    # Third-party apps
-    'ckeditor',  # Rich text editor for blog content
-    'ckeditor_uploader',  # File upload for CKEditor
-    'taggit',  # Tagging system for blog posts
+
 ]
 
 # MIDDLEWARE is a list of middleware classes that are executed on every request
@@ -228,44 +224,3 @@ EMAIL_HOST_USER = 'talkwithharpreet@gmail.com'  # Gmail account
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER  # Default sender email
 EMAIL_HOST_PASSWORD = 'ldjqbszfodflytmf'  # Use Gmail App Password (not your Gmail password)
 
-# CKEditor Configuration
-# Settings for the rich text editor used in blog posts
-
-CKEDITOR_UPLOAD_PATH = "uploads/"  # Directory for uploaded files via CKEditor
-CKEDITOR_IMAGE_BACKEND = "pillow"  # Image processing backend
-
-# CKEditor toolbar configurations
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': 'full',  # Full toolbar with all options
-        'height': 300,  # Editor height in pixels
-        'width': '100%',  # Editor width
-        'extraPlugins': ','.join([
-            'uploadimage',  # Image upload
-            'autolink',  # Auto-link detection
-            'autoembed',  # Auto-embed media
-            'embedsemantic',  # Semantic embedding
-            'autogrow',  # Auto-resize editor
-            'widget',  # Widget system
-            'lineutils',  # Line utilities
-            'clipboard',  # Clipboard operations
-            'dialog',  # Dialog system
-            'dialogui',  # Dialog UI
-            'elementspath'  # Element path
-        ]),
-    },
-    'blog': {
-        'toolbar': [
-            ['Bold', 'Italic', 'Underline', 'Strike'],  # Text formatting
-            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'],  # Lists and indentation
-            ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],  # Text alignment
-            ['Link', 'Unlink'],  # Link management
-            ['Image', 'Table', 'HorizontalRule'],  # Media and tables
-            ['Format', 'Font', 'FontSize'],  # Text formatting options
-            ['TextColor', 'BGColor'],  # Color options
-            ['Source']  # HTML source view
-        ],
-        'height': 400,  # Editor height for blog posts
-        'width': '100%',  # Full width
-    }
-}

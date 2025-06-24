@@ -58,7 +58,7 @@
 					<li class="nav-item"><a href="{% url 'contact' %}#about-section" class="nav-link"><span>About</span></a></li>
 					<li class="nav-item"><a href="{% url 'contact' %}#resume-section" class="nav-link"><span>Resume</span></a></li>
 					<li class="nav-item"><a href="{% url 'contact' %}#project-section" class="nav-link"><span>Projects</span></a></li>
-					<li class="nav-item"><a href="{% url 'blog_list' %}" class="nav-link"><span>Blog</span></a></li>
+					{% comment %} <li class="nav-item"><a href="{% url 'blog_list' %}" class="nav-link"><span>Blog</span></a></li> {% endcomment %}
 					<li class="nav-item"><a href="{% url 'contact' %}#contact-section" class="nav-link"><span>Contact</span></a></li>
 				</ul>
 			</div>
@@ -76,7 +76,7 @@
 				<div class="col-md">
 					<div class="ftco-footer-widget mb-4">
 						<h2 class="ftco-heading-2">About</h2>
-						<p>Full Stack Engineer with expertise in Development, Data Analysis, Machine Learning, and DevOps. Passionate about creating innovative solutions and sharing knowledge through my blog.</p>
+						<p>Full Stack Engineer with expertise in Development, Data Analysis, Machine Learning, and DevOps. Passionate about creating innovative solutions and sharing knowledge.</p>
 						<ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
 							<li class="ftco-animate"><a href="https://www.linkedin.com/in/harpreet22/"><span class="icon-linkedin"></span></a></li>
 							<li class="ftco-animate"><a href="https://github.com/iharpreet0809"><span class="icon-github"></span></a></li>
@@ -90,7 +90,6 @@
 							<li><a href="{% url 'contact' %}#about-section" class="py-2 d-block">About</a></li>
 							<li><a href="{% url 'contact' %}#resume-section" class="py-2 d-block">Resume</a></li>
 							<li><a href="{% url 'contact' %}#project-section" class="py-2 d-block">Projects</a></li>
-							<li><a href="{% url 'blog_list' %}" class="py-2 d-block">Blog</a></li>
 							<li><a href="{% url 'contact' %}#contact-section" class="py-2 d-block">Contact</a></li>
 						</ul>
 					</div>
