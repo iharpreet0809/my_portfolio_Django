@@ -1,6 +1,6 @@
 # Django collectstatic output
 staticfiles/
-
+mediafiles/
 # Python cache
 __pycache__/
 *.py[cod]
