@@ -6,8 +6,10 @@
 FROM python:3.11-slim
 
 # Set environment variables for Python
-ENV PYTHONDONTWRITEBYTECODE=1  # Don't write .pyc files (reduces image size)
-ENV PYTHONUNBUFFERED=1  # Force Python to run in unbuffered mode (better for Docker logs)
+#Don't write .pyc files (reduces image size)
+ENV PYTHONDONTWRITEBYTECODE=1  
+# Force Python to run in unbuffered mode (better for Docker logs)
+ENV PYTHONUNBUFFERED=1  
 
 # Set working directory inside the container
 WORKDIR /app
