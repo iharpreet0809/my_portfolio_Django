@@ -1,6 +1,9 @@
 # Django collectstatic output
 staticfiles/
 mediafiles/
+
+#logs
+logs/
 # Python cache
 __pycache__/
 *.py[cod]
@@ -13,8 +16,8 @@ __pycache__/
 .DS_Store
 Thumbs.db
 
+db.sqlite3
 
 #env files
 env/
-
 .env
