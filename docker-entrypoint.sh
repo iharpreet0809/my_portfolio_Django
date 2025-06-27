@@ -16,7 +16,7 @@ echo "⏳ Waiting for MySQL at $DB_HOST:$DB_PORT..."
 while ! nc -z "$DB_HOST" "$DB_PORT"; do
   sleep 0.5
 done
-echo "✅ MySQL Database is up and running djang setup!"
+echo "✅ MySQL Database is up and running django setup!"
 
 echo "🧱 Checking for pending migrations..."
 python manage.py makemigrations --check --dry-run > /dev/null 2>&1 || {
@@ -26,6 +26,9 @@ python manage.py makemigrations --check --dry-run > /dev/null 2>&1 || {
 
 echo "🚀 Applying migrations..."
 python manage.py migrate --noinput
+
+echo "Migrations applied with migrate!"
+
 # This gathers all static files (CSS, JS, images) into STATIC_ROOT for Nginx to serve
 echo "📦 Collecting static files..."
 python manage.py collectstatic --noinput

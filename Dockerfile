@@ -30,8 +30,11 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 # Copy the rest of the project files
 COPY . .
 
-# Copy and make entrypoint script executable
+# Copy and make entrypoint script executable for the container
+#now we are in the container and running the script wirh entrypoint.sh
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+
+#entrypoint.sh make it executable
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # Set the entrypoint script to run before the main command
@@ -39,4 +42,6 @@ ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 
 
 # Default command to run the Django application
+# Yes, this CMD command runs inside the container. It starts Gunicorn (Python WSGI server)
+# binding it to all network interfaces (0.0.0.0) on port 8000
 CMD ["gunicorn", "portfolio_django.wsgi:application", "--bind", "0.0.0.0:8000"]
