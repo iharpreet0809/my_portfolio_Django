@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # This is the root directory of the Django project
@@ -29,20 +33,20 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback-secret')
 
 # SECURITY WARNING: don't run with debug true turned on in production!
 # Debug mode shows detailed error pages and should be False in production
-# DEBUG = os.environ.get('DEBUG', 'False') == 'True'
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+# DEBUG = True
 
-# Add your server's IP and the Docker container's service name
+# Add your server's IP and the Docker container's service name for the nginx proxy
 # ALLOWED_HOSTS specifies which hostnames Django can serve
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')  # Get allowed hosts from environment variable
 #Your Django settings need to be explicitly configured to trust requests coming from your server's IP address and through the Nginx proxy.
+ALLOWED_HOSTS = ['127.0.0.1', 'iharpreet.com', 'www.iharpreet.com', 'django-app']  # Get allowed hosts from env var
 
 # Trust requests originating from your domain/IP on the port Nginx is using
 # CSRF_TRUSTED_ORIGINS is required when using HTTPS or when behind a proxy
 CSRF_TRUSTED_ORIGINS = [
     # 'http://65.1.110.216:8888',
     # If you plan to use HTTPS in the future, you can add this as well
-    # 'https://65.1.110.216:8888', iharpreet.com, www.iharpreet.com,
+    # 'https://65.1.110.216:8888', 'iharpreet.com', 'www.iharpreet.com',
 ]
 
 # Since you are not using HTTPS yet, it's best to comment these out for now
