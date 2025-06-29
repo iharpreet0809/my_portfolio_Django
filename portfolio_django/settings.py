@@ -12,10 +12,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
 # Load environment variables from .env file
-load_dotenv()
+# load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # This is the root directory of the Django project
@@ -33,13 +33,39 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback-secret')
 
 # SECURITY WARNING: don't run with debug true turned on in production!
 # Debug mode shows detailed error pages and should be False in production
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
-# DEBUG = True
+# DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+DEBUG = True
+
+# Conditional database configuration based on DEBUG setting
+if DEBUG==True: #for local development
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'my_portfolio',
+            'USER': 'root',
+            'PASSWORD': 'root',
+            'HOST': 'localhost',
+            'PORT': '3306',
+        }
+    }
+else: #for production
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.environ.get('MYSQL_DB'),
+            'USER': os.environ.get('MYSQL_USER'),
+            'PASSWORD': os.environ.get('MYSQL_PASSWORD'),
+            'HOST': os.environ.get('MYSQL_HOST'),
+            'PORT': '3306',
+        }
+    }
+
+
 
 # Add your server's IP and the Docker container's service name for the nginx proxy
 # ALLOWED_HOSTS specifies which hostnames Django can serve
 #Your Django settings need to be explicitly configured to trust requests coming from your server's IP address and through the Nginx proxy.
-ALLOWED_HOSTS = ['127.0.0.1', 'iharpreet.com', 'www.iharpreet.com', 'django-app']  # Get allowed hosts from env var
+ALLOWED_HOSTS = ['127.0.0.1', '65.1.200.98','iharpreet.com', 'www.iharpreet.com', 'django-app']  # Get allowed hosts from env var
 
 # Trust requests originating from your domain/IP on the port Nginx is using
 # CSRF_TRUSTED_ORIGINS is required when using HTTPS or when behind a proxy
@@ -141,31 +167,6 @@ TEMPLATES = [
 WSGI_APPLICATION = "portfolio_django.wsgi.application"
 
 
-# Conditional database configuration based on DEBUG setting
-if DEBUG: #for local development
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'my_portfolio',
-            'USER': 'root',
-            'PASSWORD': 'root',
-            'HOST': 'localhost',
-            'PORT': '3306',
-        }
-    }
-else: #for production
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': os.environ.get('MYSQL_DB'),
-            'USER': os.environ.get('MYSQL_USER'),
-            'PASSWORD': os.environ.get('MYSQL_PASSWORD'),
-            'HOST': os.environ.get('MYSQL_HOST'),
-            'PORT': '3306',
-        }
-    }
-
-
 
 
 # Password validation
@@ -206,9 +207,7 @@ USE_TZ = True  # Enable timezone support
 STATIC_URL = "static/"  # URL prefix for static files
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Directory for collected static files
 # Optional if you want to collect from multiple places
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),  # <-- make sure this exists!
-]
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # <-- make sure this exists!
 
 # Media files (user-uploaded content)
 MEDIA_URL = '/media/'  # URL prefix for media files
