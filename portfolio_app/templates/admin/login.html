@@ -1,0 +1,86 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block content %}
+
+<div style="background:#222; border-radius:8px; max-width:400px; margin:100px auto; box-shadow:0 2px 8px #000;">
+    <div style="background:#4682a9; color:#fff; padding:24px 0; border-radius:8px 8px 0 0; text-align:center;">
+        <h2 style="margin:0; font-weight:400;">iharpreet Admin Panel</h2>
+    </div>
+    <div style="padding:32px 45px 24px 20px;">
+        {% if error %}
+            <div style="color:#ff6b6b; margin-bottom:16px;">{{ error }}</div>
+        {% endif %}
+        {% if otp_sent %}
+            <div style="color:#4bb543; margin-bottom:16px;">OTP sent to your email: <b>{{ email }}</b></div>
+        {% endif %}
+        <form method="post" autocomplete="off" style="margin:0;">
+            {% csrf_token %}
+            {% if not otp_required %}
+                <input type="hidden" name="step" value="credentials">
+                <div style="margin-bottom:18px;">
+                    <label for="id_username" style="color:#6ec1e4;">Username:</label><br>
+                    <input type="text" name="username" id="id_username" class="form-control" style="width:100%; background:#111; color:#fff; border:2px solid #fff; border-radius:6px; padding:10px; font-size:18px;" required autofocus>
+                </div>
+                <div style="margin-bottom:18px;">
+                    <label for="id_password" style="color:#fff;">Password:</label><br>
+                    <input type="password" name="password" id="id_password" class="form-control" style="width:100%; background:#111; color:#fff; border:2px solid #222; border-radius:6px; padding:10px; font-size:18px;" required>
+                </div>
+            {% else %}
+                <input type="hidden" name="step" value="otp">
+                <input type="hidden" name="username" value="{{ username }}">
+                <div style="margin-bottom:18px;">
+                    <label for="id_otp" style="color:#6ec1e4;">Enter OTP:</label><br>
+                    <input type="text" name="otp" id="id_otp" class="form-control" style="width:100%; background:#111; color:#fff; border:2px solid #fff; border-radius:6px; padding:10px; font-size:18px;" maxlength="6" pattern="[0-9]{6}" required autofocus>
+                </div>
+                {% if info %}
+                    <div style="color:#4bb543; margin-bottom:16px;">{{ info }}</div>
+                {% endif %}
+                <div style="text-align:right; margin-bottom:10px;">
+                    <button type="button" id="resend-otp-btn" class="btn btn-link" style="color:#6ec1e4; text-decoration:underline; padding:0; font-size:15px;" {% if cooldown %}disabled{% endif %}>Resend OTP</button>
+                    <span id="cooldown-timer" style="color:#ffb347; margin-left:10px; display:{% if cooldown %}inline{% else %}none{% endif %};">
+                        (Wait <span id="timer-value">{{ cooldown }}</span>s)
+                    </span>
+                </div>
+                <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    var resendBtn = document.getElementById('resend-otp-btn');
+                    var cooldown = {{ cooldown|default:0 }};
+                    var timerSpan = document.getElementById('timer-value');
+                    var timerDiv = document.getElementById('cooldown-timer');
+                    var form = resendBtn.closest('form');
+                    if (cooldown > 0) {
+                        resendBtn.disabled = true;
+                        timerDiv.style.display = 'inline';
+                        var interval = setInterval(function() {
+                            cooldown--;
+                            timerSpan.textContent = cooldown;
+                            if (cooldown <= 0) {
+                                clearInterval(interval);
+                                resendBtn.disabled = false;
+                                timerDiv.style.display = 'none';
+                            }
+                        }, 1000);
+                    }
+                    resendBtn.addEventListener('click', function(e) {
+                        // Clear OTP field so browser doesn't require it
+                        var otpInput = document.getElementById('id_otp');
+                        if (otpInput) otpInput.value = '';
+                        // Add a hidden input for resend
+                        var hidden = document.createElement('input');
+                        hidden.type = 'hidden';
+                        hidden.name = 'resend';
+                        hidden.value = '1';
+                        form.appendChild(hidden);
+                        form.submit();
+                    });
+                });
+                </script>
+            {% endif %}
+            <div style="text-align:center; margin-top:24px;">
+                <button type="submit" class="btn btn-primary" style="min-width:100px; font-size:18px;">Log in</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

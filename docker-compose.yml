@@ -28,10 +28,11 @@ services:
 
   # Django Application Service
   django:
-    build:
-      context: .  # Build context (current directory)
-      dockerfile: Dockerfile  # Use the Dockerfile in current directory
-    image: my_portfolio_django:latest  # Name for the built image
+    # build:
+    #   context: .  # Build context (current directory)
+    #   dockerfile: Dockerfile  # Use the Dockerfile in current directory
+    # image: my_portfolio_django:latest  # Name for the built image
+    image: harpreetdevops/portfolio:latest
     container_name: django-app  # Name for the container
     ports:
       - "8000:8000"  # Expose Django development server port
@@ -82,11 +83,13 @@ services:
     volumes:
       - ./certbot/www:/var/www/certbot
       - ./certbot/conf:/etc/letsencrypt
+    # entrypoint: >
+    #  sh -c "certbot certonly --webroot --webroot-path=/var/www/certbot
+    #  --email talkwithharpreet@gmail.com --agree-tos --no-eff-email
+    #  --non-interactive --keep-until-expiring
+    #  -d iharpreet.com -d www.iharpreet.com"
     entrypoint: >
-     sh -c "certbot certonly --webroot --webroot-path=/var/www/certbot
-     --email talkwithharpreet@gmail.com --agree-tos --no-eff-email
-     --non-interactive --keep-until-expiring
-     -d iharpreet.com -d www.iharpreet.com"
+      sh -c "trap exit TERM; while :; do sleep 6h & wait $${!}; certbot renew; done"
     networks:
       - twotier
 

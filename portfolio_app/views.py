@@ -22,6 +22,22 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.shortcuts import render, redirect
 
+from django.contrib.auth import authenticate, login as auth_login, get_user_model
+from django.contrib.auth.views import LoginView
+from django.conf import settings
+import random
+
+from django.core.mail import send_mail
+
+from django.template.loader import render_to_string
+
+from django.urls import reverse
+from django.http import HttpResponseRedirect
+
+import time
+
+User = get_user_model()
+
 def contact(request):
     """
     Handle contact form submission and render the index page.
@@ -85,3 +101,102 @@ Message:
         storage.used = True
 
     return render(request, 'index.html', {'form': form})
+
+def admin_login_2fa(request):
+    """
+    Custom admin login view with OTP two-factor authentication.
+    Step 1: Validate username/password, generate/send OTP, show OTP field.
+    Step 2: Validate OTP, log in user.
+    Also supports resending OTP with a cooldown.
+    """
+    context = {'site_header': 'iharpreet Admin Panel'}
+    OTP_COOLDOWN_SECONDS = 61  # 2 minutes
+    now = int(time.time())
+    if request.method == 'POST':
+        step = request.POST.get('step', 'credentials')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        otp = request.POST.get('otp')
+        resend = request.POST.get('resend')
+
+        if step == 'credentials':
+            user = authenticate(request, username=username, password=password)
+            if user is not None and user.is_active and user.is_staff:
+                # Generate OTP
+                otp_code = str(random.randint(100000, 999999))
+                request.session['otp_user_id'] = user.id
+                request.session['otp_code'] = otp_code
+                request.session['otp_valid'] = True
+                request.session['otp_last_sent'] = now
+                request.session['otp_email'] = user.email
+                # Send OTP via email
+                subject = 'Your Admin Panel OTP'
+                message = f'Your OTP for admin login is: {otp_code}'
+                send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email], fail_silently=False)
+                context['username'] = username
+                context['otp_required'] = True
+                context['otp_sent'] = True
+                context['email'] = user.email
+                context['cooldown'] = OTP_COOLDOWN_SECONDS  # Always set cooldown after sending OTP
+                return render(request, 'admin/login.html', context)
+            else:
+                context['error'] = 'Invalid username or password.'
+                return render(request, 'admin/login.html', context)
+        elif step == 'otp':
+            if resend:
+                # Resend OTP logic
+                otp_failed = request.session.get('otp_failed', False)
+                if not otp_failed:
+                    last_sent = request.session.get('otp_last_sent', 0)
+                    if now - last_sent < OTP_COOLDOWN_SECONDS:
+                        wait_seconds = OTP_COOLDOWN_SECONDS - (now - last_sent)
+                        context['otp_required'] = True
+                        context['username'] = username
+                        context['email'] = request.session.get('otp_email')
+                        context['cooldown'] = wait_seconds
+                        context['otp_sent'] = False
+                        context['error'] = f'You Entered the wrong OTP. Please try to resend OTP'
+                        return render(request, 'admin/login.html', context)
+                # If otp_failed is True, allow immediate resend and reset the flag
+                request.session['otp_failed'] = False
+                # Generate and send new OTP
+                user_id = request.session.get('otp_user_id')
+                user = User.objects.get(id=user_id)
+                otp_code = str(random.randint(100000, 999999))
+                request.session['otp_code'] = otp_code
+                request.session['otp_last_sent'] = now
+                request.session['otp_valid'] = True
+                request.session['otp_email'] = user.email
+                subject = 'Your Admin Panel OTP'
+                message = f'Your OTP for admin login is: {otp_code}'
+                send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email], fail_silently=False)
+                context['otp_required'] = True
+                context['otp_sent'] = True
+                context['username'] = username
+                context['email'] = user.email
+                context['info'] = 'A new OTP has been sent to your email.'
+                context['cooldown'] = OTP_COOLDOWN_SECONDS  # Always set cooldown after resending OTP
+                return render(request, 'admin/login.html', context)
+            # Normal OTP check
+            if request.session.get('otp_valid') and request.session.get('otp_code') == otp:
+                user_id = request.session.get('otp_user_id')
+                user = User.objects.get(id=user_id)
+                auth_login(request, user)
+                # Clean up session
+                request.session.pop('otp_code', None)
+                request.session.pop('otp_user_id', None)
+                request.session.pop('otp_valid', None)
+                request.session.pop('otp_last_sent', None)
+                request.session.pop('otp_email', None)
+                request.session.pop('otp_failed', None)
+                return HttpResponseRedirect(reverse('admin:index'))
+            else:
+                context['otp_required'] = True
+                context['username'] = username
+                context['email'] = request.session.get('otp_email')
+                context['error'] = 'Invalid OTP. Please try again.'
+                request.session['otp_failed'] = True  # Set flag for immediate resend
+                return render(request, 'admin/login.html', context)
+    else:
+        # GET request
+        return render(request, 'admin/login.html', context)

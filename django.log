@@ -66,3 +66,634 @@ INFO 2025-06-29 22:26:45,770 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_dj
 INFO 2025-06-29 22:26:46,345 autoreload Watching for file changes with StatReloader
 INFO 2025-06-29 22:27:04,001 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
 INFO 2025-06-29 22:27:04,682 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 11:54:28,558 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 11:55:10,933 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\models.py changed, reloading.
+INFO 2025-07-01 11:55:12,127 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 11:55:23,621 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 11:55:24,232 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 11:56:57,908 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 11:56:58,689 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 11:57:13,159 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\models.py changed, reloading.
+INFO 2025-07-01 11:57:13,947 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 11:57:49,033 autoreload Watching for file changes with StatReloader
+ERROR 2025-07-01 11:57:53,800 log Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\http\request.py", line 191, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+ERROR 2025-07-01 11:57:54,170 log Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\http\request.py", line 191, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+ERROR 2025-07-01 11:57:54,473 log Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\http\request.py", line 191, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+INFO 2025-07-01 11:58:07,968 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\urls.py changed, reloading.
+INFO 2025-07-01 11:58:08,852 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 11:58:10,228 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\urls.py changed, reloading.
+INFO 2025-07-01 11:58:10,835 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 11:58:23,504 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\models.py changed, reloading.
+INFO 2025-07-01 11:58:24,242 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 11:58:25,626 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\models.py changed, reloading.
+INFO 2025-07-01 11:58:26,323 autoreload Watching for file changes with StatReloader
+WARNING 2025-07-01 11:58:53,962 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+ERROR 2025-07-01 12:01:24,206 log Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\http\request.py", line 191, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+INFO 2025-07-01 12:02:03,204 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-07-01 12:02:03,910 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 12:02:22,890 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-07-01 12:02:23,651 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 12:02:28,135 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-07-01 12:02:28,872 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 12:02:42,513 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-07-01 12:02:43,322 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 12:02:45,769 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-07-01 12:02:46,597 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 12:04:00,728 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\models.py changed, reloading.
+INFO 2025-07-01 12:04:01,408 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 12:04:04,999 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\models.py changed, reloading.
+INFO 2025-07-01 12:04:05,768 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 12:04:14,336 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 12:04:14,993 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 12:04:21,544 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\urls.py changed, reloading.
+INFO 2025-07-01 12:04:22,123 autoreload Watching for file changes with StatReloader
+ERROR 2025-07-01 12:25:01,077 log Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\http\request.py", line 191, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+ERROR 2025-07-01 12:25:01,416 log Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\http\request.py", line 191, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+ERROR 2025-07-01 12:25:01,717 log Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\http\request.py", line 191, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+INFO 2025-07-01 12:27:11,681 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 12:27:13,263 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 12:30:04,950 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 12:30:05,662 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 12:30:11,313 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\urls.py changed, reloading.
+INFO 2025-07-01 12:30:11,872 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 12:30:15,367 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\models.py changed, reloading.
+INFO 2025-07-01 12:30:16,068 autoreload Watching for file changes with StatReloader
+WARNING 2025-07-01 12:30:28,751 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+INFO 2025-07-01 12:31:26,755 autoreload Watching for file changes with StatReloader
+WARNING 2025-07-01 12:31:28,928 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-07-01 12:31:29,446 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+INFO 2025-07-01 12:32:48,945 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\urls.py changed, reloading.
+INFO 2025-07-01 12:32:49,533 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 12:33:50,267 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\urls.py changed, reloading.
+INFO 2025-07-01 12:33:50,990 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 12:34:02,577 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 12:34:03,126 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 12:34:45,290 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 12:34:45,846 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 12:34:51,113 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\urls.py changed, reloading.
+INFO 2025-07-01 12:34:51,637 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 12:34:53,028 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\models.py changed, reloading.
+INFO 2025-07-01 12:34:53,676 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 12:38:30,577 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 12:38:31,162 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 12:38:44,828 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\urls.py changed, reloading.
+INFO 2025-07-01 12:38:45,328 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 13:49:16,588 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 13:49:17,982 autoreload Watching for file changes with StatReloader
+ERROR 2025-07-01 13:49:59,440 log Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py", line 193, in admin_login_2fa
+    return render(request, 'admin/login.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 523, in parse
+    self.unclosed_block_tag(parse_until)
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 590, in unclosed_block_tag
+    raise self.error(token, msg)
+django.template.exceptions.TemplateSyntaxError: Unclosed tag on line 65: 'if'. Looking for one of: elif, else, endif.
+WARNING 2025-07-01 13:49:59,560 log Not Found: /favicon.ico
+ERROR 2025-07-01 13:50:00,227 log Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py", line 193, in admin_login_2fa
+    return render(request, 'admin/login.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 523, in parse
+    self.unclosed_block_tag(parse_until)
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 590, in unclosed_block_tag
+    raise self.error(token, msg)
+django.template.exceptions.TemplateSyntaxError: Unclosed tag on line 65: 'if'. Looking for one of: elif, else, endif.
+WARNING 2025-07-01 13:50:00,310 log Not Found: /favicon.ico
+ERROR 2025-07-01 13:50:00,990 log Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py", line 193, in admin_login_2fa
+    return render(request, 'admin/login.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 523, in parse
+    self.unclosed_block_tag(parse_until)
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 590, in unclosed_block_tag
+    raise self.error(token, msg)
+django.template.exceptions.TemplateSyntaxError: Unclosed tag on line 65: 'if'. Looking for one of: elif, else, endif.
+WARNING 2025-07-01 13:50:01,071 log Not Found: /favicon.ico
+ERROR 2025-07-01 13:50:12,692 log Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py", line 193, in admin_login_2fa
+    return render(request, 'admin/login.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 523, in parse
+    self.unclosed_block_tag(parse_until)
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 590, in unclosed_block_tag
+    raise self.error(token, msg)
+django.template.exceptions.TemplateSyntaxError: Unclosed tag on line 65: 'if'. Looking for one of: elif, else, endif.
+WARNING 2025-07-01 13:50:12,780 log Not Found: /favicon.ico
+ERROR 2025-07-01 13:50:13,364 log Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py", line 193, in admin_login_2fa
+    return render(request, 'admin/login.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 523, in parse
+    self.unclosed_block_tag(parse_until)
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 590, in unclosed_block_tag
+    raise self.error(token, msg)
+django.template.exceptions.TemplateSyntaxError: Unclosed tag on line 65: 'if'. Looking for one of: elif, else, endif.
+WARNING 2025-07-01 13:50:13,465 log Not Found: /favicon.ico
+ERROR 2025-07-01 13:50:14,003 log Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py", line 193, in admin_login_2fa
+    return render(request, 'admin/login.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 523, in parse
+    self.unclosed_block_tag(parse_until)
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 590, in unclosed_block_tag
+    raise self.error(token, msg)
+django.template.exceptions.TemplateSyntaxError: Unclosed tag on line 65: 'if'. Looking for one of: elif, else, endif.
+WARNING 2025-07-01 13:50:14,082 log Not Found: /favicon.ico
+WARNING 2025-07-01 13:51:26,532 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-07-01 13:51:52,768 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-07-01 13:57:41,267 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-07-01 13:58:25,212 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+INFO 2025-07-01 14:00:16,971 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 14:00:17,684 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 14:00:53,069 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 14:00:53,625 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 14:02:05,624 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 14:02:06,182 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 14:09:17,451 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 14:09:18,143 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 14:10:19,869 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 14:10:20,422 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 14:13:40,127 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 14:13:40,735 autoreload Watching for file changes with StatReloader
+WARNING 2025-07-01 14:14:18,589 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-07-01 14:14:54,302 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+INFO 2025-07-01 14:18:02,834 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 14:18:03,915 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 14:19:48,394 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 14:19:49,005 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 14:27:04,500 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 14:27:05,079 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 14:31:38,433 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 14:31:39,150 autoreload Watching for file changes with StatReloader
+ERROR 2025-07-01 14:44:34,956 log Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endif'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py", line 141, in admin_login_2fa
+    return render(request, 'admin/login.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\env\Lib\site-packages\django\template\base.py", line 577, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 3: 'endif'. Did you forget to register or load this tag?
+WARNING 2025-07-01 14:44:35,052 log Not Found: /favicon.ico
+INFO 2025-07-01 14:45:33,822 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 14:45:34,452 autoreload Watching for file changes with StatReloader
+WARNING 2025-07-01 14:49:23,562 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-07-01 14:49:38,318 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-07-01 14:52:32,105 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-07-01 14:53:24,697 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-07-01 14:54:10,054 log Not Found: /.well-known/appspecific/com.chrome.devtools.json

@@ -206,8 +206,9 @@ USE_TZ = True  # Enable timezone support
 
 STATIC_URL = "static/"  # URL prefix for static files
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Directory for collected static files
+
 # Optional if you want to collect from multiple places
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # <-- make sure this exists!
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # <-- make sure this exists!
 
 # Media files (user-uploaded content)
 MEDIA_URL = '/media/'  # URL prefix for media files
@@ -223,7 +224,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"  # Use BigAutoField for pri
 
 #EMAIL SETTINGS
 # Configuration for sending emails (used by contact form)
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # SMTP backend
 EMAIL_HOST = 'smtp.gmail.com'  # Gmail SMTP server
 EMAIL_PORT = 587  # SMTP port for TLS
@@ -231,4 +231,3 @@ EMAIL_USE_TLS = True  # Use TLS encryption
 EMAIL_HOST_USER = 'talkwithharpreet@gmail.com'  # Gmail account
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER  # Default sender email
 EMAIL_HOST_PASSWORD = 'ldjqbszfodflytmf'  # Use Gmail App Password (not your Gmail password)
-
