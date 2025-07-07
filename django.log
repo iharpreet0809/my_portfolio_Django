@@ -799,3 +799,9 @@ INFO 2025-07-07 13:14:47,728 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfol
 INFO 2025-07-07 13:14:48,334 autoreload Watching for file changes with StatReloader
 INFO 2025-07-07 13:15:06,026 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\forms.py changed, reloading.
 INFO 2025-07-07 13:15:06,577 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 13:28:20,301 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-07-07 13:28:22,025 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 13:28:50,057 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-07-07 13:28:50,561 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 13:28:51,913 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-07-07 13:28:52,581 autoreload Watching for file changes with StatReloader
