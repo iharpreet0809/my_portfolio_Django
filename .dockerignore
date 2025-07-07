@@ -21,6 +21,7 @@ venv/
 
 # Git
 .git/
+.gitignore
 
 # Docker
 .dockerignore

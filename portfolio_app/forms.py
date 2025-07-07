@@ -8,6 +8,7 @@ Forms handle user input validation and provide a clean interface for data collec
 from django import forms
 from .models import Contact
 from django.contrib.auth.models import User
+import re
 
 class ContactForm(forms.ModelForm):
     """
@@ -17,6 +18,13 @@ class ContactForm(forms.ModelForm):
     It includes fields for name, email, subject, and message with
     Bootstrap styling for a modern look.
     """
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        # Only allow .com, .in, .org domains
+        if not re.search(r'@[^@]+\.(com|in|org)$', email, re.IGNORECASE):
+            raise forms.ValidationError("Only .com, .in, .org email addresses are allowed.")
+        return email
+
     class Meta:
         model = Contact
         fields = ['name', 'email', 'subject', 'message']

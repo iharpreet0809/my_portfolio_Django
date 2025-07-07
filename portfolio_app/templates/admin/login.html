@@ -12,7 +12,7 @@
             <div style="color:#ff6b6b; margin-bottom:16px;">{{ error }}</div>
         {% endif %}
         {% if otp_sent %}
-            <div style="color:#4bb543; margin-bottom:16px;">OTP sent to your email: <b>{{ email }}</b></div>
+            <div style="color:#4bb543; margin-bottom:16px;">OTP sent to your email: <b>{{ masked_email }}</b></div>
         {% endif %}
         <form method="post" autocomplete="off" style="margin:0;">
             {% csrf_token %}
@@ -29,12 +29,15 @@
             {% else %}
                 <input type="hidden" name="step" value="otp">
                 <input type="hidden" name="username" value="{{ username }}">
+                {% if masked_email and show_otp_sent_msg %}
+                    <div style="color:#4bb543; margin-bottom:16px;">OTP sent to your email: <b>{{ masked_email }}</b></div>
+                {% endif %}
                 <div style="margin-bottom:18px;">
                     <label for="id_otp" style="color:#6ec1e4;">Enter OTP:</label><br>
                     <input type="text" name="otp" id="id_otp" class="form-control" style="width:100%; background:#111; color:#fff; border:2px solid #fff; border-radius:6px; padding:10px; font-size:18px;" maxlength="6" pattern="[0-9]{6}" required autofocus>
                 </div>
                 {% if info %}
-                    <div style="color:#4bb543; margin-bottom:16px;">{{ info }}</div>
+                    <div style="color:#4bb543; margin-bottom:16px;">{{ info }} <b>{{ masked_email }}</b></div>
                 {% endif %}
                 <div style="text-align:right; margin-bottom:10px;">
                     <button type="button" id="resend-otp-btn" class="btn btn-link" style="color:#6ec1e4; text-decoration:underline; padding:0; font-size:15px;" {% if cooldown %}disabled{% endif %}>Resend OTP</button>
@@ -42,8 +45,10 @@
                         (Wait <span id="timer-value">{{ cooldown }}</span>s)
                     </span>
                 </div>
+
+                <!-- resend otp script -->
                 <script>
-                document.addEventListener('DOMContentLoaded', function() {
+                    document.addEventListener('DOMContentLoaded', function() {
                     var resendBtn = document.getElementById('resend-otp-btn');
                     var cooldown = {{ cooldown|default:0 }};
                     var timerSpan = document.getElementById('timer-value');

@@ -697,3 +697,105 @@ WARNING 2025-07-01 14:49:38,318 log Not Found: /.well-known/appspecific/com.chro
 WARNING 2025-07-01 14:52:32,105 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
 WARNING 2025-07-01 14:53:24,697 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
 WARNING 2025-07-01 14:54:10,054 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-07-01 14:56:20,288 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+INFO 2025-07-01 15:24:59,793 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 15:25:01,304 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 15:36:13,278 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 15:36:13,829 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 15:57:42,151 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 15:57:43,375 autoreload Watching for file changes with StatReloader
+WARNING 2025-07-01 15:59:38,592 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-07-01 16:00:36,303 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-07-01 16:00:37,354 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-07-01 16:00:38,168 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-07-01 16:00:39,606 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-07-01 16:00:40,240 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-07-01 16:00:41,420 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+INFO 2025-07-01 16:08:12,226 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 16:08:12,842 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 16:08:26,477 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\urls.py changed, reloading.
+INFO 2025-07-01 16:08:26,995 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 16:25:52,042 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 16:25:53,302 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 16:30:36,014 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 16:30:36,585 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 16:31:23,748 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 16:31:24,392 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 16:31:57,501 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 16:31:58,068 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 16:32:07,892 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 16:32:12,114 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 16:32:12,663 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 16:32:31,123 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 16:32:31,816 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 16:32:40,130 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 16:32:40,668 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 16:33:13,084 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 16:33:13,689 autoreload Watching for file changes with StatReloader
+INFO 2025-07-01 16:36:06,989 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\urls.py changed, reloading.
+INFO 2025-07-01 16:36:07,560 autoreload Watching for file changes with StatReloader
+WARNING 2025-07-01 16:37:14,611 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-07-01 16:39:20,265 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+INFO 2025-07-01 16:40:33,696 autoreload E:\PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-01 16:40:34,752 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 11:38:53,080 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 11:40:01,636 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 11:44:52,406 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-07-07 11:44:56,765 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 11:46:40,031 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-07-07 11:46:43,566 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 11:47:13,724 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-07-07 11:47:16,844 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 11:48:18,538 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-07-07 11:48:22,908 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 11:48:25,347 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-07-07 11:48:28,742 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 11:48:48,894 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 11:49:31,992 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-07-07 11:49:36,368 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 11:49:39,131 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-07-07 11:49:42,921 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 11:50:20,023 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-07-07 11:50:23,559 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 11:50:27,057 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-07-07 11:50:31,362 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 11:51:30,416 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 11:52:36,865 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 11:53:15,082 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-07-07 11:53:19,504 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 11:54:08,770 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-07-07 11:54:24,507 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 11:54:50,976 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 11:56:12,150 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-07-07 11:56:17,151 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 11:56:33,634 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-07-07 11:56:36,618 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 11:58:20,743 autoreload Watching for file changes with StatReloader
+WARNING 2025-07-07 12:05:14,575 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+INFO 2025-07-07 12:05:42,793 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 12:13:55,341 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-07 12:13:56,221 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 12:15:31,513 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-07 12:15:32,070 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 12:20:38,364 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-07 12:20:39,250 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 12:21:04,127 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-07 12:21:04,667 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 12:21:36,671 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-07 12:21:37,246 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 12:21:38,667 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-07 12:21:39,269 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 12:22:26,521 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-07-07 12:22:27,093 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 12:25:17,746 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\forms.py changed, reloading.
+INFO 2025-07-07 12:25:18,525 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 12:25:24,317 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\forms.py changed, reloading.
+INFO 2025-07-07 12:25:25,006 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 12:25:48,937 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\forms.py changed, reloading.
+INFO 2025-07-07 12:25:49,493 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 13:12:33,192 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\forms.py changed, reloading.
+INFO 2025-07-07 13:12:35,276 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 13:14:47,728 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\forms.py changed, reloading.
+INFO 2025-07-07 13:14:48,334 autoreload Watching for file changes with StatReloader
+INFO 2025-07-07 13:15:06,026 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\forms.py changed, reloading.
+INFO 2025-07-07 13:15:06,577 autoreload Watching for file changes with StatReloader

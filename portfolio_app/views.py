@@ -65,24 +65,24 @@ def contact(request):
             subject = form.cleaned_data['subject']
             message = form.cleaned_data['message']
 
-            # Prepare email content
+            # Prepare email content body
             full_message = f"""
-New Query Submission on your website- "www.iharpreet.com":
+                            New Query-Contact Submission on your website- "www.iharpreet.com":
 
-Name: {name}
-Email: {email}
-Subject: {subject}
+                            Name: {name}
+                            Email: {email}
+                            Subject: {subject}
 
-Message:
-{message}
-"""
+                            Message:
+                            {message}
+                            """
 
             try:
                 # Send email notification to site owner
                 email_message = EmailMessage(
                     subject=f"{subject}-[Contact Form]",
                     body=full_message,
-                    from_email='From Portfolio <talkwithharpreet@gmail.com>',
+                    from_email='From Portfolio <talkwithharpreet@gmail.com>', #sender email yourself
                     to=['talkwithharpreet@gmail.com'],
                     reply_to=[email],  # Allow direct reply to visitor
                 )
@@ -102,6 +102,19 @@ Message:
 
     return render(request, 'index.html', {'form': form})
 
+def mask_email(email):
+    try:
+        username, domain = email.split('@')
+        if len(username) <= 8:
+            masked = username
+        else:
+            masked = username[:4] + '*' * (len(username)-8) + username[-4:]
+        return masked + '@' + domain
+    except Exception:
+        return email
+
+
+#admin login 2fa
 def admin_login_2fa(request):
     """
     Custom admin login view with OTP two-factor authentication.
@@ -129,16 +142,17 @@ def admin_login_2fa(request):
                 request.session['otp_valid'] = True
                 request.session['otp_last_sent'] = now
                 request.session['otp_email'] = user.email
+                request.session['otp_stage'] = True  # Set OTP stage flag
                 # Send OTP via email
                 subject = 'Your Admin Panel OTP'
                 message = f'Your OTP for admin login is: {otp_code}'
                 send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email], fail_silently=False)
-                context['username'] = username
-                context['otp_required'] = True
-                context['otp_sent'] = True
-                context['email'] = user.email
-                context['cooldown'] = OTP_COOLDOWN_SECONDS  # Always set cooldown after sending OTP
-                return render(request, 'admin/login.html', context)
+                # Store username for GET
+                request.session['otp_username'] = username
+                # Store masked email for GET
+                request.session['otp_masked_email'] = mask_email(user.email)
+                # Redirect to avoid resending OTP on refresh
+                return HttpResponseRedirect(request.path)
             else:
                 context['error'] = 'Invalid username or password.'
                 return render(request, 'admin/login.html', context)
@@ -153,6 +167,7 @@ def admin_login_2fa(request):
                         context['otp_required'] = True
                         context['username'] = username
                         context['email'] = request.session.get('otp_email')
+                        context['masked_email'] = request.session.get('otp_masked_email')
                         context['cooldown'] = wait_seconds
                         context['otp_sent'] = False
                         context['error'] = f'You Entered the wrong OTP. Please try to resend OTP'
@@ -174,6 +189,7 @@ def admin_login_2fa(request):
                 context['otp_sent'] = True
                 context['username'] = username
                 context['email'] = user.email
+                context['masked_email'] = mask_email(user.email)
                 context['info'] = 'A new OTP has been sent to your email.'
                 context['cooldown'] = OTP_COOLDOWN_SECONDS  # Always set cooldown after resending OTP
                 return render(request, 'admin/login.html', context)
@@ -189,14 +205,36 @@ def admin_login_2fa(request):
                 request.session.pop('otp_last_sent', None)
                 request.session.pop('otp_email', None)
                 request.session.pop('otp_failed', None)
+                request.session.pop('otp_stage', None)
+                request.session.pop('otp_username', None)
                 return HttpResponseRedirect(reverse('admin:index'))
             else:
                 context['otp_required'] = True
                 context['username'] = username
                 context['email'] = request.session.get('otp_email')
+                context['masked_email'] = request.session.get('otp_masked_email')
                 context['error'] = 'Invalid OTP. Please try again.'
                 request.session['otp_failed'] = True  # Set flag for immediate resend
                 return render(request, 'admin/login.html', context)
     else:
         # GET request
+        if request.session.get('otp_stage'):
+            context['otp_required'] = True
+            context['username'] = request.session.get('otp_username')
+            context['email'] = request.session.get('otp_email')
+            context['masked_email'] = request.session.get('otp_masked_email')
+            # Calculate cooldown
+            last_sent = request.session.get('otp_last_sent', 0)
+            seconds_left = OTP_COOLDOWN_SECONDS - (now - last_sent)
+            if seconds_left > 0:
+                context['cooldown'] = seconds_left
+            return render(request, 'admin/login.html', context)
         return render(request, 'admin/login.html', context)
+
+def admin_login_reset(request):
+    # Clear all OTP-related session variables
+    for key in [
+        'otp_user_id', 'otp_code', 'otp_valid', 'otp_last_sent', 'otp_email',
+        'otp_failed', 'otp_stage', 'otp_username', 'otp_masked_email']:
+        request.session.pop(key, None)
+    return redirect('admin_login_2fa')
