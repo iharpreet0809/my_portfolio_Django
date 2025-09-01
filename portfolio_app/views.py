@@ -101,6 +101,12 @@ def contact(request):
                             """
 
             try:
+                # Check if email password is configured
+                from django.conf import settings
+                if not settings.EMAIL_HOST_PASSWORD:
+                    messages.error(request, 'Email configuration error: EMAIL_HOST_PASSWORD not set.')
+                    return redirect('/#contact-msg')
+                
                 # Send email notification to site owner
                 email_message = EmailMessage(
                     subject=f"{subject}-[Contact Form]",
@@ -117,9 +123,16 @@ def contact(request):
                 messages.success(request, 'Your message has been sent successfully!')
                 return redirect('/#contact-msg')  # Redirect to contact section
 
-            except (BadHeaderError, SMTPException):
-                # Handle email sending errors
-                return HttpResponse('There was an error sending the email.')
+            except (BadHeaderError, SMTPException) as e:
+                # Handle email sending errors with more detail
+                print(f"Email error: {e}")  # For debugging
+                messages.error(request, f'Email sending failed: {str(e)}')
+                return redirect('/#contact-msg')
+            except Exception as e:
+                # Handle any other errors
+                print(f"Unexpected error: {e}")  # For debugging
+                messages.error(request, 'An unexpected error occurred while sending the email.')
+                return redirect('/#contact-msg')
         else:
             # Form is invalid - generate new CAPTCHA and show errors
             captcha_question, captcha_answer = generate_captcha()

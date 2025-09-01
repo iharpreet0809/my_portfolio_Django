@@ -69,8 +69,8 @@ else:  # for production
 # ALLOWED_HOSTS specifies which hostnames Django can serve
 #Your Django settings need to be explicitly configured to trust requests coming from your server's IP address and through the Nginx proxy.
 ALLOWED_HOSTS = [
-    '127.0.0.1',
-    '65.1.200.98',
+    #'127.0.0.1',
+    #'65.1.200.98',
     'iharpreet.com',
     'www.iharpreet.com',
     'django-app', #for dockercontainer
@@ -81,7 +81,9 @@ ALLOWED_HOSTS = [
 CSRF_TRUSTED_ORIGINS = [
     # 'http://65.1.110.216:8888',
     # If you plan to use HTTPS in the future, you can add this as well
-    # 'https://65.1.110.216:8888', 'iharpreet.com', 'www.iharpreet.com',
+    # 'https://65.1.110.216:8888',
+    "https://iharpreet.com",
+    "https://www.iharpreet.com",
 ]
 
 # Since you are not using HTTPS yet, it's best to comment these out for now
@@ -212,12 +214,18 @@ USE_TZ = True  # Enable timezone support
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
+# URL to serve static files
+STATIC_URL = '/static/'
 
-STATIC_URL = "static/"  # URL prefix for static files
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Directory for collected static files
+# Where collectstatic puts everything (inside container)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Optional if you want to collect from multiple places
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # <-- make sure this exists!
+# Where to look for extra static files (your top-level static/ folder)
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+
 
 # Media files (user-uploaded content)
 MEDIA_URL = '/media/'  # URL prefix for media files
