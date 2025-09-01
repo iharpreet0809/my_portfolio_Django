@@ -3,7 +3,8 @@ staticfiles/
 mediafiles/
 
 #logs
-logs/
+*.log
+logs/*
 django.log
 
 # Python cache

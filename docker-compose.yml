@@ -49,6 +49,7 @@ services:
         condition: service_healthy  # Wait for MySQL to be healthy before starting
     volumes:
     - ./staticfiles:/app/staticfiles  # Mount static files directory for Nginx
+    - ./logs:/app/logs #for storing django logs
     networks:
       - twotier  # Connect to custom network
     restart: unless-stopped  # Restart unless manually stopped
