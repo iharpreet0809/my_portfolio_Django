@@ -35,35 +35,26 @@
     color: rgb(255, 255, 255);
     overflow: hidden;
     white-space: nowrap;
-    animation: typing 3s steps(20, end) infinite;
+    min-height: 40px;
+    display: inline-block;
+    border-right: 2px solid transparent;
+    transition: all 0.1s ease;
 }
 
-#typing-animation:before {
-    content: "";
-    /* position: absolute; */
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
-    background-color: #ccc;
-    animation: typing-cursor 0.5s ease-in-out infinite;
+#typing-animation.cursor::after {
+    content: "|";
+    animation: blink 0.8s ease-in-out infinite;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    transition: opacity 0.1s ease;
 }
 
-@keyframes typing {
-    from {
-        width: 0;
+@keyframes blink {
+    0%, 45% {
+        opacity: 1;
     }
-    to {
-        width: 100%;
-    }
-}
-
-@keyframes typing-cursor {
-    from {
-        width: 5px;
-    }
-    to {
-        width: 0;
+    50%, 100% {
+        opacity: 0;
     }
 }
 

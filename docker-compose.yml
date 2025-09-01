@@ -28,11 +28,11 @@ services:
 
   # Django Application Service
   django:
-    # build:
-    #   context: .  # Build context (current directory)
-    #   dockerfile: Dockerfile  # Use the Dockerfile in current directory
-    # image: my_portfolio_django:latest  # Name for the built image
-    image: harpreetdevops/portfolio:latest
+    build:
+      context: .  # Build context (current directory)
+      dockerfile: Dockerfile  # Use the Dockerfile in current directory
+    image: portfolio_django:latest  # Name for the built image for local docker
+    # image: harpreetdevops/portfolio:latest #for remote docker pull
     container_name: django-app  # Name for the container
     ports:
       - "8000:8000"  # Expose Django development server port

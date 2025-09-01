@@ -1,30 +1,65 @@
 // Initialize the typing animation
 document.addEventListener('DOMContentLoaded', function() {
-    const typingAnimationElement = document.getElementById('typing-animation');
+    // Add a small delay to ensure everything is loaded
+    setTimeout(() => {
+        const typingAnimationElement = document.getElementById('typing-animation');
+        
+        if (!typingAnimationElement) {
+            console.warn('Typing animation element not found');
+            return;
+        }
 
     // Create an array of typing text
     const typingTexts = [
-        'Engineer  ',
-        'Analyst  ',
-        'Data Enthusiast   ',
+        'Engineer',
+        'Analyst', 
+        'Data Enthusiast',
     ];
 
-    // Create a function to display the typing animation for a given text
-    function playTypingAnimation(text) {
-        // Loop through each character and add it to the element
-        for (let i = 0; i < text.length; i++) {
-            setTimeout(() => {
-                typingAnimationElement.textContent += text[i];
-            }, i * 200); // Increase the delay to slow down the typing animation
+    let currentTextIndex = 0;
+    let currentCharIndex = 0;
+    let isDeleting = false;
+    let typingSpeed = 80; // Speed for typing - made faster for smoothness
+    let deletingSpeed = 60; // Speed for deleting - made faster for smoothness
+    let pauseTime = 1500; // Time to pause between words - reduced for better flow
+
+    function typeText() {
+        const currentText = typingTexts[currentTextIndex];
+        
+        if (isDeleting) {
+            // Delete characters
+            typingAnimationElement.textContent = currentText.substring(0, currentCharIndex - 1);
+            currentCharIndex--;
+        } else {
+            // Type characters
+            typingAnimationElement.textContent = currentText.substring(0, currentCharIndex + 1);
+            currentCharIndex++;
         }
 
-        // Once the animation is complete, reset the text and start over
-        setTimeout(() => {
-            typingAnimationElement.textContent = '';
-            playTypingAnimation(typingTexts[(typingTexts.indexOf(text) + 1) % typingTexts.length]);
-        }, text.length * 200);
+        // Add cursor class when typing, remove when deleting
+        if (!isDeleting && currentCharIndex > 0) {
+            typingAnimationElement.classList.add('cursor');
+        } else if (isDeleting && currentCharIndex === 0) {
+            typingAnimationElement.classList.remove('cursor');
+        }
+
+        let speed = isDeleting ? deletingSpeed : typingSpeed;
+
+        if (!isDeleting && currentCharIndex === currentText.length) {
+            // Finished typing, pause then start deleting
+            speed = pauseTime;
+            isDeleting = true;
+        } else if (isDeleting && currentCharIndex === 0) {
+            // Finished deleting, move to next word
+            isDeleting = false;
+            currentTextIndex = (currentTextIndex + 1) % typingTexts.length;
+            speed = 300; // Reduced pause before starting next word for smoother flow
+        }
+
+        setTimeout(typeText, speed);
     }
 
-    // Start the typing animation loop
-    playTypingAnimation(typingTexts[0]);
+    // Start the typing animation
+    typeText();
+    }, 100); // 100ms delay
 });
