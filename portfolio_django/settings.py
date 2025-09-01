@@ -109,7 +109,7 @@ LOGGING = {
         'file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'django.log'),
+            'filename': os.path.join(BASE_DIR, 'logs/django.log'),
             'formatter': 'verbose',
         },
         'console': {
@@ -239,4 +239,5 @@ EMAIL_PORT = 587  # SMTP port for TLS
 EMAIL_USE_TLS = True  # Use TLS encryption
 EMAIL_HOST_USER = 'talkwithharpreet@gmail.com'  # Gmail account
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER  # Default sender email
-EMAIL_HOST_PASSWORD = 'ldjqbszfodflytmf'  # Use Gmail App Password (not your Gmail password)
+# EMAIL_HOST_PASSWORD = 'ldjqbszfodflytmf'  # Use Gmail App Password (not your Gmail password)
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')  # Use Gmail App Password (not your Gmail password)

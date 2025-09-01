@@ -114,7 +114,7 @@
 								<br>
 								<br>
 								<h2>Full Stack Engineer <br> (Development, Data Analyst, Machine Learning, DevOps)</h2>
-								<h2 class="d-flex" style="margin-bottom: 0">With over 2+ year of experience</h2>
+								<h2 class="d-flex" style="margin-bottom: 0;">With over 2+ year of experience</h2>
 								<br>
 								<p><a href="https://www.linkedin.com/in/harpreet22/"
 										class="btn btn-primary py-3 px-3">LinkedIn</a>
@@ -373,8 +373,7 @@
 				<div class="col-md-4 d-flex ftco-animate">
 					<div class="blog-entry justify-content-end">
 						<a href="https://github.com/iharpreet0809/Zomato-Dataset-Exploratory-Data-Analysis-Python"
-   class="block-20 zoom-effect" style="background-image: url('{% static "images/zomato.jpg" %}');">
-
+							class="block-20 zoom-effect" style="background-image: url('{% static 'images/zomato.jpg' %}');">
 						</a>
 						<div class="text mt-3 float-right d-block">
 
@@ -532,6 +531,9 @@
 				<div class="col-md-6 d-flex align-items-center justify-content-center">
 					<img src="{% static 'images/contact.svg' %}" alt="Contact Illustration" class="img-fluid" style="max-width: 90%; border-radius: 20px; box-shadow: 0 4px 24px rgba(0,0,0,0.08);">
 				</div>
+
+
+				<!-- Contact form -->
 				<div class="col-md-6 order-md-last d-flex">
 					<form action="{% url 'contact' %}" method="POST" class="bg-light p-4 p-md-5 contact-form">
 						{% csrf_token %}
@@ -547,6 +549,25 @@
 						</div>
 						<div class="form-group" id="contact-msg">
 							{{ form.message }}
+						</div>
+						<div class="form-group">
+							<label for="{{ form.captcha.id_for_label }}" class="form-label">CAPTCHA</label>
+							<div class="captcha-container">
+								<div class="captcha-line">
+									<span class="captcha-text">{{ form.captcha.help_text }}</span>
+									<button type="button" class="captcha-refresh" onclick="refreshCaptcha()" title="Refresh CAPTCHA">
+										<i class="icon-refresh"></i>
+									</button>
+									{{ form.captcha }}
+								</div>
+								{% if form.captcha.errors %}
+									<div class="captcha-error">
+										{% for error in form.captcha.errors %}
+											{{ error }}
+										{% endfor %}
+									</div>
+								{% endif %}
+							</div>
 						</div>
 						<div class="form-group" >
 							<input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
@@ -616,6 +637,55 @@
             document.getElementById('contact-section').scrollIntoView({ behavior: 'smooth' });
         }
     });
+</script>
+
+<!-- CAPTCHA refresh function -->
+<script>
+function refreshCaptcha() {
+    // Show loading state
+    const refreshBtn = document.querySelector('.captcha-refresh');
+    const originalContent = refreshBtn.innerHTML;
+    refreshBtn.innerHTML = '<i class="icon-spinner"></i>';
+    refreshBtn.disabled = true;
+    
+    // Make AJAX request to refresh CAPTCHA
+    fetch('{% url "refresh_captcha" %}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Update the CAPTCHA question
+            const captchaText = document.querySelector('.captcha-text');
+            captchaText.textContent = data.question;
+            
+            // Clear the input field
+            const captchaInput = document.querySelector('input[name="captcha"]');
+            if (captchaInput) {
+                captchaInput.value = '';
+            }
+            
+            // Clear any error messages
+            const errorDivs = document.querySelectorAll('.captcha-error');
+            errorDivs.forEach(div => {
+                div.remove();
+            });
+        }
+    })
+    .catch(error => {
+        console.error('Error refreshing CAPTCHA:', error);
+        // Fallback to page reload
+        window.location.reload();
+    })
+    .finally(() => {
+        // Restore button state
+        refreshBtn.innerHTML = originalContent;
+        refreshBtn.disabled = false;
+    });
+}
 </script>
 
 <!-- invalid email domain alert script-->

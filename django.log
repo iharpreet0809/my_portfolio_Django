@@ -805,3 +805,122 @@ INFO 2025-07-07 13:28:50,057 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfol
 INFO 2025-07-07 13:28:50,561 autoreload Watching for file changes with StatReloader
 INFO 2025-07-07 13:28:51,913 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
 INFO 2025-07-07 13:28:52,581 autoreload Watching for file changes with StatReloader
+INFO 2025-09-01 17:27:26,401 autoreload Watching for file changes with StatReloader
+INFO 2025-09-01 17:29:32,674 autoreload Watching for file changes with StatReloader
+ERROR 2025-09-01 17:29:47,981 log Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\mysql\base.py", line 76, in execute
+    return self.cursor.execute(query, args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\MySQLdb\connections.py", line 280, in query
+    _mysql.connection.query(self, query)
+MySQLdb.ProgrammingError: (1146, "Table 'my_portfolio.auth_user' doesn't exist")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py", line 136, in admin_login_2fa
+    user = authenticate(request, username=username, password=password)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\debug.py", line 75, in sensitive_variables_wrapper
+    return func(*func_args, **func_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\contrib\auth\__init__.py", line 114, in authenticate
+    user = backend.authenticate(request, **credentials)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\contrib\auth\backends.py", line 65, in authenticate
+    user = UserModel._default_manager.get_by_natural_key(username)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\contrib\auth\base_user.py", line 37, in get_by_natural_key
+    return self.get(**{self.model.USERNAME_FIELD: username})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 629, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 366, in __len__
+    self._fetch_all()
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1949, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\compiler.py", line 1623, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\mysql\base.py", line 76, in execute
+    return self.cursor.execute(query, args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\MySQLdb\connections.py", line 280, in query
+    _mysql.connection.query(self, query)
+django.db.utils.ProgrammingError: (1146, "Table 'my_portfolio.auth_user' doesn't exist")
+WARNING 2025-09-01 17:29:48,180 log Not Found: /favicon.ico
+INFO 2025-09-01 17:30:37,169 autoreload Watching for file changes with StatReloader
+INFO 2025-09-01 17:31:09,590 autoreload Watching for file changes with StatReloader
+INFO 2025-09-01 17:40:57,961 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-09-01 17:40:59,446 autoreload Watching for file changes with StatReloader
+INFO 2025-09-01 17:47:24,213 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\forms.py changed, reloading.
+INFO 2025-09-01 17:47:25,275 autoreload Watching for file changes with StatReloader
+INFO 2025-09-01 17:47:49,660 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-09-01 17:47:50,266 autoreload Watching for file changes with StatReloader
+INFO 2025-09-01 17:54:41,917 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-09-01 17:54:42,502 autoreload Watching for file changes with StatReloader
+INFO 2025-09-01 17:55:02,411 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-09-01 17:55:03,069 autoreload Watching for file changes with StatReloader
+INFO 2025-09-01 17:55:12,718 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\forms.py changed, reloading.
+INFO 2025-09-01 17:55:13,550 autoreload Watching for file changes with StatReloader
+INFO 2025-09-01 17:55:25,238 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-09-01 17:55:25,812 autoreload Watching for file changes with StatReloader
+INFO 2025-09-01 17:55:37,458 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\urls.py changed, reloading.
+INFO 2025-09-01 17:55:38,103 autoreload Watching for file changes with StatReloader
+INFO 2025-09-01 17:56:09,322 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\urls.py changed, reloading.
+INFO 2025-09-01 17:56:10,104 autoreload Watching for file changes with StatReloader
+INFO 2025-09-01 17:58:59,077 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-09-01 17:58:59,813 autoreload Watching for file changes with StatReloader
+INFO 2025-09-01 17:59:25,836 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-09-01 17:59:26,480 autoreload Watching for file changes with StatReloader
+INFO 2025-09-01 18:15:05,072 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\forms.py changed, reloading.
+INFO 2025-09-01 18:15:05,855 autoreload Watching for file changes with StatReloader
+INFO 2025-09-01 18:15:38,112 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\forms.py changed, reloading.
+INFO 2025-09-01 18:15:38,664 autoreload Watching for file changes with StatReloader
+INFO 2025-09-01 18:30:57,907 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\forms.py changed, reloading.
+INFO 2025-09-01 18:30:58,603 autoreload Watching for file changes with StatReloader
+INFO 2025-09-01 18:38:30,074 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.

@@ -13,4 +13,6 @@ urlpatterns = [
     # Homepage with contact form
     path('', views.contact, name='contact'),
     
+    # CAPTCHA refresh endpoint
+    path('refresh-captcha/', views.refresh_captcha_ajax, name='refresh_captcha'),
 ]

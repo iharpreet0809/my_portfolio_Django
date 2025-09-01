@@ -76,3 +76,107 @@
 .zoom-effect:hover {
     transform: scale(1.1);
 }
+
+/*======================================
+//--//-->   CAPTCHA STYLES
+======================================*/
+
+.captcha-container {
+    margin-top: 10px;
+}
+
+.captcha-line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.captcha-text {
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+    white-space: nowrap;
+}
+
+.captcha-container input {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    width: 100px;
+}
+
+.captcha-container input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.captcha-refresh {
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #666;
+    transition: all 0.2s ease;
+}
+
+.captcha-refresh:hover {
+    background: #e9ecef;
+    border-color: #adb5bd;
+}
+
+.captcha-error {
+    color: #dc3545 !important;
+    font-weight: 600;
+    font-size: 14px;
+    margin-top: 8px;
+    background-color: #f8d7da !important;
+    border: 1px solid #f5c6cb !important;
+    border-radius: 4px;
+    padding: 8px 12px;
+    display: block;
+}
+
+/* Make it even more specific to override any Bootstrap styles */
+.form-group .captcha-error {
+    color: #dc3545 !important;
+    background-color: #f8d7da !important;
+    border-color: #f5c6cb !important;
+}
+
+/* Additional specificity to ensure it works */
+.contact-form .captcha-error {
+    color: #dc3545 !important;
+    background-color: #f8d7da !important;
+    border: 1px solid #f5c6cb !important;
+    font-weight: 600;
+}
+
+/* Most specific selector to override everything */
+.contact-form .form-group .captcha-error {
+    color: #dc3545 !important;
+    background-color: #f8d7da !important;
+    border: 1px solid #f5c6cb !important;
+    font-weight: 600;
+    font-size: 14px;
+    margin-top: 8px;
+    border-radius: 4px;
+    padding: 8px 12px;
+    display: block;
+}
+
+/* Responsive design for CAPTCHA */
+@media (max-width: 768px) {
+    .captcha-line {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+    
+    .captcha-container input {
+        width: 100%;
+    }
+}

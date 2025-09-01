@@ -9,6 +9,10 @@ __pycache__/
 *.db
 *.log
 
+#Logs
+logs/
+django.log
+
 # Environment and virtualenv
 .env
 env/

@@ -14,6 +14,8 @@ from django.views.decorators.http import require_http_methods
 from django.utils import timezone
 from datetime import datetime
 from .forms import ContactForm
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 # Email imports for contact form functionality
 from django.core.mail import EmailMessage, BadHeaderError
@@ -38,6 +40,24 @@ import time
 
 User = get_user_model()
 
+def generate_captcha():
+    """
+    Generate a random math problem for CAPTCHA.
+    Returns a tuple of (question, answer).
+    Ensures all results are positive numbers under 100.
+    """
+    # Generate numbers between 1 and 50 to ensure sum is under 100
+    num1 = random.randint(1, 50)
+    num2 = random.randint(1, 50)
+    
+    # Only use addition
+    answer = num1 + num2
+    
+    # Create the question string
+    question = f"{num1} + {num2} = ?"
+    
+    return (question, answer)
+
 def contact(request):
     """
     Handle contact form submission and render the index page.
@@ -53,8 +73,11 @@ def contact(request):
         HttpResponse: Rendered home page with form or success message
     """
     if request.method == 'POST':
+        # Get the CAPTCHA answer from session
+        captcha_answer = request.session.get('captcha_answer')
+        
         # Process form submission
-        form = ContactForm(request.POST)
+        form = ContactForm(request.POST, captcha_answer=captcha_answer)
         if form.is_valid():
             # Save form data to database
             form.save()
@@ -87,15 +110,36 @@ def contact(request):
                     reply_to=[email],  # Allow direct reply to visitor
                 )
                 email_message.send(fail_silently=False)
+                
+                # Clear the CAPTCHA from session after successful submission
+                request.session.pop('captcha_answer', None)
+                
                 messages.success(request, 'Your message has been sent successfully!')
                 return redirect('/#contact-msg')  # Redirect to contact section
 
             except (BadHeaderError, SMTPException):
                 # Handle email sending errors
                 return HttpResponse('There was an error sending the email.')
+        else:
+            # Form is invalid - generate new CAPTCHA and show errors
+            captcha_question, captcha_answer = generate_captcha()
+            request.session['captcha_answer'] = (captcha_question, captcha_answer)
+            
+            # Recreate form with new CAPTCHA
+            form = ContactForm(request.POST, captcha_answer=(captcha_question, captcha_answer))
+            
+            # Add error message for CAPTCHA
+            if 'captcha' in form.errors:
+                messages.error(request, 'Incorrect CAPTCHA answer. Please try again.')
+            
+            return redirect('/#contact-msg')  # Redirect to contact section with errors
     else:
         # GET request - display empty form
-        form = ContactForm()
+        # Generate new CAPTCHA for fresh form
+        captcha_question, captcha_answer = generate_captcha()
+        request.session['captcha_answer'] = (captcha_question, captcha_answer)
+        
+        form = ContactForm(captcha_answer=(captcha_question, captcha_answer))
         # Clear any existing messages when page loads normally
         storage = messages.get_messages(request)
         storage.used = True
@@ -238,3 +282,20 @@ def admin_login_reset(request):
         'otp_failed', 'otp_stage', 'otp_username', 'otp_masked_email']:
         request.session.pop(key, None)
     return redirect('admin_login_2fa')
+
+@csrf_exempt
+def refresh_captcha_ajax(request):
+    """
+    AJAX endpoint to refresh CAPTCHA without reloading the page.
+    """
+    if request.method == 'POST':
+        # Generate new CAPTCHA
+        captcha_question, captcha_answer = generate_captcha()
+        request.session['captcha_answer'] = (captcha_question, captcha_answer)
+        
+        return JsonResponse({
+            'question': captcha_question,
+            'success': True
+        })
+    
+    return JsonResponse({'success': False, 'error': 'Invalid request method'})
