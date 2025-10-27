@@ -15,6 +15,8 @@ from django.utils import timezone
 from datetime import datetime
 from .forms import ContactForm
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_headers
 import json
 
 # Email imports for contact form functionality
@@ -38,7 +40,82 @@ from django.http import HttpResponseRedirect
 
 import time
 
+# Import Celery tasks for async email sending
+try:
+    from .tasks import send_contact_email, send_admin_otp_email
+    CELERY_AVAILABLE = True
+except ImportError:
+    CELERY_AVAILABLE = False
+
 User = get_user_model()
+
+def send_contact_email_sync(name, email, subject, message):
+    """
+    Synchronous email sending function as fallback when Celery is unavailable.
+    """
+    try:
+        # Prepare email content
+        full_message = f"""
+        New Query-Contact Submission on your website- "www.iharpreet.com":
+
+        Name: {name}
+        Email: {email}
+        Subject: {subject}
+
+        Message:
+        {message}
+        """
+
+        # Check if email password is configured
+        if not settings.EMAIL_HOST_PASSWORD:
+            print('Email configuration error: EMAIL_HOST_PASSWORD not set.')
+            return False
+
+        # Send email notification to site owner
+        email_message = EmailMessage(
+            subject=f"{subject}-[Contact Form]",
+            body=full_message,
+            from_email='From Portfolio <talkwithharpreet@gmail.com>',
+            to=['talkwithharpreet@gmail.com'],
+            reply_to=[email],  # Allow direct reply to visitor
+        )
+        email_message.send(fail_silently=False)
+        
+        print(f'Contact email sent successfully from {email}')
+        return True
+
+    except (SMTPException, Exception) as e:
+        print(f'Failed to send contact email: {str(e)}')
+        return False
+
+def send_admin_otp_email_sync(user_email, otp_code):
+    """
+    Synchronous OTP email sending function as fallback when Celery is unavailable.
+    """
+    try:
+        subject = 'Your Admin Panel OTP'
+        message = f'Your OTP for admin login is: {otp_code}'
+        
+        # Check if email password is configured
+        if not settings.EMAIL_HOST_PASSWORD:
+            print('Email configuration error: EMAIL_HOST_PASSWORD not set.')
+            return False
+
+        # Send OTP email
+        email_message = EmailMessage(
+            subject=subject,
+            body=message,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=[user_email],
+        )
+        email_message.send(fail_silently=False)
+        
+        print(f'Admin OTP email sent successfully to {user_email}')
+        return True
+
+    except (SMTPException, Exception) as e:
+        print(f'Failed to send admin OTP email: {str(e)}')
+        return False
 
 def generate_captcha():
     """
@@ -58,6 +135,7 @@ def generate_captcha():
     
     return (question, answer)
 
+@vary_on_headers('User-Agent')
 def contact(request):
     """
     Handle contact form submission and render the index page.
@@ -107,31 +185,34 @@ def contact(request):
                     messages.error(request, 'Email configuration error: EMAIL_HOST_PASSWORD not set.')
                     return redirect('/#contact-msg')
                 
-                # Send email notification to site owner
-                email_message = EmailMessage(
-                    subject=f"{subject}-[Contact Form]",
-                    body=full_message,
-                    from_email='From Portfolio <talkwithharpreet@gmail.com>', #sender email yourself
-                    to=['talkwithharpreet@gmail.com'],
-                    reply_to=[email],  # Allow direct reply to visitor
-                )
-                email_message.send(fail_silently=False)
+                # Try to send email asynchronously using Celery, fallback to sync if unavailable
+                email_sent = False
+                try:
+                    if CELERY_AVAILABLE:
+                        # Try async email sending with Celery
+                        send_contact_email.delay(name, email, subject, message)
+                        email_sent = True
+                        print("Email sent asynchronously via Celery")
+                    else:
+                        raise Exception("Celery not available")
+                except Exception as celery_error:
+                    print(f"Celery error: {celery_error}, falling back to synchronous email")
+                    # Fallback to synchronous email sending
+                    email_sent = send_contact_email_sync(name, email, subject, message)
                 
-                # Clear the CAPTCHA from session after successful submission
-                request.session.pop('captcha_answer', None)
+                if email_sent:
+                    # Clear the CAPTCHA from session after successful submission
+                    request.session.pop('captcha_answer', None)
+                    messages.success(request, 'Your message has been sent successfully!')
+                else:
+                    messages.error(request, 'Failed to send email. Please try again later.')
                 
-                messages.success(request, 'Your message has been sent successfully!')
                 return redirect('/#contact-msg')  # Redirect to contact section
 
-            except (BadHeaderError, SMTPException) as e:
-                # Handle email sending errors with more detail
-                print(f"Email error: {e}")  # For debugging
-                messages.error(request, f'Email sending failed: {str(e)}')
-                return redirect('/#contact-msg')
             except Exception as e:
                 # Handle any other errors
                 print(f"Unexpected error: {e}")  # For debugging
-                messages.error(request, 'An unexpected error occurred while sending the email.')
+                messages.error(request, 'An unexpected error occurred while processing your request.')
                 return redirect('/#contact-msg')
         else:
             # Form is invalid - generate new CAPTCHA and show errors
@@ -200,10 +281,16 @@ def admin_login_2fa(request):
                 request.session['otp_last_sent'] = now
                 request.session['otp_email'] = user.email
                 request.session['otp_stage'] = True  # Set OTP stage flag
-                # Send OTP via email
-                subject = 'Your Admin Panel OTP'
-                message = f'Your OTP for admin login is: {otp_code}'
-                send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email], fail_silently=False)
+                # Send OTP via email with fallback mechanism
+                try:
+                    if CELERY_AVAILABLE:
+                        send_admin_otp_email.delay(user.email, otp_code)
+                        print("OTP email sent asynchronously via Celery")
+                    else:
+                        raise Exception("Celery not available")
+                except Exception as celery_error:
+                    print(f"Celery error: {celery_error}, falling back to synchronous OTP email")
+                    send_admin_otp_email_sync(user.email, otp_code)
                 # Store username for GET
                 request.session['otp_username'] = username
                 # Store masked email for GET
@@ -231,7 +318,7 @@ def admin_login_2fa(request):
                         return render(request, 'admin/login.html', context)
                 # If otp_failed is True, allow immediate resend and reset the flag
                 request.session['otp_failed'] = False
-                # Generate and send new OTP
+                # Generate and send new OTP asynchronously using Celery
                 user_id = request.session.get('otp_user_id')
                 user = User.objects.get(id=user_id)
                 otp_code = str(random.randint(100000, 999999))
@@ -239,9 +326,16 @@ def admin_login_2fa(request):
                 request.session['otp_last_sent'] = now
                 request.session['otp_valid'] = True
                 request.session['otp_email'] = user.email
-                subject = 'Your Admin Panel OTP'
-                message = f'Your OTP for admin login is: {otp_code}'
-                send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email], fail_silently=False)
+                # Send OTP via email with fallback mechanism (resend)
+                try:
+                    if CELERY_AVAILABLE:
+                        send_admin_otp_email.delay(user.email, otp_code)
+                        print("OTP email resent asynchronously via Celery")
+                    else:
+                        raise Exception("Celery not available")
+                except Exception as celery_error:
+                    print(f"Celery error: {celery_error}, falling back to synchronous OTP email")
+                    send_admin_otp_email_sync(user.email, otp_code)
                 context['otp_required'] = True
                 context['otp_sent'] = True
                 context['username'] = username

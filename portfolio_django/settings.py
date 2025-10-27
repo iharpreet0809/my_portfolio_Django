@@ -69,7 +69,7 @@ else:  # for production
 # ALLOWED_HOSTS specifies which hostnames Django can serve
 #Your Django settings need to be explicitly configured to trust requests coming from your server's IP address and through the Nginx proxy.
 ALLOWED_HOSTS = [
-    #'127.0.0.1',
+    '127.0.0.1',
     #'65.1.200.98',
     'iharpreet.com',
     'www.iharpreet.com',
@@ -247,5 +247,28 @@ EMAIL_PORT = 587  # SMTP port for TLS
 EMAIL_USE_TLS = True  # Use TLS encryption
 EMAIL_HOST_USER = 'talkwithharpreet@gmail.com'  # Gmail account
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER  # Default sender email
-# EMAIL_HOST_PASSWORD = 'ldjqbszfodflytmf'  # Use Gmail App Password (not your Gmail password)
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')  # Use Gmail App Password (not your Gmail password)
+EMAIL_HOST_PASSWORD = 'ldjqbszfodflytmf'  # Use Gmail App Password (not your Gmail password)
+
+# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')  # Use Gmail App Password (not your Gmail password)
+
+
+# CELERY CONFIGURATION
+# Celery settings for async task processing
+REDIS_URL = os.environ.get('REDIS_URL', 'redis://127.0.0.1:6379/0')
+
+# Celery Configuration Options
+CELERY_BROKER_URL = REDIS_URL
+CELERY_RESULT_BACKEND = REDIS_URL
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = TIME_ZONE
+
+# Celery task routing
+CELERY_TASK_ROUTES = {
+    'portfolio_app.tasks.send_contact_email_async': {'queue': 'emails'},
+}
+
+# Celery worker configuration
+CELERY_WORKER_PREFETCH_MULTIPLIER = 1
+CELERY_TASK_ACKS_LATE = True

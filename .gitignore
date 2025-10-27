@@ -24,3 +24,4 @@ db.sqlite3
 #env files
 env/
 .env
+.env.example
