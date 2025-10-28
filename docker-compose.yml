@@ -1,76 +1,221 @@
-version: '3.8'
+version: "3.8"  # Docker Compose file format version
 
 services:
-  web:
-    build: .
-    ports:
-      - "8000:8000"
-    volumes:
-      - .:/app
-      - static_volume:/app/staticfiles
-      - media_volume:/app/mediafiles
-    depends_on:
-      - db
-      - redis
+  # MySQL Database Service
+  mysql:
+    image: mysql:8.0  # Use official MySQL image instead of mysql-server
+    container_name: mysql  # Name for the container
+    deploy:
+      resources:
+        limits:
+          memory: 300M  # Reduced for t2.micro - MySQL minimal config
     environment:
-      - DEBUG=False
-      - REDIS_URL=redis://redis:6379/0
-    command: >
-      sh -c "python manage.py collectstatic --noinput &&
-             python manage.py migrate &&
-             python manage.py runserver 0.0.0.0:8000"
-    restart: unless-stopped
-
-  db:
-    image: mysql:8.0
-    environment:
-      MYSQL_DATABASE: my_portfolio
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}  # Root password from environment variable
+      MYSQL_DATABASE: ${MYSQL_DATABASE}  # Database name from environment variable
+      MYSQL_USER: ${MYSQL_USER}  # Database user from environment variable
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}  # Database password from environment variable
+      MYSQL_ROOT_HOST: '%'  # Allow root connections from any host
     ports:
-      - "3306:3306"
+      - "3306:3306"  # Expose MySQL port to host machine
     volumes:
-      - mysql_data:/var/lib/mysql
-    restart: unless-stopped
+      - mysql_data:/var/lib/mysql  # Persistent storage for database data
+      # - ./staticfiles:/app/staticfiles  # Commented out - static files handled by Django
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql  # SQL script to run on first startup
+    networks:
+      - twotier  # Connect to custom network
+    restart: always  # Restart container if it stops
+    command: --default-authentication-plugin=mysql_native_password --skip-log-bin --innodb-buffer-pool-size=128M --innodb-log-file-size=32M --innodb-flush-method=O_DSYNC --innodb-flush-log-at-trx-commit=2 --query-cache-size=0 --query-cache-type=0  # Optimized for low memory
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s  # Check every 10 seconds
+      timeout: 5s  # Timeout after 5 seconds
+      retries: 5  # Retry 5 times before marking unhealthy
+      start_period: 60s  # Wait 60 seconds before starting health checks
 
+  # Redis Service for Celery
   redis:
-    image: redis:7-alpine
+    image: redis:7-alpine  # Official Redis Alpine image
+    container_name: redis  # Name for the container
+    deploy:
+      resources:
+        limits:
+          memory: 50M  # Very minimal Redis for t2.micro
     ports:
-      - "6379:6379"
+      - "6379:6379"  # Expose Redis port to host machine
     volumes:
-      - redis_data:/data
-    command: redis-server --appendonly yes
-    restart: unless-stopped
+      - redis_data:/data  # Persistent storage for Redis data
+    command: redis-server --appendonly yes  # Enable Redis persistence
+    networks:
+      - twotier  # Connect to custom network
+    restart: always  # Restart container if it stops
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]  # Check if Redis is responding
+      interval: 10s  # Check every 10 seconds
+      timeout: 5s  # Timeout after 5 seconds
+      retries: 5  # Retry 5 times before marking unhealthy
+      start_period: 30s  # Wait 30 seconds before starting health checks
 
+  # Django Application Service
+  django:
+    build:
+      context: .  # Build context (current directory)
+      dockerfile: Dockerfile  # Use the Dockerfile in current directory
+    image: portfolio_django:latest  # Name for the built image
+    #image: harpreetdevops/portfolio
+    container_name: django-app  # Name for the container
+    deploy:
+      resources:
+        limits:
+          memory: 200M  # Reduced Django memory for t2.micro
+    ports:
+      - "8000:8000"  # Expose Django development server port
+    environment:
+      SECRET_KEY: ${SECRET_KEY}  # Django secret key from environment variable
+      DEBUG: ${DEBUG}  # Debug mode from environment variable
+      MYSQL_HOST: mysql  # Database host (service name)
+      MYSQL_USER: ${MYSQL_USER}  # Database user from environment variable
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}  # Database password from environment variable
+      MYSQL_DB: ${MYSQL_DATABASE}  # Database name from environment variable
+      DJANGO_SETTINGS_MODULE: ${DJANGO_SETTINGS_MODULE}  # Django settings module
+      REDIS_URL: redis://redis:6379/0  # Redis connection URL for Celery
+    depends_on:
+      mysql:
+        condition: service_healthy  # Wait for MySQL to be healthy before starting
+      redis:
+        condition: service_healthy  # Wait for Redis to be healthy before starting
+    volumes:
+      - ./staticfiles:/app/staticfiles  # Mount static files directory for Nginx
+      - ./logs:/app/logs #for storing the django logs
+    networks:
+      - twotier  # Connect to custom network
+    restart: unless-stopped  # Restart unless manually stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000 || exit 1"]  # Check if Django is responding
+      interval: 10s  # Check every 10 seconds
+      timeout: 5s  # Timeout after 5 seconds
+      retries: 5  # Retry 5 times before marking unhealthy
+      start_period: 30s  # Wait 30 seconds before starting health checks
+
+  # Celery Worker Service
   celery:
-    build: .
-    volumes:
-      - .:/app
-    depends_on:
-      - db
-      - redis
+    build:
+      context: .  # Build context (current directory)
+      dockerfile: Dockerfile  # Use the Dockerfile in current directory
+    image: portfolio_django:latest  # Same image as Django
+    container_name: celery-worker  # Name for the container
+    deploy:
+      resources:
+        limits:
+          memory: 150M  # Reduced Celery worker for t2.micro
     environment:
-      - DEBUG=False
-      - REDIS_URL=redis://redis:6379/0
-    command: celery -A portfolio_django worker --loglevel=info --concurrency=2
-    restart: unless-stopped
+      SECRET_KEY: ${SECRET_KEY}  # Django secret key from environment variable
+      DEBUG: ${DEBUG}  # Debug mode from environment variable
+      MYSQL_HOST: mysql  # Database host (service name)
+      MYSQL_USER: ${MYSQL_USER}  # Database user from environment variable
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}  # Database password from environment variable
+      MYSQL_DB: ${MYSQL_DATABASE}  # Database name from environment variable
+      DJANGO_SETTINGS_MODULE: ${DJANGO_SETTINGS_MODULE}  # Django settings module
+      REDIS_URL: redis://redis:6379/0  # Redis connection URL for Celery
+    depends_on:
+      mysql:
+        condition: service_healthy  # Wait for MySQL to be healthy before starting
+      redis:
+        condition: service_healthy  # Wait for Redis to be healthy before starting
+    volumes:
+      - .:/app  # Mount current directory
+      - ./logs:/app/logs  # for storing the celery logs
+    networks:
+      - twotier  # Connect to custom network
+    restart: unless-stopped  # Restart unless manually stopped
+    command: celery -A portfolio_django worker --loglevel=info --concurrency=1 --queues=default,emails
 
+    healthcheck:
+      test: ["CMD-SHELL", "celery -A portfolio_django inspect ping || exit 1"]  # Check if Celery worker is responding
+      interval: 30s  # Check every 30 seconds
+      timeout: 10s  # Timeout after 10 seconds
+      retries: 3  # Retry 3 times before marking unhealthy
+      start_period: 60s  # Wait 60 seconds before starting health checks
+
+  # Celery Beat Service (for scheduled tasks)
   celery-beat:
-    build: .
-    volumes:
-      - .:/app
-    depends_on:
-      - db
-      - redis
+    build:
+      context: .  # Build context (current directory)
+      dockerfile: Dockerfile  # Use the Dockerfile in current directory
+    image: portfolio_django:latest  # Same image as Django
+    container_name: celery-beat  # Name for the container
+    deploy:
+      resources:
+        limits:
+          memory: 80M  # Minimal Celery beat for t2.micro
     environment:
-      - DEBUG=False
-      - REDIS_URL=redis://redis:6379/0
+      SECRET_KEY: ${SECRET_KEY}  # Django secret key from environment variable
+      DEBUG: ${DEBUG}  # Debug mode from environment variable
+      MYSQL_HOST: mysql  # Database host (service name)
+      MYSQL_USER: ${MYSQL_USER}  # Database user from environment variable
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}  # Database password from environment variable
+      MYSQL_DB: ${MYSQL_DATABASE}  # Database name from environment variable
+      DJANGO_SETTINGS_MODULE: ${DJANGO_SETTINGS_MODULE}  # Django settings module
+      REDIS_URL: redis://redis:6379/0  # Redis connection URL for Celery
+    depends_on:
+      mysql:
+        condition: service_healthy  # Wait for MySQL to be healthy before starting
+      redis:
+        condition: service_healthy  # Wait for Redis to be healthy before starting
+    volumes:
+      - .:/app  # Mount current directory
+      - ./logs:/app/logs  # for storing the celery beat logs
+    networks:
+      - twotier  # Connect to custom network
+    restart: unless-stopped  # Restart unless manually stopped
     command: celery -A portfolio_django beat --loglevel=info --scheduler django_celery_beat.schedulers:DatabaseScheduler
-    restart: unless-stopped
 
+  # Nginx Web Server Service
+  nginx:
+    image: nginx:latest  # Official Nginx image
+    container_name: nginx  # Name for the container
+    deploy:
+      resources:
+        limits:
+          memory: 50M  # Minimal Nginx for t2.micro
+    ports:
+      - "80:80"  # Expose Nginx port 80 as 80 on host
+      - "443:443"  # Expose Nginx port 443 for HTTPS
+    depends_on:
+      - django  # Wait for Django service to start
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - ./staticfiles:/app/staticfiles  # NGINX SERVES from this directory
+      - ./certbot/www:/var/www/certbot
+      - ./certbot/conf:/etc/letsencrypt
+    networks:
+      - twotier  # Connect to custom network
+    restart: always  # Restart container if it stops (ensures Nginx auto-starts after reboot)
+
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    deploy:
+      resources:
+        limits:
+          memory: 30M  # Minimal Certbot for t2.micro
+    volumes:
+      - ./certbot/www:/var/www/certbot
+      - ./certbot/conf:/etc/letsencrypt
+    # entrypoint: >
+    #   sh -c "certbot certonly --webroot --webroot-path=/var/www/certbot
+    #   --email talkwithharpreet@gmail.com --agree-tos --no-eff-email
+    #   --non-interactive --keep-until-expiring
+    #   -d iharpreet.com -d www.iharpreet.com"
+    entrypoint: >
+      sh -c "trap exit TERM; while :; do sleep 6h & wait $${!}; certbot renew; done"
+    networks:
+      - twotier
+
+# Custom network for inter-service communication
+networks:
+  twotier:  # Network name for internal communication
+
+# Named volumes for persistent data storage
 volumes:
-  mysql_data:
-  redis_data:
-  static_volume:
-  media_volume:
+  mysql_data:  # Persistent volume for MySQL database data
+  redis_data:  # Persistent volume for Redis data

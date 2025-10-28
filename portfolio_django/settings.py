@@ -30,10 +30,35 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback-secret')
 
+# Add your server's IP and the Docker container's service name for the nginx proxy
+# ALLOWED_HOSTS specifies which hostnames Django can serve
+#Your Django settings need to be explicitly configured to trust requests coming from your server's IP address and through the Nginx proxy.
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    #'65.1.200.98',
+    'iharpreet.com',
+    'www.iharpreet.com',
+    'django-app', #for dockercontainer
+]  # Get allowed hosts from env var
+
+# Trust requests originating from your domain/IP on the port Nginx is using
+# CSRF_TRUSTED_ORIGINS is required when using HTTPS or when behind a proxy
+CSRF_TRUSTED_ORIGINS = [
+    # 'http://65.1.110.216:8888',
+    # If you plan to use HTTPS in the future, you can add this as well
+    # 'https://65.1.110.216:8888',
+    "https://iharpreet.com",
+    "https://www.iharpreet.com",
+]
+
+# Since you are not using HTTPS yet, it's best to comment these out for now
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
+
 # SECURITY WARNING: don't run with debug true turned on in production!
 # Debug mode shows detailed error pages and should be False in production
-
-
 # DEBUG is set based on the 'DEBUG' environment variable from your .env file.
 # If 'DEBUG' is set to 'True' (as a string) in your environment, DEBUG will be True.
 # Otherwise, it defaults to False.
@@ -65,31 +90,6 @@ else:  # for production
 
 
 
-# Add your server's IP and the Docker container's service name for the nginx proxy
-# ALLOWED_HOSTS specifies which hostnames Django can serve
-#Your Django settings need to be explicitly configured to trust requests coming from your server's IP address and through the Nginx proxy.
-ALLOWED_HOSTS = [
-    '127.0.0.1',
-    #'65.1.200.98',
-    'iharpreet.com',
-    'www.iharpreet.com',
-    'django-app', #for dockercontainer
-]  # Get allowed hosts from env var
-
-# Trust requests originating from your domain/IP on the port Nginx is using
-# CSRF_TRUSTED_ORIGINS is required when using HTTPS or when behind a proxy
-CSRF_TRUSTED_ORIGINS = [
-    # 'http://65.1.110.216:8888',
-    # If you plan to use HTTPS in the future, you can add this as well
-    # 'https://65.1.110.216:8888',
-    "https://iharpreet.com",
-    "https://www.iharpreet.com",
-]
-
-# Since you are not using HTTPS yet, it's best to comment these out for now
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
 
 
 import os
