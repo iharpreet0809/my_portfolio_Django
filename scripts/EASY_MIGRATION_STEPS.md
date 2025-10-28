@@ -55,7 +55,7 @@ mv live_portfolio live_portfolio_old_$(date +%Y%m%d)
 ### Step 4: Clone Fresh Project
 ```bash
 # Clone fresh code
-git clone https://github.com/your-username/your-repo.git live_portfolio
+git clone -b master https://github.com/iharpreet0809/my_portfolio_Django.git live_portfolio
 
 # Go to new project
 cd live_portfolio
@@ -75,7 +75,10 @@ chmod +x simple_backup_restore.sh
 
 ### Step 6: Restore Data
 ```bash
-# Restore from backup (use the path from Step 2)
+# First build images to avoid errors
+docker compose build
+
+# Then restore data (use the path from Step 2)
 ./simple_backup_restore.sh restore /home/ubuntu/data_backups/mysql_migration_20241027_143022
 ```
 
@@ -85,7 +88,7 @@ chmod +x simple_backup_restore.sh
 docker compose ps
 
 # Check website
-curl -I http://your-domain.com
+curl -I http://iharpreet.com
 
 # Check database
 docker compose exec mysql mysqladmin ping -uroot -p${MYSQL_ROOT_PASSWORD}
@@ -106,14 +109,14 @@ cd ..
 mv live_portfolio live_portfolio_old_$(date +%Y%m%d)
 
 # 3. Clone fresh
-git clone https://github.com/your-username/your-repo.git live_portfolio
+git clone -b master https://github.com/iharpreet0809/my_portfolio_Django.git live_portfolio
 cd live_portfolio
 
 # 4. Copy script
 cp ../live_portfolio_old_*/simple_backup_restore.sh .
 chmod +x simple_backup_restore.sh
 
-# 5. Restore (replace YYYYMMDD_HHMMSS with actual backup folder name)
+# 5. Restore and build (replace YYYYMMDD_HHMMSS with actual backup folder name)
 ./simple_backup_restore.sh restore /home/ubuntu/data_backups/mysql_migration_YYYYMMDD_HHMMSS
 
 # 6. Verify
@@ -162,13 +165,15 @@ docker compose up -d
 - **Backup**: ~2-3 minutes
 - **Clone**: ~1 minute  
 - **Restore**: ~3-4 minutes
-- **Total**: ~6-8 minutes
+- **Docker Build**: ~2-3 minutes
+- **Total**: ~8-11 minutes
 
 ---
 
 ## 🚨 Important Notes
 1. **Backup path** will be shown after Step 2 - copy it exactly
-2. **Replace your-repo.git** with actual GitHub repo URL
+2. **Docker build** is required after restore (included in steps)
 3. **Keep old project** until everything is verified working
 4. **SSL certificates** will be preserved (no need to regenerate)
 5. **All form data** will be preserved in MySQL
+6. **Build process** may take 2-3 minutes first time

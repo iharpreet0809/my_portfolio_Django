@@ -203,6 +203,9 @@ def contact(request):
                 if email_sent:
                     # Clear the CAPTCHA from session after successful submission
                     request.session.pop('captcha_answer', None)
+                    # Generate new CAPTCHA for next submission
+                    captcha_question, captcha_answer = generate_captcha()
+                    request.session['captcha_answer'] = (captcha_question, captcha_answer)
                     messages.success(request, 'Your message has been sent successfully!')
                 else:
                     messages.error(request, 'Failed to send email. Please try again later.')

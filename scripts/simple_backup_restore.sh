@@ -191,9 +191,9 @@ restore_from_backup() {
         print_status "Redis data restored"
     fi
     
-    # 6. Start containers
-    print_warning "Starting containers..."
-    docker compose up -d
+    # 6. Build and start containers
+    print_warning "Building and starting containers..."
+    docker compose up --build -d
     
     # Wait for services
     print_warning "Waiting for services to start..."

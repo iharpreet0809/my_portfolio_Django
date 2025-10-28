@@ -140,6 +140,9 @@ INSTALLED_APPS = [
     
     # Custom apps
     'portfolio_app',  # Main portfolio application
+    
+    # Celery Beat app for scheduled tasks
+    'django_celery_beat',  # Celery Beat scheduler
 
 ]
 
@@ -266,7 +269,8 @@ CELERY_TIMEZONE = TIME_ZONE
 
 # Celery task routing
 CELERY_TASK_ROUTES = {
-    'portfolio_app.tasks.send_contact_email_async': {'queue': 'emails'},
+    'portfolio_app.tasks.send_contact_email': {'queue': 'emails'},
+    'portfolio_app.tasks.send_admin_otp_email': {'queue': 'emails'},
 }
 
 # Celery worker configuration
