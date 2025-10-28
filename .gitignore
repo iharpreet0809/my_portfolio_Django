@@ -25,3 +25,4 @@ db.sqlite3
 env/
 .env
 .env.example
+.env.production
