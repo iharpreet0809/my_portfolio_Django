@@ -22,8 +22,7 @@ class ContactForm(forms.ModelForm):
         max_length=10,
         widget=forms.TextInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Enter the answer',
-            'style': 'width: 200px; display: inline-block; margin-right: 10px;'
+            'placeholder': 'Answer'
         }),
         label='CAPTCHA',
         help_text='Please solve the math problem above'
@@ -33,7 +32,7 @@ class ContactForm(forms.ModelForm):
         self.captcha_answer = kwargs.pop('captcha_answer', None)
         super().__init__(*args, **kwargs)
         if self.captcha_answer:
-            self.fields['captcha'].help_text = f'Please solve: {self.captcha_answer[0]}'
+            self.fields['captcha'].help_text = f'solve: {self.captcha_answer[0]}'
     
     def clean_captcha(self):
         captcha = self.cleaned_data.get('captcha')

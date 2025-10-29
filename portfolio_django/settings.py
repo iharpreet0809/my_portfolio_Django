@@ -267,7 +267,13 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = TIME_ZONE
 
-# Celery task routing
+# Fix Celery worker connection issues
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+CELERY_BROKER_CONNECTION_RETRY = True
+CELERY_TASK_ALWAYS_EAGER = False
+CELERY_TASK_EAGER_PROPAGATES = False
+
+# Celery task routing - route email tasks to dedicated queue
 CELERY_TASK_ROUTES = {
     'portfolio_app.tasks.send_contact_email': {'queue': 'emails'},
     'portfolio_app.tasks.send_admin_otp_email': {'queue': 'emails'},

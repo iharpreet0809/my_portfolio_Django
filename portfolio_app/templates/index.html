@@ -513,60 +513,129 @@
 				</div>
 			</div> 
 
-			<div class="row no-gutters block-9">
-				<div class="col-md-6 d-flex align-items-center justify-content-center">
-					<img data-src="{% static 'images/contact.svg' %}" alt="Contact Illustration" class="img-fluid lazy-img" style="max-width: 90%; border-radius: 20px; box-shadow: 0 4px 24px rgba(0,0,0,0.08);" loading="lazy">
+			<!-- Modern Contact Layout -->
+			<div class="row contact-main-row">
+				<!-- Left Side - Contact Image & Info -->
+				<div class="col-lg-5 col-md-6 contact-left-section">
+					<div class="contact-image-container">
+						<img data-src="{% static 'images/contact.svg' %}" alt="Contact Illustration" class="contact-illustration lazy-img" loading="lazy">
+						
+						<!-- Contact CTA -->
+						<div class="contact-cta">
+							<h3>Let's Work Together!</h3>
+							<p>Ready to bring your ideas to life? Drop me a message and let's create something amazing together.</p>
+							
+							<!-- Quick Contact Links -->
+							<div class="quick-contact-links">
+								<a href="mailto:talkwithharpreet@gmail.com" class="quick-contact-item">
+									<i class="icon-paper-plane"></i>
+									<span>Email Me</span>
+								</a>
+								<a href="https://www.linkedin.com/in/harpreet22/" class="quick-contact-item">
+									<i class="icon-linkedin"></i>
+									<span>LinkedIn</span>
+								</a>
+								<a href="https://github.com/iharpreet0809" class="quick-contact-item">
+									<i class="icon-github"></i>
+									<span>GitHub</span>
+								</a>
+							</div>
+						</div>
+					</div>
 				</div>
 
-
-				<!-- Contact form -->
-				<div class="col-md-6 order-md-last d-flex">
-					<form action="{% url 'contact' %}" method="POST" class="bg-light p-4 p-md-5 contact-form">
-						{% csrf_token %}
+				<!-- Right Side - Contact Form -->
+				<div class="col-lg-7 col-md-6 contact-right-section">
+					<div class="contact-form-wrapper">
+						<div class="form-header">
+							<h3>Send Message</h3>
+							<p>Fill out the form below and I'll get back to you as soon as possible.</p>
+						</div>
 						
-						<div class="form-group">
-							{{ form.name }}
-						</div>
-						<div class="form-group">
-							{{ form.email }}
-						</div>
-						<div class="form-group">
-							{{ form.subject }}
-						</div>
-						<div class="form-group" id="contact-msg">
-							{{ form.message }}
-						</div>
-						<div class="form-group">
-							<label for="{{ form.captcha.id_for_label }}" class="form-label">CAPTCHA</label>
-							<div class="captcha-container">
-								<div class="captcha-line">
-									<span class="captcha-text">{{ form.captcha.help_text }}</span>
-									<button type="button" class="captcha-refresh" onclick="refreshCaptcha()" title="Refresh CAPTCHA">
-										<i class="icon-refresh"></i>
-									</button>
-									{{ form.captcha }}
-								</div>
-								{% if form.captcha.errors %}
-									<div class="captcha-error">
-										{% for error in form.captcha.errors %}
+						<form action="{% url 'contact' %}" method="POST" class="bg-light p-4 p-md-5 contact-form modern-contact-form" id="contactForm">
+							{% csrf_token %}
+							
+							<div class="form-group">
+								<label for="{{ form.name.id_for_label }}" class="form-label">Name</label>
+								{{ form.name }}
+								{% if form.name.errors %}
+									<div class="field-error">
+										{% for error in form.name.errors %}
 											{{ error }}
 										{% endfor %}
 									</div>
 								{% endif %}
 							</div>
-						</div>
-						<div class="form-group" >
-							<input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
-						</div>
-						{% if messages %}
-							{% for message in messages %}
-								<div class="alert alert-{{ message.tags }}">
-									{{ message }}
+							
+							<div class="form-group">
+								<label for="{{ form.email.id_for_label }}" class="form-label">Email</label>
+								{{ form.email }}
+								{% if form.email.errors %}
+									<div class="field-error">
+										{% for error in form.email.errors %}
+											{{ error }}
+										{% endfor %}
+									</div>
+								{% endif %}
+							</div>
+							
+							<div class="form-group">
+								<label for="{{ form.subject.id_for_label }}" class="form-label">Subject</label>
+								{{ form.subject }}
+								{% if form.subject.errors %}
+									<div class="field-error">
+										{% for error in form.subject.errors %}
+											{{ error }}
+										{% endfor %}
+									</div>
+								{% endif %}
+							</div>
+							
+							<div class="form-group" id="contact-msg">
+								<label for="{{ form.message.id_for_label }}" class="form-label">Message</label>
+								{{ form.message }}
+								{% if form.message.errors %}
+									<div class="field-error">
+										{% for error in form.message.errors %}
+											{{ error }}
+										{% endfor %}
+									</div>
+								{% endif %}
+							</div>
+							
+							<div class="form-group">
+								<label for="{{ form.captcha.id_for_label }}" class="form-label">CAPTCHA</label>
+								<div class="captcha-container">
+									<div class="captcha-line">
+										<span class="captcha-text">{{ form.captcha.help_text }}</span>
+										<button type="button" class="captcha-refresh" onclick="refreshCaptcha()" title="Refresh CAPTCHA">
+											<i class="icon-refresh"></i>
+										</button>
+										{{ form.captcha }}
+									</div>
+									{% if form.captcha.errors %}
+										<div class="captcha-error">
+											{% for error in form.captcha.errors %}
+												{{ error }}
+											{% endfor %}
+										</div>
+									{% endif %}
 								</div>
-							{% endfor %}
-						{% endif %}
-					</form>
-					
+							</div>
+							
+							<div class="form-group">
+								<input type="submit" value="Send Message" class="btn btn-primary py-3 px-5 btn-send-message">
+							</div>
+							
+							{% if messages %}
+								{% for message in messages %}
+									<div class="alert alert-{{ message.tags }} modern-alert">
+										{{ message }}
+									</div>
+								{% endfor %}
+							{% endif %}
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -664,20 +733,60 @@
     });
 </script>
 
-<!-- CAPTCHA refresh function -->
+<!-- CAPTCHA layout optimization -->
 <script>
+// Function to check and optimize CAPTCHA layout
+function optimizeCaptchaLayout() {
+    const captchaText = document.querySelector('.captcha-text');
+    const captchaContainer = document.querySelector('.captcha-container');
+    
+    if (captchaText && captchaContainer) {
+        const textLength = captchaText.textContent.length;
+        // Check if text is long or if we're on a small screen
+        const isSmallScreen = window.innerWidth <= 600;
+        const isLongText = textLength > 18;
+        
+        if (isLongText || isSmallScreen) {
+            captchaContainer.classList.add('long-text');
+        } else {
+            captchaContainer.classList.remove('long-text');
+        }
+    }
+}
+
+// Run on page load and resize
+document.addEventListener('DOMContentLoaded', function() {
+    optimizeCaptchaLayout();
+    
+    // Check for form errors and scroll to first error
+    const firstError = document.querySelector('.field-error, .captcha-error');
+    if (firstError) {
+        // Scroll to the error with some offset
+        const errorField = firstError.closest('.form-group');
+        if (errorField) {
+            errorField.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'center' 
+            });
+        }
+    }
+});
+window.addEventListener('resize', optimizeCaptchaLayout);
+
 function refreshCaptcha() {
     // Show loading state
     const refreshBtn = document.querySelector('.captcha-refresh');
     const originalContent = refreshBtn.innerHTML;
-    refreshBtn.innerHTML = '<i class="icon-spinner"></i>';
+    refreshBtn.innerHTML = '<i class="icon-spinner" style="animation: spin 1s linear infinite;"></i>';
     refreshBtn.disabled = true;
+    refreshBtn.style.opacity = '0.7';
     
     // Make AJAX request to refresh CAPTCHA
     fetch('{% url "refresh_captcha" %}', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
         },
     })
     .then(response => response.json())
@@ -685,12 +794,15 @@ function refreshCaptcha() {
         if (data.success) {
             // Update the CAPTCHA question
             const captchaText = document.querySelector('.captcha-text');
-            captchaText.textContent = data.question;
+            if (captchaText) {
+                captchaText.textContent = `solve: ${data.question}`;
+            }
             
             // Clear the input field
             const captchaInput = document.querySelector('input[name="captcha"]');
             if (captchaInput) {
                 captchaInput.value = '';
+                captchaInput.focus(); // Focus on input for better UX
             }
             
             // Clear any error messages
@@ -702,13 +814,18 @@ function refreshCaptcha() {
     })
     .catch(error => {
         console.error('Error refreshing CAPTCHA:', error);
-        // Fallback to page reload
-        window.location.reload();
+        // Show user-friendly error message
+        const captchaText = document.querySelector('.captcha-text');
+        if (captchaText) {
+            captchaText.textContent = 'Error loading CAPTCHA. Please refresh the page.';
+            captchaText.style.color = '#dc3545';
+        }
     })
     .finally(() => {
         // Restore button state
         refreshBtn.innerHTML = originalContent;
         refreshBtn.disabled = false;
+        refreshBtn.style.opacity = '1';
     });
 }
 </script>
@@ -745,6 +862,224 @@ function refreshCaptcha() {
 	  });
 	});
   </script>
+
+<!-- Enhanced Contact Form with Client-side Validation -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contactForm');
+    const formInputs = document.querySelectorAll('.contact-form .form-control');
+    
+    // Form data preservation and restoration
+    function saveFormData() {
+        const formData = {};
+        formInputs.forEach(input => {
+            if (input.name && input.name !== 'csrfmiddlewaretoken') {
+                formData[input.name] = input.value;
+            }
+        });
+        localStorage.setItem('contactFormData', JSON.stringify(formData));
+    }
+    
+    function restoreFormData() {
+        const savedData = localStorage.getItem('contactFormData');
+        if (savedData) {
+            const formData = JSON.parse(savedData);
+            Object.keys(formData).forEach(key => {
+                const input = document.querySelector(`[name="${key}"]`);
+                if (input && key !== 'captcha') { // Don't restore CAPTCHA
+                    input.value = formData[key];
+                    if (input.value) {
+                        input.parentElement.classList.add('focused');
+                    }
+                }
+            });
+        }
+    }
+    
+    function clearFormData() {
+        localStorage.removeItem('contactFormData');
+    }
+    
+    // Client-side CAPTCHA validation
+    function validateCaptcha() {
+        const captchaText = document.querySelector('.captcha-text').textContent;
+        const captchaInput = document.querySelector('input[name="captcha"]');
+        const captchaAnswer = captchaInput.value.trim();
+        
+        // Extract the math problem from the help text
+        const match = captchaText.match(/solve:\s*(\d+)\s*([+\-*/])\s*(\d+)/);
+        if (!match) return true; // If we can't parse, let server handle it
+        
+        const num1 = parseInt(match[1]);
+        const operator = match[2];
+        const num2 = parseInt(match[3]);
+        
+        let correctAnswer;
+        switch (operator) {
+            case '+': correctAnswer = num1 + num2; break;
+            case '-': correctAnswer = num1 - num2; break;
+            case '*': correctAnswer = num1 * num2; break;
+            case '/': correctAnswer = Math.floor(num1 / num2); break;
+            default: return true; // Let server handle unknown operators
+        }
+        
+        return parseInt(captchaAnswer) === correctAnswer;
+    }
+    
+    function showCaptchaError(message) {
+        // Remove existing error
+        const existingError = document.querySelector('.captcha-error-client');
+        if (existingError) {
+            existingError.remove();
+        }
+        
+        // Add new error
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'captcha-error captcha-error-client';
+        errorDiv.textContent = message;
+        
+        const captchaContainer = document.querySelector('.captcha-container');
+        captchaContainer.appendChild(errorDiv);
+        
+        // Focus on CAPTCHA input
+        const captchaInput = document.querySelector('input[name="captcha"]');
+        captchaInput.focus();
+        captchaInput.select();
+        
+        // Scroll to CAPTCHA
+        captchaContainer.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'center' 
+        });
+    }
+    
+    // Form submission handler
+    contactForm.addEventListener('submit', function(e) {
+        // Save form data before validation
+        saveFormData();
+        
+        // Validate CAPTCHA first
+        const captchaInput = document.querySelector('input[name="captcha"]');
+        if (!captchaInput.value.trim()) {
+            e.preventDefault();
+            showCaptchaError('Please enter the CAPTCHA answer.');
+            return;
+        }
+        
+        if (!validateCaptcha()) {
+            e.preventDefault();
+            showCaptchaError('Incorrect CAPTCHA answer. Please try again.');
+            return;
+        }
+        
+        // If validation passes, clear saved data and allow submission
+        clearFormData();
+    });
+    
+    // Auto-save form data as user types
+    formInputs.forEach(input => {
+        // Add floating label effect
+        input.addEventListener('focus', function() {
+            this.parentElement.classList.add('focused');
+        });
+        
+        input.addEventListener('blur', function() {
+            if (!this.value) {
+                this.parentElement.classList.remove('focused');
+            }
+        });
+        
+        // Auto-save on input
+        input.addEventListener('input', saveFormData);
+        
+        // Check if input has value on load
+        if (input.value) {
+            input.parentElement.classList.add('focused');
+        }
+    });
+    
+    // Clear client-side CAPTCHA errors when user types
+    const captchaInput = document.querySelector('input[name="captcha"]');
+    if (captchaInput) {
+        captchaInput.addEventListener('input', function() {
+            const clientError = document.querySelector('.captcha-error-client');
+            if (clientError) {
+                clientError.remove();
+            }
+        });
+    }
+    
+    // Restore form data on page load (in case of server-side errors)
+    restoreFormData();
+    
+    // Add ripple effect to submit button
+    const submitBtn = document.querySelector('.contact-form .btn-primary');
+    if (submitBtn) {
+        submitBtn.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.classList.add('ripple');
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+    }
+    
+    // Smooth scroll to form on validation errors
+    const alerts = document.querySelectorAll('.contact-form .alert');
+    if (alerts.length > 0) {
+        document.querySelector('.contact-form').scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'center' 
+        });
+    }
+    
+    // Clear saved data on successful submission (when page redirects)
+    if (window.location.hash === '#success') {
+        clearFormData();
+    }
+});
+</script>
+
+<!-- Ripple effect CSS -->
+<style>
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    transform: scale(0);
+    animation: rippleEffect 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes rippleEffect {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+.contact-form .btn-primary {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Floating label effect */
+.contact-form .form-group.focused .form-control {
+    border-color: #ffbd39 !important;
+    box-shadow: 0 0 0 3px rgba(255, 189, 57, 0.1) !important;
+}
+</style>
   
 
 </body>

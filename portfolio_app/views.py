@@ -43,11 +43,87 @@ import time
 # Import Celery tasks for async email sending
 try:
     from .tasks import send_contact_email, send_admin_otp_email
+    from celery import current_app
+    import redis
     CELERY_AVAILABLE = True
-except ImportError:
+    CELERY_IMPORT_ERROR = None
+except ImportError as e:
     CELERY_AVAILABLE = False
+    CELERY_IMPORT_ERROR = str(e)
+    current_app = None
+    redis = None
 
 User = get_user_model()
+
+# Cache for worker availability check (avoid repeated checks)
+_worker_check_cache = {'available': False, 'timestamp': 0}
+CACHE_DURATION = 30  # Cache for 30 seconds
+
+def is_celery_worker_available():
+    """
+    Check if both Redis and Celery workers are available.
+    Returns True if both Redis is accessible and Celery workers are active, False otherwise.
+    Uses caching to avoid repeated checks within 30 seconds.
+    """
+    if not CELERY_AVAILABLE:
+        print(f"Celery not available: {CELERY_IMPORT_ERROR}")
+        return False
+    
+    # Check cache first
+    current_time = time.time()
+    if current_time - _worker_check_cache['timestamp'] < CACHE_DURATION:
+        return _worker_check_cache['available']
+    
+    redis_available = False
+    celery_available = False
+    
+    try:
+        # Check Redis connection
+        redis_url = getattr(settings, 'CELERY_BROKER_URL', 'redis://127.0.0.1:6379/0')
+        
+        # Parse Redis URL to get connection details
+        if redis_url.startswith('redis://'):
+            url_parts = redis_url.replace('redis://', '').split('/')
+            host_port = url_parts[0].split(':')
+            host = host_port[0] if host_port[0] else '127.0.0.1'
+            port = int(host_port[1]) if len(host_port) > 1 else 6379
+            db = int(url_parts[1]) if len(url_parts) > 1 else 0
+        else:
+            host, port, db = '127.0.0.1', 6379, 0
+        
+        # Test Redis connection with timeout
+        r = redis.Redis(host=host, port=port, db=db, socket_timeout=2, socket_connect_timeout=2)
+        r.ping()
+        redis_available = True
+        print("Redis available")
+        
+    except Exception as e:
+        print(f"Redis not available: {str(e)}")
+        return False
+    
+    if redis_available:
+        try:
+            # Check if Celery workers are active with shorter timeout
+            from celery import current_app
+            inspect = current_app.control.inspect(timeout=1)  # Reduced to 1 second
+            
+            # Try ping first (faster than active())
+            ping_result = inspect.ping()
+            if ping_result and len(ping_result) > 0:
+                celery_available = True
+                print("Celery workers available")
+            else:
+                print("Celery workers not available")
+                    
+        except Exception as e:
+            print(f"Celery workers not available: {str(e)}")
+    
+    # Update cache
+    result = redis_available and celery_available
+    _worker_check_cache['available'] = result
+    _worker_check_cache['timestamp'] = current_time
+    
+    return result
 
 def send_contact_email_sync(name, email, subject, message):
     """
@@ -187,17 +263,19 @@ def contact(request):
                 
                 # Try to send email asynchronously using Celery, fallback to sync if unavailable
                 email_sent = False
-                try:
-                    if CELERY_AVAILABLE:
-                        # Try async email sending with Celery
-                        send_contact_email.delay(name, email, subject, message)
+                
+                # Check if both Redis and Celery workers are available before attempting async send
+                # Try async email first, fallback to sync if needed
+                if is_celery_worker_available():
+                    try:
+                        result = send_contact_email.delay(name, email, subject, message)
+                        print(f"✅ Email sent Asynchronously (Task ID: {result.id})")
                         email_sent = True
-                        print("Email sent asynchronously via Celery")
-                    else:
-                        raise Exception("Celery not available")
-                except Exception as celery_error:
-                    print(f"Celery error: {celery_error}, falling back to synchronous email")
-                    # Fallback to synchronous email sending
+                    except Exception as celery_error:
+                        print(f"Async email failed, using synchronous email: {celery_error}")
+                        email_sent = send_contact_email_sync(name, email, subject, message)
+                else:
+                    print("✅ Email sent Synchronously ")
                     email_sent = send_contact_email_sync(name, email, subject, message)
                 
                 if email_sent:
@@ -285,14 +363,15 @@ def admin_login_2fa(request):
                 request.session['otp_email'] = user.email
                 request.session['otp_stage'] = True  # Set OTP stage flag
                 # Send OTP via email with fallback mechanism
-                try:
-                    if CELERY_AVAILABLE:
-                        send_admin_otp_email.delay(user.email, otp_code)
-                        print("OTP email sent asynchronously via Celery")
-                    else:
-                        raise Exception("Celery not available")
-                except Exception as celery_error:
-                    print(f"Celery error: {celery_error}, falling back to synchronous OTP email")
+                if is_celery_worker_available():
+                    try:
+                        result = send_admin_otp_email.delay(user.email, otp_code)
+                        print(f"OTP email sent asynchronously (Task ID: {result.id})")
+                    except Exception as celery_error:
+                        print(f"Async OTP failed, using synchronous email: {celery_error}")
+                        send_admin_otp_email_sync(user.email, otp_code)
+                else:
+                    print("OTP email sent synchronously (Celery not available)")
                     send_admin_otp_email_sync(user.email, otp_code)
                 # Store username for GET
                 request.session['otp_username'] = username
@@ -330,14 +409,15 @@ def admin_login_2fa(request):
                 request.session['otp_valid'] = True
                 request.session['otp_email'] = user.email
                 # Send OTP via email with fallback mechanism (resend)
-                try:
-                    if CELERY_AVAILABLE:
-                        send_admin_otp_email.delay(user.email, otp_code)
-                        print("OTP email resent asynchronously via Celery")
-                    else:
-                        raise Exception("Celery not available")
-                except Exception as celery_error:
-                    print(f"Celery error: {celery_error}, falling back to synchronous OTP email")
+                if is_celery_worker_available():
+                    try:
+                        result = send_admin_otp_email.delay(user.email, otp_code)
+                        print(f"OTP email resent asynchronously (Task ID: {result.id})")
+                    except Exception as celery_error:
+                        print(f"Async OTP resend failed, using synchronous email: {celery_error}")
+                        send_admin_otp_email_sync(user.email, otp_code)
+                else:
+                    print("OTP email resent synchronously (Celery not available)")
                     send_admin_otp_email_sync(user.email, otp_code)
                 context['otp_required'] = True
                 context['otp_sent'] = True

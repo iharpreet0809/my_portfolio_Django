@@ -11,6 +11,14 @@ import logging
 logger = logging.getLogger(__name__)
 
 
+@shared_task
+def test_celery():
+    """
+    Simple test task to verify Celery is working.
+    """
+    return "Celery is working!"
+
+
 @shared_task(bind=True, max_retries=3, default_retry_delay=60)
 def send_contact_email(self, name, email, subject, message):
     """

@@ -40,20 +40,22 @@ def start_celery_worker():
     
     print("📋 Celery Worker Configuration:")
     print("   • Broker: Redis (localhost:6379)")
-    print("   • Concurrency: 2 workers")
+    print("   • Concurrency: 1 worker (for debugging)")
     print("   • Log Level: INFO")
     print("   • Queues: default, emails")
+    print("   • Pool: solo (for Windows compatibility)")
     print()
     
     try:
-        # Start Celery worker
+        # Start Celery worker with Windows-compatible settings
         cmd = [
             sys.executable, '-m', 'celery', 
             '-A', 'portfolio_django',
             'worker',
             '--loglevel=info',
-            '--concurrency=2',
-            '--queues=default,emails'
+            '--pool=solo',  # Better for Windows
+            '--concurrency=1',  # Single worker for debugging
+            '--queues=default,emails'  # Handle both queues
         ]
         
         print("🔄 Starting Celery worker...")
