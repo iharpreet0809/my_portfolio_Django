@@ -28,12 +28,14 @@ A Django-based portfolio website with contact form functionality and admin panel
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd portfolio_django
    ```
 
 2. **Create and activate virtual environment**
+
    ```bash
    python -m venv env
    # On Windows
@@ -43,12 +45,14 @@ A Django-based portfolio website with contact form functionality and admin panel
    ```
 
 3. **Install dependencies**
+
    ```bash
    pip install -r requirements.txt
    ```
 
 4. **Set up environment variables**
    Create a `.env` file in the project root:
+
    ```env
    SECRET_KEY=your-secret-key-here
    DEBUG=True
@@ -57,6 +61,7 @@ A Django-based portfolio website with contact form functionality and admin panel
    ```
 
 5. **Database setup**
+
    ```bash
    python manage.py makemigrations
    python manage.py migrate
@@ -72,11 +77,13 @@ A Django-based portfolio website with contact form functionality and admin panel
 #### Option 1: Using Docker Compose (Recommended)
 
 1. **Start all services**
+
    ```bash
    docker-compose up -d
    ```
 
    This will start:
+
    - Django web server (port 8000)
    - MySQL database (port 3306)
    - Redis (port 6379)
@@ -84,6 +91,7 @@ A Django-based portfolio website with contact form functionality and admin panel
    - Celery beat (for scheduled tasks)
 
 2. **View logs**
+
    ```bash
    docker-compose logs -f
    ```
@@ -96,18 +104,20 @@ A Django-based portfolio website with contact form functionality and admin panel
 #### Option 2: Manual Setup
 
 1. **Start Redis**
+
    ```bash
    # On Windows (using WSL or Docker)
    redis-server
-   
+
    # On macOS
    brew services start redis
-   
+
    # On Linux
    sudo systemctl start redis
    ```
 
 2. **Start Celery worker** (in a separate terminal)
+
    ```bash
    celery -A portfolio_django worker --loglevel=info
    ```
@@ -159,16 +169,19 @@ CELERY_RESULT_BACKEND = 'django-db'
 ## Development
 
 ### Running Tests
+
 ```bash
 python manage.py test
 ```
 
 ### Static Files
+
 ```bash
 python manage.py collectstatic
 ```
 
 ### Database Migrations
+
 ```bash
 python manage.py makemigrations
 python manage.py migrate
@@ -190,11 +203,13 @@ For production deployment:
 ### Common Issues
 
 1. **Celery worker not starting**
+
    - Ensure Redis is running
    - Check Redis connection URL
    - Verify Celery configuration
 
 2. **Emails not sending**
+
    - Check email credentials
    - Verify SMTP settings
    - Check Celery worker logs
@@ -212,4 +227,72 @@ For production deployment:
 
 ## License
 
-This project is licensed under the MIT License. 
+This project is licensed under the MIT License.
+
+## 🔀 Merge dev → main
+
+### Prerequisites
+
+- Ensure you have committed all changes in your current branch
+- Make sure you have push access to both branches
+
+### Complete Merge Commands (Copy & Run)
+
+```bash
+# Ensure local branches up-to-date
+git fetch origin
+git checkout dev
+git pull origin dev
+git checkout main
+git pull origin main
+
+# Merge preferring incoming (dev). Use --allow-unrelated-histories only if needed.
+git merge -X theirs dev --allow-unrelated-histories
+
+# If merge finished with conflicts, run:
+git checkout --theirs .
+git add .
+git commit -m "Merge dev into main — accept incoming (dev) changes"
+
+# Push final result
+git push origin main
+```
+
+### Quick Command Reference
+
+```bash
+# Complete merge in one go (if no conflicts expected)
+git fetch origin && \
+git checkout dev && git pull origin dev && \
+git checkout main && git pull origin main && \
+git merge -X theirs dev && \
+git push origin main
+```
+
+### Troubleshooting
+
+**Issue: Merge conflicts**
+
+```bash
+# View conflicted files
+git status
+
+# Accept all dev changes
+git checkout --theirs .
+git add .
+git commit -m "Resolve conflicts - accept dev changes"
+```
+
+**Issue: Unrelated histories**
+
+```bash
+# Add --allow-unrelated-histories flag
+git merge -X theirs dev --allow-unrelated-histories
+```
+
+**Issue: Need to abort merge**
+
+```bash
+# Cancel the merge and return to previous state
+git merge --abort
+```
