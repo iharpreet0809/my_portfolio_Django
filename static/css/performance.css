@@ -1,0 +1,101 @@
+/* Performance Optimization CSS */
+
+/* Lazy loading placeholder styles */
+.lazy-bg {
+    background-color: #f8f9fa;
+    background-image: linear-gradient(45deg, #f8f9fa 25%, transparent 25%), 
+                      linear-gradient(-45deg, #f8f9fa 25%, transparent 25%), 
+                      linear-gradient(45deg, transparent 75%, #f8f9fa 75%), 
+                      linear-gradient(-45deg, transparent 75%, #f8f9fa 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    transition: background-image 0.3s ease;
+}
+
+.lazy-img {
+    background-color: #f8f9fa;
+    min-height: 200px;
+    transition: opacity 0.3s ease;
+}
+
+.lazy-img[src] {
+    opacity: 1;
+}
+
+/* Optimize animations for better performance */
+.ftco-animate {
+    will-change: transform;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    .ftco-animate,
+    .aos-animate,
+    .owl-carousel {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* Critical above-the-fold styles */
+.hero {
+    min-height: 100vh;
+    position: relative;
+}
+
+.navbar {
+    transition: background-color 0.3s ease;
+}
+
+/* Optimize font loading */
+.font-display-swap {
+    font-display: swap;
+}
+
+/* Preload critical images */
+.hero .lazy-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    opacity: 0.1;
+    z-index: -1;
+}
+
+/* Optimize carousel performance */
+.owl-carousel .owl-item {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Reduce layout shifts */
+.block-20 {
+    min-height: 200px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Contact form optimization */
+.contact-form {
+    transform: translateZ(0);
+}
+
+/* Optimize progress bars */
+.progress-bar {
+    transition: width 0.6s ease;
+}
+
+/* Image optimization */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Optimize counter animations */
+.counter-wrap .number {
+    will-change: contents;
+}

@@ -1,0 +1,371 @@
+INFO 2025-09-01 18:38:30,945 autoreload Watching for file changes with StatReloader
+INFO 2025-09-01 18:43:34,638 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-09-01 18:43:35,466 autoreload Watching for file changes with StatReloader
+INFO 2025-09-01 20:18:57,053 autoreload Watching for file changes with StatReloader
+INFO 2025-09-01 21:03:13,522 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-09-01 21:03:15,043 autoreload Watching for file changes with StatReloader
+INFO 2025-09-01 21:03:23,680 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-09-01 21:03:24,241 autoreload Watching for file changes with StatReloader
+INFO 2025-09-01 21:03:28,677 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-09-01 21:03:29,225 autoreload Watching for file changes with StatReloader
+INFO 2025-09-01 21:03:45,949 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-09-01 21:03:46,475 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 11:05:12,346 autoreload Watching for file changes with StatReloader
+ERROR 2025-10-27 11:05:43,336 log Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\http\request.py", line 191, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+ERROR 2025-10-27 11:05:43,731 log Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\http\request.py", line 191, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+INFO 2025-10-27 11:06:09,178 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-10-27 11:06:10,948 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 11:06:22,408 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-10-27 11:06:24,189 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 11:18:07,525 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 11:35:38,680 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-10-27 11:35:40,215 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 11:37:12,606 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-27 11:37:13,459 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 11:37:17,195 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-27 11:37:18,180 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 11:42:05,562 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-27 11:42:06,571 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 11:42:20,768 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-27 11:42:21,544 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 11:42:56,703 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-27 11:42:57,540 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 11:43:11,677 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-27 11:43:12,471 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 11:43:46,469 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-27 11:43:47,452 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 11:43:57,416 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-10-27 11:43:58,352 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 12:02:27,274 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 12:11:21,601 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-10-27 12:11:22,599 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 12:11:30,711 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-10-27 12:11:31,598 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 12:13:56,592 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-10-27 12:13:57,467 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 12:14:06,605 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-10-27 12:14:07,403 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 12:21:10,802 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 12:22:04,831 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-10-27 12:22:05,632 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 12:34:11,208 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 12:34:25,867 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 12:35:10,957 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 12:37:02,151 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 12:37:39,628 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 12:39:11,439 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-10-27 12:39:12,357 autoreload Watching for file changes with StatReloader
+ERROR 2025-10-27 12:39:20,961 log Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\http\request.py", line 191, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+ERROR 2025-10-27 12:39:21,061 log Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\http\request.py", line 191, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+ERROR 2025-10-27 12:39:22,509 log Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\http\request.py", line 191, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+ERROR 2025-10-27 12:39:22,584 log Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\http\request.py", line 191, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+ERROR 2025-10-27 12:39:22,762 log Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\http\request.py", line 191, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+ERROR 2025-10-27 12:39:22,909 log Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\harpr\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\http\request.py", line 191, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+INFO 2025-10-27 12:39:44,967 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-10-27 12:39:45,729 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 12:41:10,804 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-10-27 12:41:11,578 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 12:41:14,109 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-10-27 12:41:14,832 autoreload Watching for file changes with StatReloader
+WARNING 2025-10-27 12:41:32,691 connection No hostname was supplied. Reverting to default 'localhost'
+INFO 2025-10-27 12:42:44,616 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-10-27 12:42:45,450 autoreload Watching for file changes with StatReloader
+WARNING 2025-10-27 12:46:00,863 connection No hostname was supplied. Reverting to default 'localhost'
+INFO 2025-10-27 13:00:59,989 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 13:06:51,488 autoreload Watching for file changes with StatReloader
+INFO 2025-10-27 13:08:20,421 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-10-27 13:08:21,243 autoreload Watching for file changes with StatReloader
+WARNING 2025-10-27 13:46:23,214 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+INFO 2025-10-28 12:34:58,938 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 11:52:46,373 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 11:54:53,671 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 11:55:17,430 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 11:55:34,147 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 12:00:28,088 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 12:01:54,494 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\forms.py changed, reloading.
+INFO 2025-10-29 12:01:55,815 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 12:02:02,911 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\forms.py changed, reloading.
+INFO 2025-10-29 12:02:03,953 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 12:03:46,192 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\forms.py changed, reloading.
+INFO 2025-10-29 12:03:47,393 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 12:03:55,248 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\forms.py changed, reloading.
+INFO 2025-10-29 12:03:56,372 autoreload Watching for file changes with StatReloader
+WARNING 2025-10-29 12:09:15,833 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 12:19:09,883 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+ERROR 2025-10-29 12:20:30,568 redis Connection to Redis lost: Retry (0/20) now.
+ERROR 2025-10-29 12:20:32,616 redis Connection to Redis lost: Retry (1/20) in 1.00 second.
+ERROR 2025-10-29 12:20:35,662 redis Connection to Redis lost: Retry (2/20) in 1.00 second.
+ERROR 2025-10-29 12:20:38,687 redis Connection to Redis lost: Retry (3/20) in 1.00 second.
+ERROR 2025-10-29 12:20:41,715 redis Connection to Redis lost: Retry (4/20) in 1.00 second.
+ERROR 2025-10-29 12:20:44,778 redis Connection to Redis lost: Retry (5/20) in 1.00 second.
+ERROR 2025-10-29 12:20:47,812 redis Connection to Redis lost: Retry (6/20) in 1.00 second.
+ERROR 2025-10-29 12:20:50,862 redis Connection to Redis lost: Retry (7/20) in 1.00 second.
+ERROR 2025-10-29 12:20:53,880 redis Connection to Redis lost: Retry (8/20) in 1.00 second.
+ERROR 2025-10-29 12:20:56,909 redis Connection to Redis lost: Retry (9/20) in 1.00 second.
+ERROR 2025-10-29 12:20:59,934 redis Connection to Redis lost: Retry (10/20) in 1.00 second.
+INFO 2025-10-29 12:38:09,530 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 12:38:11,643 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 12:38:23,190 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 12:38:24,232 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 12:38:34,160 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 12:38:35,353 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 12:38:45,351 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 12:38:46,370 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 12:38:55,239 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 12:38:56,531 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 12:44:32,918 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 12:44:34,472 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 12:44:44,570 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 12:44:45,778 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 12:44:55,693 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 12:44:56,915 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 12:45:07,928 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 12:45:08,906 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 12:53:16,289 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 12:53:17,731 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 12:53:41,141 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 12:53:42,215 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 13:10:14,093 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-10-29 13:10:15,250 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 13:19:00,208 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 13:21:24,936 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\tasks.py changed, reloading.
+INFO 2025-10-29 13:21:26,365 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 13:21:33,230 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\tasks.py changed, reloading.
+INFO 2025-10-29 13:21:34,462 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 13:21:48,490 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 13:21:49,774 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 13:26:29,176 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\tasks.py changed, reloading.
+INFO 2025-10-29 13:26:30,525 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 13:26:43,606 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\tasks.py changed, reloading.
+INFO 2025-10-29 13:26:44,940 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 13:26:58,024 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\celery.py changed, reloading.
+INFO 2025-10-29 13:26:59,166 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 13:27:13,207 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 13:27:14,437 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 13:46:12,803 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 13:50:23,177 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 13:50:24,499 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 14:00:32,671 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-10-29 14:00:34,685 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 14:00:46,754 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 14:00:48,007 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 14:03:15,095 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\celery.py changed, reloading.
+INFO 2025-10-29 14:03:16,214 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 14:03:26,111 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\tasks.py changed, reloading.
+INFO 2025-10-29 14:03:27,186 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 14:03:33,969 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\tasks.py changed, reloading.
+INFO 2025-10-29 14:03:35,182 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 14:04:27,732 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\tasks.py changed, reloading.
+INFO 2025-10-29 14:04:28,858 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 14:04:36,739 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\tasks.py changed, reloading.
+INFO 2025-10-29 14:04:37,761 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 14:04:48,764 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 14:04:49,971 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 14:05:30,012 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\settings.py changed, reloading.
+INFO 2025-10-29 14:05:31,134 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 14:10:46,453 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 14:14:02,933 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_django\celery.py changed, reloading.
+INFO 2025-10-29 14:14:04,125 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 14:14:11,946 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\tasks.py changed, reloading.
+INFO 2025-10-29 14:14:13,147 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 14:14:36,564 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\tasks.py changed, reloading.
+INFO 2025-10-29 14:14:37,615 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 14:15:01,070 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 14:15:02,151 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 14:16:28,791 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 14:16:30,084 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 14:16:42,111 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 14:16:43,172 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 14:16:53,072 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 14:16:54,090 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 14:38:47,599 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 14:38:50,423 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 14:40:27,538 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 14:40:29,017 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 14:40:34,937 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 14:40:36,339 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 14:45:48,405 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 14:45:50,197 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 14:45:57,157 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 14:45:58,463 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 14:47:10,552 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 14:47:11,544 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 14:47:13,691 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 14:47:14,635 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 14:47:48,417 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 14:47:49,712 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 14:47:56,839 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 14:47:58,155 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 14:48:10,454 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 14:48:11,587 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 14:48:18,380 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 14:48:19,418 autoreload Watching for file changes with StatReloader
+WARNING 2025-10-29 14:55:17,978 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 14:56:54,919 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 14:58:36,597 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 15:03:10,147 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 15:04:19,797 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 15:05:42,601 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 15:07:50,528 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 15:07:51,288 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 15:07:51,849 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 15:07:52,336 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 15:07:52,749 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 15:07:56,101 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 15:07:56,659 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 15:07:57,122 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 15:07:57,498 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 15:07:57,709 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 15:07:57,819 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 15:07:57,961 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 15:08:17,624 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 15:08:18,391 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 15:08:22,023 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 15:08:23,067 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 15:08:23,739 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 15:08:24,391 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 15:08:29,212 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 15:08:29,946 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 15:08:46,006 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 15:08:46,611 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 15:09:05,054 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+INFO 2025-10-29 17:25:11,109 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 17:32:10,225 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\forms.py changed, reloading.
+INFO 2025-10-29 17:32:13,129 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 17:32:28,148 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\forms.py changed, reloading.
+INFO 2025-10-29 17:32:30,880 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 17:32:49,146 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\forms.py changed, reloading.
+INFO 2025-10-29 17:32:51,531 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 17:57:06,800 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\forms.py changed, reloading.
+INFO 2025-10-29 17:57:11,111 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 18:00:35,820 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\forms.py changed, reloading.
+INFO 2025-10-29 18:00:38,915 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 18:04:54,887 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\forms.py changed, reloading.
+INFO 2025-10-29 18:04:57,625 autoreload Watching for file changes with StatReloader
+WARNING 2025-10-29 18:05:25,770 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 18:06:29,323 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 18:06:53,408 log Not Found: /favicon.ico
+INFO 2025-10-29 18:11:20,781 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\forms.py changed, reloading.
+INFO 2025-10-29 18:11:23,462 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 18:12:12,204 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\forms.py changed, reloading.
+INFO 2025-10-29 18:12:15,866 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 18:18:23,744 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 18:18:24,993 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 18:21:38,604 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 18:21:39,605 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 18:40:44,185 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 18:40:46,637 autoreload Watching for file changes with StatReloader
+INFO 2025-10-29 18:47:50,998 autoreload Watching for file changes with StatReloader
+WARNING 2025-10-29 18:49:46,347 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+INFO 2025-10-29 18:54:16,219 autoreload E:\WORK_PRACTICE\PORTFOLIOS\LIVE\portfolio_django\portfolio_app\views.py changed, reloading.
+INFO 2025-10-29 18:54:17,376 autoreload Watching for file changes with StatReloader
+WARNING 2025-10-29 19:02:21,596 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 19:04:53,551 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 19:10:42,438 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 19:10:54,357 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-29 19:14:50,661 log Not Found: /Harpreet_Singh_Resume.pdf
+WARNING 2025-10-29 19:14:50,711 log Not Found: /favicon.ico
