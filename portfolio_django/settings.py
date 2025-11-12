@@ -93,37 +93,89 @@ else:  # for production
 
 
 import os
+import logging
+from logging.handlers import TimedRotatingFileHandler
+from pathlib import Path
+
+# Base directory setup
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Create /logs directory if it doesn’t exist
+LOG_DIR = os.path.join(BASE_DIR, 'logs')
+os.makedirs(LOG_DIR, exist_ok=True)
 
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+
     'formatters': {
         'verbose': {
-            'format': '{levelname} {asctime} {module} {message}',
+            'format': '{levelname} {asctime} [{name}] {module} {message}',
             'style': '{',
         },
         'simple': {
-            'format': '{levelname} {message}',
+            'format': '{levelname}: {message}',
             'style': '{',
         },
     },
+
     'handlers': {
-        'file': {
+        # Rotating daily logs (INFO)
+        'file_info': {
             'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs/django.log'),
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': os.path.join(LOG_DIR, 'info.log'),
+            'when': 'midnight',     # rotate every midnight
+            'interval': 1,          # every 1 day
+            'backupCount': 7,       # keep last 7 days
+            'formatter': 'verbose',
+        },
+        # Rotating daily logs (ERROR)
+        'file_error': {
+            'level': 'ERROR',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': os.path.join(LOG_DIR, 'error.log'),
+            'when': 'midnight',
+            'interval': 1,
+            'backupCount': 14,      # keep last 14 days of errors
             'formatter': 'verbose',
         },
         'console': {
             'class': 'logging.StreamHandler',
-            'formatter': 'simple'
+            'formatter': 'simple',
+        },
+        'null': {
+            'class': 'logging.NullHandler',
         },
     },
+
+    'loggers': {
+        # General Django logs
+        'django': {
+            'handlers': ['file_info', 'console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        # Request errors only (500s, etc.)
+        'django.request': {
+            'handlers': ['file_error'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        # Silence "Invalid HTTP_HOST header" spam
+        'django.security.DisallowedHost': {
+            'handlers': ['null'],
+            'propagate': False,
+        },
+    },
+
+    # Root logger
     'root': {
-        'handlers': ['file', 'console'],
-        'level': 'INFO',
+        'handlers': ['console', 'file_error'],
+        'level': 'WARNING',
     },
 }
+
 
 
 # Application definition
