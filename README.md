@@ -1,326 +1,298 @@
-# Django Portfolio Application
+# Portfolio Django Application
 
-A modern, feature-rich portfolio website built with Django, featuring a contact form and Docker deployment.
+A Django-based portfolio website with contact form functionality and admin panel with 2FA.
 
-## 🚀 Features
+## Features
 
-### Core Features
-- **Portfolio Homepage**: Professional landing page with contact form
-- **Contact Form**: Email notifications for visitor inquiries
-- **Admin Interface**: Full Django admin for content management
-- **Responsive Design**: Mobile-friendly Bootstrap-based UI
+- **Contact Form**: Users can submit contact messages with CAPTCHA verification
+- **Admin Panel**: Secure admin login with OTP-based two-factor authentication
+- **Background Email Processing**: Contact form emails are sent asynchronously using Celery
+- **Responsive Design**: Modern, responsive UI with Bootstrap
 
-### Technical Features
-- **Docker Deployment**: Containerized application with Docker Compose
-- **MySQL Database**: Production-ready database setup
-- **Nginx Reverse Proxy**: Efficient static file serving and load balancing
-- **Gunicorn**: Production WSGI server
-- **Email Integration**: SMTP email notifications
-- **SEO Optimized**: Meta tags and structured content
+## Technology Stack
 
-## 🏗️ Architecture
-
-### Project Structure
-```
-portfolio_django/
-├── portfolio_app/          # Main Django application
-│   ├── models.py          # Database models (Contact, Category, Author)
-│   ├── views.py           # View functions for handling requests
-│   ├── forms.py           # Django forms for user input
-│   ├── urls.py            # URL routing configuration
-│   ├── admin.py           # Django admin interface configuration
-│   └── templates/         # HTML templates
-├── portfolio_django/       # Django project settings
-│   ├── settings.py        # Django configuration
-│   ├── urls.py            # Main URL configuration
-│   └── wsgi.py            # WSGI application entry point
-├── static/                # Static files (CSS, JS, images)
-├── mediafiles/            # User-uploaded files
-├── Dockerfile             # Docker image configuration
-├── docker-compose.yml     # Multi-container application setup
-├── nginx.conf             # Nginx reverse proxy configuration
-└── requirements.txt       # Python dependencies
-```
-
-### Technology Stack
-- **Backend**: Django 5.2.3 (Python web framework)
+- **Backend**: Django 5.2.3
 - **Database**: MySQL 8.0
-- **Web Server**: Nginx (reverse proxy) + Gunicorn (WSGI server)
-- **Containerization**: Docker & Docker Compose
-- **Frontend**: Bootstrap, jQuery, custom CSS/JS
-- **Image Processing**: Pillow
+- **Task Queue**: Celery with Redis
+- **Email**: SMTP (Gmail)
+- **Frontend**: HTML, CSS, JavaScript, Bootstrap
 
-## 🛠️ Installation & Setup
+## Setup Instructions
 
 ### Prerequisites
-- Docker and Docker Compose
-- Git
 
-### Quick Start (Docker)
+- Python 3.8+
+- MySQL 8.0
+- Redis (for Celery)
+
+### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd portfolio_django
    ```
 
-2. **Create environment file**
+2. **Create and activate virtual environment**
+
    ```bash
-   cp .env.example .env
-   # Edit .env with your configuration
+   python -m venv env
+   # On Windows
+   env\Scripts\activate
+   # On macOS/Linux
+   source env/bin/activate
    ```
 
-3. **Start the application**
-   ```bash
-   docker-compose up -d
-   ```
+3. **Install dependencies**
 
-4. **Access the application**
-   - Website: http://localhost:8888
-   - Admin: http://localhost:8888/admin
-
-### Local Development Setup
-
-1. **Install Python dependencies**
    ```bash
    pip install -r requirements.txt
    ```
 
-2. **Set up MySQL database**
-   ```bash
-   # Create database and user
-   mysql -u root -p
-   CREATE DATABASE my_portfolio;
-   CREATE USER 'portfolio_user'@'localhost' IDENTIFIED BY 'your_password';
-   GRANT ALL PRIVILEGES ON my_portfolio.* TO 'portfolio_user'@'localhost';
-   FLUSH PRIVILEGES;
+4. **Set up environment variables**
+   Create a `.env` file in the project root:
+
+   ```env
+   SECRET_KEY=your-secret-key-here
+   DEBUG=True
+   EMAIL_HOST_PASSWORD=your-gmail-app-password
+   REDIS_URL=redis://localhost:6379/0
    ```
 
-3. **Configure Django settings**
-   ```bash
-   # Update database settings in portfolio_django/settings.py
-   # Set DEBUG = True for development
-   ```
+5. **Database setup**
 
-4. **Run migrations**
    ```bash
+   python manage.py makemigrations
    python manage.py migrate
    ```
 
-5. **Create superuser**
+6. **Create superuser**
    ```bash
    python manage.py createsuperuser
    ```
 
-6. **Collect static files**
+### Running the Application
+
+#### Option 1: Using Docker Compose (Recommended)
+
+1. **Start all services**
+
    ```bash
-   python manage.py collectstatic
+   docker-compose up -d
    ```
 
-7. **Start development server**
+   This will start:
+
+   - Django web server (port 8000)
+   - MySQL database (port 3306)
+   - Redis (port 6379)
+   - Celery worker
+   - Celery beat (for scheduled tasks)
+
+2. **View logs**
+
+   ```bash
+   docker-compose logs -f
+   ```
+
+3. **Stop services**
+   ```bash
+   docker-compose down
+   ```
+
+#### Option 2: Manual Setup
+
+1. **Start Redis**
+
+   ```bash
+   # On Windows (using WSL or Docker)
+   redis-server
+
+   # On macOS
+   brew services start redis
+
+   # On Linux
+   sudo systemctl start redis
+   ```
+
+2. **Start Celery worker** (in a separate terminal)
+
+   ```bash
+   celery -A portfolio_django worker --loglevel=info
+   ```
+
+3. **Start Django development server** (in another terminal)
    ```bash
    python manage.py runserver
    ```
 
-## 📝 Configuration
+## Background Email Processing
 
-### Environment Variables
-Create a `.env` file with the following variables:
+The application uses Celery to handle email sending asynchronously:
 
-```env
-# Django Settings
-SECRET_KEY=your-secret-key-here
-DEBUG=True
-DJANGO_SETTINGS_MODULE=portfolio_django.settings
+- **Contact Form**: When users submit the contact form, the email is queued and sent in the background
+- **Admin OTP**: OTP emails for admin login are also sent asynchronously
+- **Retry Logic**: Failed emails are automatically retried up to 3 times with 60-second delays
 
-# Database Settings
-MYSQL_ROOT_PASSWORD=your-root-password
-MYSQL_DATABASE=my_portfolio
-MYSQL_USER=portfolio_user
-MYSQL_PASSWORD=your-database-password
-MYSQL_HOST=mysql
+### Benefits
 
-# Email Settings (for contact form)
-EMAIL_HOST_USER=your-email@gmail.com
-EMAIL_HOST_PASSWORD=your-app-password
+- **Faster Response**: Contact form submissions are instant
+- **Reliability**: Failed emails are retried automatically
+- **Scalability**: Can handle multiple email requests simultaneously
+- **User Experience**: Users don't wait for email delivery
+
+## Configuration
+
+### Email Settings
+
+Configure your email settings in `portfolio_django/settings.py`:
+
+```python
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'your-email@gmail.com'
+EMAIL_HOST_PASSWORD = 'your-app-password'  # Use Gmail App Password
 ```
 
-### Email Configuration
-The contact form uses Gmail SMTP. To set up:
-1. Enable 2-factor authentication on your Gmail account
-2. Generate an App Password
-3. Update the email settings in `settings.py`
+### Celery Settings
 
-## 🗄️ Database Models
+Celery is configured to use Redis as the message broker:
 
-### Contact Model
-- Stores contact form submissions
-- Fields: name, email, subject, message, created_at
-
-### Category Model
-- Organizes content into categories
-- Fields: name, slug, description, timestamps
-
-### Author Model
-- Extends Django User model with additional info
-- Fields: bio, profile_picture, social media links
-
-## 🔧 Management Commands
-
-### Database Operations
-```bash
-# Apply migrations
-python manage.py migrate
-
-# Create new migration
-python manage.py makemigrations
-
-# Reset database
-python manage.py flush
+```python
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'django-db'
 ```
 
-### Static Files
-```bash
-# Collect static files
-python manage.py collectstatic
-
-# Clear static files
-python manage.py collectstatic --clear
-```
-
-### User Management
-```bash
-# Create superuser
-python manage.py createsuperuser
-
-# Change password
-python manage.py changepassword
-```
-
-## 🐳 Docker Commands
-
-### Container Management
-```bash
-# Start all services
-docker-compose up -d
-
-# Stop all services
-docker-compose down
-
-# View logs
-docker-compose logs -f
-
-# Rebuild containers
-docker-compose up --build
-
-# Access Django container
-docker-compose exec django bash
-
-# Access MySQL container
-docker-compose exec mysql mysql -u root -p
-```
-
-### Database Operations
-```bash
-# Backup database
-docker-compose exec mysql mysqldump -u root -p my_portfolio > backup.sql
-
-# Restore database
-docker-compose exec -T mysql mysql -u root -p my_portfolio < backup.sql
-```
-
-## 📊 Performance Optimization
-
-### Database Optimization
-- Use `select_related()` for foreign key relationships
-- Use `prefetch_related()` for many-to-many relationships
-- Implement database indexing for frequently queried fields
-
-### Static Files
-- Nginx serves static files directly (more efficient than Django)
-- Use `collectstatic` to gather all static files in production
-- Consider CDN for global static file delivery
-
-### Caching
-- Implement Redis caching for frequently accessed data
-- Use Django's caching framework for view caching
-- Cache database queries where appropriate
-
-## 🔒 Security Considerations
-
-### Production Security
-- Set `DEBUG = False` in production
-- Use strong `SECRET_KEY`
-- Configure `ALLOWED_HOSTS` properly
-- Enable HTTPS with SSL certificates
-- Use environment variables for sensitive data
-- Regular security updates
-
-### Database Security
-- Use strong database passwords
-- Limit database user privileges
-- Regular database backups
-- Monitor database access logs
-
-## 🧪 Testing
+## Development
 
 ### Running Tests
+
 ```bash
-# Run all tests
 python manage.py test
-
-# Run specific app tests
-python manage.py test portfolio_app
-
-# Run with coverage
-coverage run --source='.' manage.py test
-coverage report
 ```
 
-## 📈 Monitoring & Logging
+### Static Files
 
-### Application Logs
-- Django logs are available in container logs
-- Use `docker-compose logs -f django` to monitor
+```bash
+python manage.py collectstatic
+```
 
-### Database Monitoring
-- Monitor MySQL performance with built-in tools
-- Set up database backup automation
+### Database Migrations
 
-### Error Tracking
-- Consider integrating Sentry for error tracking
-- Monitor application performance metrics
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
 
-## 🤝 Contributing
+## Production Deployment
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests for new functionality
-5. Submit a pull request
+For production deployment:
 
-## 📄 License
+1. Set `DEBUG=False` in environment variables
+2. Configure production database settings
+3. Set up proper email credentials
+4. Configure Redis for production
+5. Set up Celery workers as system services
+6. Use a production WSGI server like Gunicorn
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+## Troubleshooting
 
-## 🆘 Support
+### Common Issues
 
-For support and questions:
-- Create an issue in the repository
-- Check the Django documentation
-- Review the code comments for implementation details
+1. **Celery worker not starting**
 
-## 🔄 Updates & Maintenance
+   - Ensure Redis is running
+   - Check Redis connection URL
+   - Verify Celery configuration
 
-### Regular Maintenance Tasks
-- Update Django and dependencies regularly
-- Monitor security advisories
-- Backup database regularly
-- Review and update Docker images
-- Monitor application performance
+2. **Emails not sending**
 
-### Version Updates
-- Test updates in development environment first
-- Follow Django's upgrade guide for major version changes
-- Update requirements.txt with new versions
-- Test all functionality after updates 
+   - Check email credentials
+   - Verify SMTP settings
+   - Check Celery worker logs
+
+3. **Database connection issues**
+   - Verify MySQL is running
+   - Check database credentials
+   - Ensure database exists
+
+### Logs
+
+- Django logs: `logs/django.log`
+- Celery logs: Check terminal output or Docker logs
+- Redis logs: Check Redis server logs
+
+## License
+
+This project is licensed under the MIT License.
+
+## 🔀 Merge dev → main
+
+### Prerequisites
+
+- Ensure you have committed all changes in your current branch
+- Make sure you have push access to both branches
+
+### Complete Merge Commands (Copy & Run)
+
+```bash
+# Ensure local branches up-to-date
+git fetch origin
+git checkout dev
+git pull origin dev
+git checkout main
+git pull origin main
+
+# Merge preferring incoming (dev). Use --allow-unrelated-histories only if needed.
+git merge -X theirs dev --allow-unrelated-histories
+
+# If merge finished with conflicts, run:
+git checkout --theirs .
+git add .
+git commit -m "Merge dev into main — accept incoming (dev) changes"
+
+# Push final result
+git push origin main
+```
+
+### Quick Command Reference
+
+```bash
+# Complete merge in one go (if no conflicts expected)
+git fetch origin && \
+git checkout dev && git pull origin dev && \
+git checkout main && git pull origin main && \
+git merge -X theirs dev && \
+git push origin main
+```
+
+### Troubleshooting
+
+**Issue: Merge conflicts**
+
+```bash
+# View conflicted files
+git status
+
+# Accept all dev changes
+git checkout --theirs .
+git add .
+git commit -m "Resolve conflicts - accept dev changes"
+```
+
+**Issue: Unrelated histories**
+
+```bash
+# Add --allow-unrelated-histories flag
+git merge -X theirs dev --allow-unrelated-histories
+```
+
+**Issue: Need to abort merge**
+
+```bash
+# Cancel the merge and return to previous state
+git merge --abort
+```
