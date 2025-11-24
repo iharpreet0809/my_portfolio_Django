@@ -35,7 +35,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback-secret')
 #Your Django settings need to be explicitly configured to trust requests coming from your server's IP address and through the Nginx proxy.
 ALLOWED_HOSTS = [
     '127.0.0.1',
-    #'65.1.200.98',
+    'localhost',
+    '54.210.54.137',  # EC2 Elastic IP
     'iharpreet.com',
     'www.iharpreet.com',
     'django-app', #for dockercontainer
@@ -44,17 +45,20 @@ ALLOWED_HOSTS = [
 # Trust requests originating from your domain/IP on the port Nginx is using
 # CSRF_TRUSTED_ORIGINS is required when using HTTPS or when behind a proxy
 CSRF_TRUSTED_ORIGINS = [
-    # 'http://65.1.110.216:8888',
-    # If you plan to use HTTPS in the future, you can add this as well
-    # 'https://65.1.110.216:8888',
-    "https://iharpreet.com",
-    "https://www.iharpreet.com",
+    'http://54.210.54.137',  # EC2 IP
+    'http://iharpreet.com',
+    'http://www.iharpreet.com',
+    'https://iharpreet.com',
+    'https://www.iharpreet.com',
 ]
 
-# Since you are not using HTTPS yet, it's best to comment these out for now
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
+# Only enable these when using HTTPS
+# if not DEBUG:
+#     # Comment these out until you set up SSL certificates
+#     # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+#     # CSRF_COOKIE_SECURE = True
+#     # SESSION_COOKIE_SECURE = True
+#     pass
 
 
 # SECURITY WARNING: don't run with debug true turned on in production!
@@ -269,10 +273,21 @@ USE_TZ = True  # Enable timezone support
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
+
+# # S3 Configuration for production
+# if not DEBUG:
+#     # Use S3 for static files in production
+#     S3_BUCKET_NAME = os.environ.get('S3_BUCKET_NAME')
+#     AWS_S3_REGION_NAME = 'us-east-1'
+#     STATIC_URL = f'https://{S3_BUCKET_NAME}.s3.amazonaws.com/static/'
+# else:
+#     # Local static files for development
+#     STATIC_URL = '/static/'
+
 # URL to serve static files
 STATIC_URL = '/static/'
 
-# Where collectstatic puts everything (inside container)
+# Where collectstatic puts everything
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Where to look for extra static files (your top-level static/ folder)

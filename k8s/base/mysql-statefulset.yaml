@@ -1,0 +1,129 @@
+# Headless Service for MySQL StatefulSet
+# Provides stable network identity for database pods
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql  # Service name used by Django to connect
+  namespace: portfolio
+  labels:
+    app: mysql
+spec:
+  ports:
+    - port: 3306  # MySQL default port
+      targetPort: 3306
+      name: mysql
+  clusterIP: None  # Headless service - no load balancing, direct pod access
+  selector:
+    app: mysql  # Routes to MySQL pods
+---
+# StatefulSet for MySQL database
+# Unlike Deployment, StatefulSet provides stable pod identity and ordered deployment
+# Perfect for stateful applications like databases
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+  namespace: portfolio
+spec:
+  serviceName: mysql  # Associates with the headless service above
+  replicas: 1  # Single MySQL instance (use replication for HA in production)
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:8.0  # Official MySQL 8.0 image
+        ports:
+        - containerPort: 3306  # MySQL listens on this port
+          name: mysql
+        # MySQL configuration via environment variables
+        env:
+        - name: MYSQL_ROOT_PASSWORD  # Root user password
+          valueFrom:
+            secretKeyRef:
+              name: portfolio-secrets
+              key: MYSQL_ROOT_PASSWORD
+        - name: MYSQL_DATABASE  # Database to create on first startup
+          valueFrom:
+            secretKeyRef:
+              name: portfolio-secrets
+              key: MYSQL_DB
+        - name: MYSQL_USER  # Application user to create
+          valueFrom:
+            secretKeyRef:
+              name: portfolio-secrets
+              key: MYSQL_USER
+        - name: MYSQL_PASSWORD  # Application user password
+          valueFrom:
+            secretKeyRef:
+              name: portfolio-secrets
+              key: MYSQL_PASSWORD
+        - name: MYSQL_ROOT_HOST  # Allow root connections from any host
+          value: "%"
+        # MySQL server arguments for optimization
+        args:
+          - --default-authentication-plugin=mysql_native_password  # Use native password auth (compatible with older clients)
+          - --skip-log-bin  # Disable binary logging (saves disk space, not needed for single instance)
+          - --innodb-buffer-pool-size=128M  # Memory for caching data and indexes (reduced for low-memory environments)
+          - --innodb-log-file-size=32M  # Size of redo log files (reduced for low-memory)
+          - --innodb-flush-method=O_DSYNC  # Direct I/O for better performance
+          - --innodb-flush-log-at-trx-commit=2  # Flush logs every second (better performance, slight risk on crash)
+        # Resource limits for MySQL
+        resources:
+          requests:
+            memory: "256Mi"  # Minimum memory guaranteed
+            cpu: "250m"
+          limits:
+            memory: "512Mi"  # Maximum memory allowed
+            cpu: "500m"
+        # Mount volumes into container
+        volumeMounts:
+        - name: mysql-data  # Persistent storage for database files
+          mountPath: /var/lib/mysql  # MySQL data directory
+        - name: init-sql  # Optional initialization SQL scripts
+          mountPath: /docker-entrypoint-initdb.d  # MySQL runs scripts from this directory on first start
+        # Liveness probe - checks if MySQL is running
+        livenessProbe:
+          exec:
+            command:
+            - mysqladmin  # MySQL admin tool
+            - ping  # Simple health check command
+            - -h
+            - localhost
+          initialDelaySeconds: 60  # Wait 60s for MySQL to start
+          periodSeconds: 10  # Check every 10 seconds
+          timeoutSeconds: 5
+          failureThreshold: 5  # Restart after 5 failures
+        # Readiness probe - checks if MySQL is ready to accept connections
+        readinessProbe:
+          exec:
+            command:
+            - mysqladmin
+            - ping
+            - -h
+            - localhost
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+      # Volumes available to the pod
+      volumes:
+      - name: init-sql  # Optional ConfigMap with initialization SQL
+        configMap:
+          name: mysql-init-sql
+          optional: true  # Don't fail if ConfigMap doesn't exist
+  # VolumeClaimTemplates - creates PVC for each StatefulSet pod
+  # Ensures data persists even if pod is deleted/recreated
+  volumeClaimTemplates:
+  - metadata:
+      name: mysql-data  # Name referenced in volumeMounts
+    spec:
+      accessModes: ["ReadWriteOnce"]  # Single pod can read/write (database requirement)
+      resources:
+        requests:
+          storage: 10Gi  # Request 10GB for database storage

@@ -1,6 +1,10 @@
 # Django collectstatic output
 staticfiles/
 mediafiles/
+aws-deployment
+test_checks
+ReadsIdea
+k8s/base/secret.yaml
 
 #logs
 *.log
@@ -26,3 +30,4 @@ env/
 .env
 .env.example
 .env.production
+.env.prod.example

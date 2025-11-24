@@ -489,3 +489,15 @@ def refresh_captcha_ajax(request):
         })
     
     return JsonResponse({'success': False, 'error': 'Invalid request method'})
+
+
+# Health check endpoint for ECS Fargate
+@csrf_exempt
+@require_http_methods(["GET"])
+def health_check(request):
+    """Health check endpoint for AWS ECS load balancer"""
+    return JsonResponse({
+        'status': 'healthy',
+        'service': 'portfolio-django',
+        'timestamp': timezone.now().isoformat()
+    })

@@ -1,0 +1,95 @@
+# Service for Redis
+# Exposes Redis internally for Celery workers and Django
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis  # Service name used in REDIS_URL (redis://redis:6379/0)
+  namespace: portfolio
+  labels:
+    app: redis
+spec:
+  ports:
+    - port: 6379  # Redis default port
+      targetPort: 6379
+      name: redis
+  selector:
+    app: redis  # Routes traffic to Redis pods
+---
+# Deployment for Redis cache/message broker
+# Used by Celery for task queue and Django for caching
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  namespace: portfolio
+spec:
+  replicas: 1  # Single Redis instance (use Redis Sentinel/Cluster for HA)
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:7-alpine  # Lightweight Alpine-based Redis 7
+        ports:
+        - containerPort: 6379  # Redis listens on this port
+          name: redis
+        # Redis server configuration
+        command:
+          - redis-server  # Start Redis server
+          - --appendonly  # Enable AOF (Append Only File) persistence
+          - "yes"  # Ensures data survives restarts
+        # Resource limits - Redis is lightweight
+        resources:
+          requests:
+            memory: "64Mi"  # Minimum memory
+            cpu: "100m"
+          limits:
+            memory: "128Mi"  # Maximum memory
+            cpu: "200m"
+        # Mount persistent storage for Redis data
+        volumeMounts:
+        - name: redis-data
+          mountPath: /data  # Redis stores AOF and RDB files here
+        # Liveness probe - checks if Redis is responding
+        livenessProbe:
+          exec:
+            command:
+            - redis-cli  # Redis command-line client
+            - ping  # Returns PONG if Redis is alive
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 5
+        # Readiness probe - checks if Redis is ready to serve
+        readinessProbe:
+          exec:
+            command:
+            - redis-cli
+            - ping
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+      volumes:
+      - name: redis-data
+        persistentVolumeClaim:
+          claimName: redis-pvc  # References PVC below
+---
+# PersistentVolumeClaim for Redis data
+# Ensures Celery task queue and cache data persists
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: redis-pvc
+  namespace: portfolio
+spec:
+  accessModes:
+    - ReadWriteOnce  # Single pod access (Redis is single-instance)
+  resources:
+    requests:
+      storage: 5Gi  # Request 5GB for Redis data

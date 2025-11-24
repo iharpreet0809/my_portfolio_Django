@@ -1,0 +1,10 @@
+# Namespace for portfolio application
+# Provides logical isolation and resource organization
+# All portfolio resources (pods, services, etc.) are deployed in this namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: portfolio  # Namespace name used in all other manifests
+  labels:
+    name: portfolio  # Label for identification
+    environment: production  # Indicates this is production environment

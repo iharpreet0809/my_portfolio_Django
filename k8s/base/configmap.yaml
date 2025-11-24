@@ -1,0 +1,20 @@
+# ConfigMap for non-sensitive application configuration
+# Stores environment variables that can be shared across pods
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: portfolio-config
+  namespace: portfolio
+data:
+  # Django debug mode - MUST be False in production for security
+  DEBUG: "False"
+  
+  # Django settings module path
+  DJANGO_SETTINGS_MODULE: "portfolio_django.settings"
+  
+  # MySQL database port
+  MYSQL_PORT: "3306"
+  
+  # Allowed hosts for Django (security setting)
+  # Django will only serve requests for these domains
+  ALLOWED_HOSTS: "iharpreet.com,www.iharpreet.com"
