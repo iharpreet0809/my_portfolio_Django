@@ -18,8 +18,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from portfolio_app.views import admin_login_2fa, admin_login_reset, health_check
 
 urlpatterns = [
+    path("health/", health_check, name="health_check"),  # Health check for ECS
+    path("admin/login/", admin_login_2fa, name="admin_login_2fa"),
+    path("admin/reset/", admin_login_reset, name="admin_login_reset"),
     path("admin/", admin.site.urls),
     path('', include('portfolio_app.urls')),  # include your app's urls
 ]

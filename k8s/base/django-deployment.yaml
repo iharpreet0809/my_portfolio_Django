@@ -1,0 +1,180 @@
+# Service definition for Django application
+# Exposes Django pods internally within the cluster
+apiVersion: v1
+kind: Service
+metadata:
+  name: django  # Service name used by other pods to connect (e.g., nginx -> django:8000)
+  namespace: portfolio  # Isolated namespace for all portfolio resources
+  labels:
+    app: django  # Label for organizing and selecting resources
+spec:
+  type: ClusterIP  # Internal-only service (not exposed outside cluster)
+  ports:
+    - port: 8000  # Port exposed by the service
+      targetPort: 8000  # Port on the pod where Django/Gunicorn listens
+      name: http  # Named port for better readability
+  selector:
+    app: django  # Routes traffic to pods with this label
+---
+# Deployment definition for Django application
+# Manages the desired state of Django pods with rolling updates
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django  # Deployment name
+  namespace: portfolio
+spec:
+  replicas: 2  # Run 2 Django pods for high availability and load distribution
+  selector:
+    matchLabels:
+      app: django  # Manages pods with this label
+  template:
+    metadata:
+      labels:
+        app: django  # Label applied to all pods created by this deployment
+    spec:
+      # Init containers run before main containers and must complete successfully
+      # They ensure dependencies are ready before Django starts
+      initContainers:
+      - name: wait-for-mysql
+        image: busybox:1.35  # Lightweight image with networking tools
+        command:
+          - sh
+          - -c
+          - |
+            # Loop until MySQL port is accessible
+            until nc -z mysql 3306; do
+              echo "Waiting for MySQL..."
+              sleep 2
+            done
+            echo "MySQL is ready!"
+      - name: wait-for-redis
+        image: busybox:1.35
+        command:
+          - sh
+          - -c
+          - |
+            # Loop until Redis port is accessible
+            until nc -z redis 6379; do
+              echo "Waiting for Redis..."
+              sleep 2
+            done
+            echo "Redis is ready!"
+      # Main application containers
+      containers:
+      - name: django
+        image: harpreetdevops/portfolio:latest  # Your Docker image from Docker Hub
+        imagePullPolicy: Always  # Always pull latest image on pod restart (use specific tags in production)
+        ports:
+        - containerPort: 8000  # Port where Gunicorn serves Django
+          name: http
+        # Environment variables for Django configuration
+        env:
+        - name: SECRET_KEY  # Django secret key for cryptographic signing
+          valueFrom:
+            secretKeyRef:  # Load from Kubernetes Secret (secure storage)
+              name: portfolio-secrets
+              key: SECRET_KEY
+        - name: DEBUG  # Django debug mode (should be False in production)
+          valueFrom:
+            configMapKeyRef:  # Load from ConfigMap (non-sensitive config)
+              name: portfolio-config
+              key: DEBUG
+        - name: DJANGO_SETTINGS_MODULE  # Points to Django settings file
+          valueFrom:
+            configMapKeyRef:
+              name: portfolio-config
+              key: DJANGO_SETTINGS_MODULE
+        - name: MYSQL_HOST  # Database hostname (uses Kubernetes service name)
+          value: "mysql"
+        - name: MYSQL_PORT  # Database port
+          valueFrom:
+            configMapKeyRef:
+              name: portfolio-config
+              key: MYSQL_PORT
+        - name: MYSQL_DB  # Database name
+          valueFrom:
+            secretKeyRef:
+              name: portfolio-secrets
+              key: MYSQL_DB
+        - name: MYSQL_USER  # Database username
+          valueFrom:
+            secretKeyRef:
+              name: portfolio-secrets
+              key: MYSQL_USER
+        - name: MYSQL_PASSWORD  # Database password (sensitive)
+          valueFrom:
+            secretKeyRef:
+              name: portfolio-secrets
+              key: MYSQL_PASSWORD
+        - name: REDIS_URL  # Redis connection string for Celery
+          value: "redis://redis:6379/0"
+        # Resource management - ensures fair resource allocation
+        resources:
+          requests:  # Minimum resources guaranteed to the pod
+            memory: "256Mi"  # 256 megabytes of RAM
+            cpu: "250m"  # 0.25 CPU cores (250 millicores)
+          limits:  # Maximum resources the pod can use
+            memory: "512Mi"  # Pod will be killed if it exceeds this
+            cpu: "500m"  # CPU will be throttled if it exceeds this
+        # Mount persistent volumes into the container
+        volumeMounts:
+        - name: staticfiles  # Shared volume for static files (CSS, JS, images)
+          mountPath: /app/staticfiles  # Path inside container
+        - name: logs  # Shared volume for application logs
+          mountPath: /app/logs
+        # Liveness probe - checks if container is alive
+        # If fails, Kubernetes will restart the container
+        livenessProbe:
+          httpGet:
+            path: /  # HTTP endpoint to check
+            port: 8000
+          initialDelaySeconds: 60  # Wait 60s before first check (allows app to start)
+          periodSeconds: 10  # Check every 10 seconds
+          timeoutSeconds: 5  # Fail if no response in 5 seconds
+          failureThreshold: 5  # Restart after 5 consecutive failures
+        # Readiness probe - checks if container is ready to serve traffic
+        # If fails, pod is removed from service endpoints (no traffic sent)
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 30  # Wait 30s before first check
+          periodSeconds: 10  # Check every 10 seconds
+          timeoutSeconds: 5
+          failureThreshold: 3  # Mark unready after 3 consecutive failures
+      # Define volumes used by containers
+      volumes:
+      - name: staticfiles  # Volume for static files
+        persistentVolumeClaim:  # Uses PVC for persistent storage
+          claimName: staticfiles-pvc  # References the PVC defined below
+      - name: logs  # Volume for application logs
+        persistentVolumeClaim:
+          claimName: logs-pvc
+---
+# PersistentVolumeClaim for static files
+# Requests persistent storage from the cluster
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: staticfiles-pvc  # Name referenced by pods
+  namespace: portfolio
+spec:
+  accessModes:
+    - ReadWriteMany  # Multiple pods can read/write simultaneously (needed for multiple Django replicas)
+  resources:
+    requests:
+      storage: 5Gi  # Request 5GB of storage for static files
+---
+# PersistentVolumeClaim for application logs
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: logs-pvc
+  namespace: portfolio
+spec:
+  accessModes:
+    - ReadWriteMany  # Multiple pods (Django, Celery) can write logs
+  resources:
+    requests:
+      storage: 5Gi  # Request 5GB for logs

@@ -1,6 +1,16 @@
 # Django collectstatic output
 staticfiles/
 mediafiles/
+aws-deployment
+test_checks
+ReadsIdea
+k8s/base/secret.yaml
+
+#logs
+*.log
+logs/*
+django.log
+
 # Python cache
 __pycache__/
 *.py[cod]
@@ -13,8 +23,11 @@ __pycache__/
 .DS_Store
 Thumbs.db
 
+db.sqlite3
 
 #env files
 env/
-
 .env
+.env.example
+.env.production
+.env.prod.example

@@ -1,0 +1,46 @@
+# CronJob for automatic SSL certificate renewal
+# Runs Certbot periodically to renew Let's Encrypt certificates
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: certbot-renewal
+  namespace: portfolio
+spec:
+  schedule: "0 */12 * * *"  # Cron schedule: every 12 hours (at minute 0)
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: certbot
+            image: certbot/certbot  # Official Certbot image
+            # Certbot renew command
+            command:
+              - certbot  # Certbot CLI
+              - renew  # Renew all certificates that are due
+              - --webroot  # Use webroot method (no server restart needed)
+              - --webroot-path=/var/www/certbot  # Path where Nginx serves challenges
+              - --quiet  # Minimal output
+            # Resource limits - Certbot is lightweight
+            resources:
+              requests:
+                memory: "64Mi"
+                cpu: "50m"
+              limits:
+                memory: "128Mi"
+                cpu: "100m"
+            # Mount volumes for webroot and certificates
+            volumeMounts:
+            - name: certbot-www  # Webroot for ACME challenges
+              mountPath: /var/www/certbot
+            - name: certbot-conf  # Certificate storage
+              mountPath: /etc/letsencrypt
+          restartPolicy: OnFailure  # Retry if renewal fails
+          # Define volumes
+          volumes:
+          - name: certbot-www
+            persistentVolumeClaim:
+              claimName: certbot-www-pvc
+          - name: certbot-conf
+            persistentVolumeClaim:
+              claimName: certbot-conf-pvc

@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # This is the root directory of the Django project
@@ -24,36 +28,157 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 # The secret key is used for cryptographic signing and should be kept secure
 
-# SECRET_KEY = "django-insecure-kyaqp9kt2q@&x(nbndoxf6@3&-jad$nv6*9sc&&&)95%q$)c=t"
 SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback-secret')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-# Debug mode shows detailed error pages and should be False in production
-
-#FOR PRODUCTION
-# DEBUG = os.environ.get('DEBUG', 'False') == 'True'
-
-#for LOCAL DEVELOPMENT
-DEBUG = True
-
-# Add your server's IP and the Docker container's service name
+# Add your server's IP and the Docker container's service name for the nginx proxy
 # ALLOWED_HOSTS specifies which hostnames Django can serve
-ALLOWED_HOSTS = ['*', 'django-app'] # add the docker container name of nginx due to allow the csrf validation properly.
 #Your Django settings need to be explicitly configured to trust requests coming from your server's IP address and through the Nginx proxy.
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    '54.210.54.137',  # EC2 Elastic IP
+    'iharpreet.com',
+    'www.iharpreet.com',
+    'django-app', #for dockercontainer
+]  # Get allowed hosts from env var
 
 # Trust requests originating from your domain/IP on the port Nginx is using
 # CSRF_TRUSTED_ORIGINS is required when using HTTPS or when behind a proxy
 CSRF_TRUSTED_ORIGINS = [
-    'http://65.1.110.216:8888',
-    # If you plan to use HTTPS in the future, you can add this as well
-    # 'https://65.1.110.216:8888',
+    'http://54.210.54.137',  # EC2 IP
+    'http://iharpreet.com',
+    'http://www.iharpreet.com',
+    'https://iharpreet.com',
+    'https://www.iharpreet.com',
 ]
 
-# Since you are not using HTTPS yet, it's best to comment these out for now
-# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-# CSRF_COOKIE_SECURE = True
-# SESSION_COOKIE_SECURE = True
+# Only enable these when using HTTPS
+# if not DEBUG:
+#     # Comment these out until you set up SSL certificates
+#     # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+#     # CSRF_COOKIE_SECURE = True
+#     # SESSION_COOKIE_SECURE = True
+#     pass
 
+
+# SECURITY WARNING: don't run with debug true turned on in production!
+# Debug mode shows detailed error pages and should be False in production
+# DEBUG is set based on the 'DEBUG' environment variable from your .env file.
+# If 'DEBUG' is set to 'True' (as a string) in your environment, DEBUG will be True.
+# Otherwise, it defaults to False.
+DEBUG = os.environ.get('DEBUG', 'False').lower() in ('true', '1', 'yes')
+
+# Conditional database configuration based on DEBUG setting
+if DEBUG:  # for local development
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'my_portfolio',
+            'USER': 'root',
+            'PASSWORD': 'root',
+            'HOST': 'localhost',
+            'PORT': '3306',
+        }
+    }
+else:  # for production
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.environ.get('MYSQL_DB'),
+            'USER': os.environ.get('MYSQL_USER'),
+            'PASSWORD': os.environ.get('MYSQL_PASSWORD'),
+            'HOST': os.environ.get('MYSQL_HOST'),
+            'PORT': '3306',
+        }
+    }
+
+
+
+
+
+import os
+import logging
+from logging.handlers import TimedRotatingFileHandler
+from pathlib import Path
+
+# Base directory setup
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Create /logs directory if it doesn’t exist
+LOG_DIR = os.path.join(BASE_DIR, 'logs')
+os.makedirs(LOG_DIR, exist_ok=True)
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} [{name}] {module} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname}: {message}',
+            'style': '{',
+        },
+    },
+
+    'handlers': {
+        # Rotating daily logs (INFO)
+        'file_info': {
+            'level': 'INFO',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': os.path.join(LOG_DIR, 'info.log'),
+            'when': 'midnight',     # rotate every midnight
+            'interval': 1,          # every 1 day
+            'backupCount': 7,       # keep last 7 days
+            'formatter': 'verbose',
+        },
+        # Rotating daily logs (ERROR)
+        'file_error': {
+            'level': 'ERROR',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': os.path.join(LOG_DIR, 'error.log'),
+            'when': 'midnight',
+            'interval': 1,
+            'backupCount': 14,      # keep last 14 days of errors
+            'formatter': 'verbose',
+        },
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+        'null': {
+            'class': 'logging.NullHandler',
+        },
+    },
+
+    'loggers': {
+        # General Django logs
+        'django': {
+            'handlers': ['file_info', 'console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        # Request errors only (500s, etc.)
+        'django.request': {
+            'handlers': ['file_error'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        # Silence "Invalid HTTP_HOST header" spam
+        'django.security.DisallowedHost': {
+            'handlers': ['null'],
+            'propagate': False,
+        },
+    },
+
+    # Root logger
+    'root': {
+        'handlers': ['console', 'file_error'],
+        'level': 'WARNING',
+    },
+}
 
 
 
@@ -71,6 +196,9 @@ INSTALLED_APPS = [
     
     # Custom apps
     'portfolio_app',  # Main portfolio application
+    
+    # Celery Beat app for scheduled tasks
+    'django_celery_beat',  # Celery Beat scheduler
 
 ]
 
@@ -107,54 +235,6 @@ TEMPLATES = [
 
 # WSGI_APPLICATION points to the WSGI application object
 WSGI_APPLICATION = "portfolio_django.wsgi.application"
-
-
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-# SQLite configuration (commented out - using MySQL instead)
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
-
-# Production MySQL configuration (commented out - using conditional configuration)
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': os.environ.get('MYSQL_DB'),
-#         'USER': os.environ.get('MYSQL_USER'),
-#         'PASSWORD': os.environ.get('MYSQL_PASSWORD'),
-#         'HOST': os.environ.get('MYSQL_HOST'),
-#         'PORT': '3306',
-#     }
-# }
-
-# Conditional database configuration based on DEBUG setting
-if DEBUG: #for local development
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'my_portfolio',
-            'USER': 'root',
-            'PASSWORD': 'root',
-            'HOST': 'localhost',
-            'PORT': '3306',
-        }
-    }
-else: #for production
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': os.environ.get('MYSQL_DB'),
-            'USER': os.environ.get('MYSQL_USER'),
-            'PASSWORD': os.environ.get('MYSQL_PASSWORD'),
-            'HOST': os.environ.get('MYSQL_HOST'),
-            'PORT': '3306',
-        }
-    }
 
 
 
@@ -194,12 +274,28 @@ USE_TZ = True  # Enable timezone support
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = "static/"  # URL prefix for static files
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Directory for collected static files
-# Optional if you want to collect from multiple places
+# # S3 Configuration for production
+# if not DEBUG:
+#     # Use S3 for static files in production
+#     S3_BUCKET_NAME = os.environ.get('S3_BUCKET_NAME')
+#     AWS_S3_REGION_NAME = 'us-east-1'
+#     STATIC_URL = f'https://{S3_BUCKET_NAME}.s3.amazonaws.com/static/'
+# else:
+#     # Local static files for development
+#     STATIC_URL = '/static/'
+
+# URL to serve static files
+STATIC_URL = '/static/'
+
+# Where collectstatic puts everything
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Where to look for extra static files (your top-level static/ folder)
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),  # <-- make sure this exists!
+    os.path.join(BASE_DIR, 'static'),
 ]
+
+
 
 # Media files (user-uploaded content)
 MEDIA_URL = '/media/'  # URL prefix for media files
@@ -215,7 +311,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"  # Use BigAutoField for pri
 
 #EMAIL SETTINGS
 # Configuration for sending emails (used by contact form)
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # SMTP backend
 EMAIL_HOST = 'smtp.gmail.com'  # Gmail SMTP server
 EMAIL_PORT = 587  # SMTP port for TLS
@@ -224,3 +319,33 @@ EMAIL_HOST_USER = 'talkwithharpreet@gmail.com'  # Gmail account
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER  # Default sender email
 EMAIL_HOST_PASSWORD = 'ldjqbszfodflytmf'  # Use Gmail App Password (not your Gmail password)
 
+# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')  # Use Gmail App Password (not your Gmail password)
+
+
+# CELERY CONFIGURATION
+# Celery settings for async task processing
+REDIS_URL = os.environ.get('REDIS_URL', 'redis://127.0.0.1:6379/0')
+
+# Celery Configuration Options
+CELERY_BROKER_URL = REDIS_URL
+CELERY_RESULT_BACKEND = REDIS_URL
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = TIME_ZONE
+
+# Fix Celery worker connection issues
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+CELERY_BROKER_CONNECTION_RETRY = True
+CELERY_TASK_ALWAYS_EAGER = False
+CELERY_TASK_EAGER_PROPAGATES = False
+
+# Celery task routing - route email tasks to dedicated queue
+CELERY_TASK_ROUTES = {
+    'portfolio_app.tasks.send_contact_email': {'queue': 'emails'},
+    'portfolio_app.tasks.send_admin_otp_email': {'queue': 'emails'},
+}
+
+# Celery worker configuration
+CELERY_WORKER_PREFETCH_MULTIPLIER = 1
+CELERY_TASK_ACKS_LATE = True
