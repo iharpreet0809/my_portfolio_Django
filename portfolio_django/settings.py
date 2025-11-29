@@ -55,6 +55,8 @@ CSRF_TRUSTED_ORIGINS = [
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
+USE_X_FORWARDED_HOST = True
+
 
 
 # SECURITY WARNING: don't run with debug true turned on in production!
