@@ -13,8 +13,8 @@ services:
       MYSQL_USER: ${MYSQL_USER}  # Database user from environment variable
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}  # Database password from environment variable
       MYSQL_ROOT_HOST: '%'  # Allow root connections from any host
-    ports:
-      - "3306:3306"  # Expose MySQL port to host machine
+    # ports:
+    #   - "3306:3306"  # Expose MySQL port to host machine
     volumes:
       - mysql_data:/var/lib/mysql  # Persistent storage for database data
       # - ./staticfiles:/app/staticfiles  # Commented out - static files handled by Django
@@ -38,8 +38,8 @@ services:
       resources:
         limits:
           memory: 50M  # Very minimal Redis for t2.micro
-    ports:
-      - "6379:6379"  # Expose Redis port to host machine
+    # ports:
+    #   - "6379:6379"  # Expose Redis port to host machine
     volumes:
       - redis_data:/data  # Persistent storage for Redis data
     command: redis-server --appendonly yes  # Enable Redis persistence
@@ -66,7 +66,7 @@ services:
         limits:
           memory: 200M  # Reduced Django memory for t2.micro
     ports:
-      - "8000:8000"  # Expose Django development server port
+      - "8000"  # Expose Django development server port
     environment:
       SECRET_KEY: ${SECRET_KEY}  # Django secret key from environment variable
       DEBUG: ${DEBUG}  # Debug mode from environment variable
